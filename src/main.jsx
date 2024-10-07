@@ -76,7 +76,7 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
-  <appContextProvider>
+  <AppContextProvider>
     <RouterProvider  router={router}/>
-  </appContextProvider>
+  </AppContextProvider>
 )
