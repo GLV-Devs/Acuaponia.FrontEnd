@@ -1,4 +1,4 @@
-const page3 = () => {
+const dashboard = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const page3 = () => {
     )
 }
 
-export default page3
+export default dashboard

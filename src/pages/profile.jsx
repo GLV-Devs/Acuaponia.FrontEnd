@@ -1,4 +1,4 @@
-const page2 = () => {
+const profile = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const page2 = () => {
     )
 }
 
-export default page2
+export default profile

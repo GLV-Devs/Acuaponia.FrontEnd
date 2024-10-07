@@ -1,4 +1,4 @@
-const page1 = () => {
+const subServer = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const page1 = () => {
     )
 }
 
-export default page1
+export default subServer
