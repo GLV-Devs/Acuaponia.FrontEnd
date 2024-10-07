@@ -1,4 +1,4 @@
-const subServerSession = () => {
+const SubServerSession = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const subServerSession = () => {
     )
 }
 
-export default subServerSession
+export default SubServerSession
