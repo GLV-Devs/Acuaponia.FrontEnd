@@ -1,4 +1,4 @@
-const settings = () => {
+const Settings = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const settings = () => {
     )
 }
 
-export default settings
+export default Settings

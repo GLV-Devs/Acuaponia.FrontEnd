@@ -1,4 +1,4 @@
-const reportCreation = () => {
+const ReportCreation = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const reportCreation = () => {
     )
 }
 
-export default reportCreation
+export default ReportCreation

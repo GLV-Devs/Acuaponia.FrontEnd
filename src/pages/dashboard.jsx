@@ -1,4 +1,4 @@
-const dashboard = () => {
+const Dashboard = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const dashboard = () => {
     )
 }
 
-export default dashboard
+export default Dashboard

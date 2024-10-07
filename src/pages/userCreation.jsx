@@ -1,4 +1,4 @@
-const userCreation = () => {
+const UserCreation = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const userCreation = () => {
     )
 }
 
-export default userCreation
+export default UserCreation

@@ -1,4 +1,4 @@
-const individualDevice = () => {
+const IndividualDevice = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const individualDevice = () => {
     )
 }
 
-export default individualDevice
+export default IndividualDevice
