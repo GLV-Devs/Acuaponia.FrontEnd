@@ -1,74 +1,74 @@
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import appContextProvider from './context/contextProvider'
+import AppContextProvider from './context/contextProvider'
 import { Root } from './pages/root'
-import { errorPage } from './pages/errorPage'
-import { login } from './pages/login'
-import { dashboard } from './pages/dashboard'
-import { subServerSearch } from './pages/subSeverSearch'
-import { subServer } from './pages/subServer'
-import { individualDevice } from './pages/individualDevice'
-import { subServerSession } from './pages/subServerSession'
-import { individualReactor } from './pages/individualReactor'
-import { profile } from './pages/profile'
-import { userCreation } from './pages/userCreation'
-import { deviceCreation } from './pages/deviceCreation'
-import { reportCreation } from './pages/reportCreation'
-import { notificationCreation } from './pages/notificationCreation'
+import { ErrorPage } from './pages/errorPage'
+import { Login } from './pages/login'
+import { Dashboard } from './pages/dashboard'
+import { SubServerSearch } from './pages/subSeverSearch'
+import { SubServer } from './pages/subServer'
+import { IndividualDevice } from './pages/individualDevice'
+import { SubServerSession } from './pages/subServerSession'
+import { IndividualReactor } from './pages/individualReactor'
+import { Profile } from './pages/profile'
+import { UserCreation } from './pages/userCreation'
+import { DeviceCreation } from './pages/deviceCreation'
+import { ReportCreation } from './pages/reportCreation'
+import { NotificationCreation } from './pages/notificationCreation'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root/>,
-    errorElement: <errorPage/>,
+    errorElement: <ErrorPage/>,
     children: [
       {
-        path: '/ch1',
-        element: <login/>
+        path: '/Login',
+        element: <Login/>
       },
       {
-        path: '/ch2',
-        element: <dashboard/>
+        path: '/Dashboard',
+        element: <Dashboard/>
       },
       {
-        path: '/ch3',
-        element: <subServerSearch/>
+        path: '/SubServerSearch',
+        element: <SubServerSearch/>
       },
       {
-        path: '/ch4',
-        element: <subServer/>
+        path: '/SubServer',
+        element: <SubServer/>
       },
       {
-        path: '/ch5',
-        element: <individualDevice/>
+        path: '/IndividualDevice',
+        element: <IndividualDevice/>
       },
       {
-        path: '/ch6',
-        element: <subServerSession/>
+        path: '/SubServerSession',
+        element: <SubServerSession/>
       },
       {
-        path: '/ch7',
-        element: <individualReactor/>
+        path: '/IndividualReactor',
+        element: <IndividualReactor/>
       },
       {
-        path: '/ch8',
-        element: <profile/>
+        path: '/Profile',
+        element: <Profile/>
       },
       {
-        path: '/ch9',
-        element: <userCreation/>
+        path: '/UserCreation',
+        element: <UserCreation/>
       },
       {
-        path: '/ch10',
-        element: <deviceCreation/>
+        path: '/DeviceCreation',
+        element: <DeviceCreation/>
       },
       {
-        path: '/ch11',
-        element: <reportCreation/>
+        path: '/ReportCreation',
+        element: <ReportCreation/>
       },
       {
-        path: '/ch12',
-        element: <notificationCreation/>
+        path: '/NotificationCreation',
+        element: <NotificationCreation/>
       },
       
     ]

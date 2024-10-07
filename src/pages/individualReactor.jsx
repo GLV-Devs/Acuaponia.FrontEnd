@@ -1,4 +1,4 @@
-const individualReactor = () => {
+const IndividualReactor = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const individualReactor = () => {
     )
 }
 
-export default individualReactor
+export default IndividualReactor

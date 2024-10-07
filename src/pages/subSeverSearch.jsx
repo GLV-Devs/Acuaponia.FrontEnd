@@ -1,4 +1,4 @@
-const subServerSearch = () => {
+const SubServerSearch = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const subServerSearch = () => {
     )
 }
 
-export default subServerSearch
+export default SubServerSearch

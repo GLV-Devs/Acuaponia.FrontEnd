@@ -1,4 +1,4 @@
-const notificationCreation = () => {
+const NotificationCreation = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const notificationCreation = () => {
     )
 }
 
-export default notificationCreation
+export default NotificationCreation

@@ -1,4 +1,4 @@
-const deviceCreation = () => {
+const DeviceCreation = () => {
     return(
         <>
         
@@ -6,4 +6,4 @@ const deviceCreation = () => {
     )
 }
 
-export default deviceCreation
+export default DeviceCreation
