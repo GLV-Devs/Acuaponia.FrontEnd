@@ -15,6 +15,7 @@ import UserCreation from './pages/userCreation'
 import DeviceCreation from './pages/deviceCreation'
 import ReportCreation from './pages/reportCreation'
 import NotificationCreation from './pages/notificationCreation'
+import './style.scss'
 
 const router = createBrowserRouter([
   {
