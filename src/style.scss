@@ -3,6 +3,10 @@
     --moduleBgColor: #191925;
 }
 
+body{
+    margin: 0px;
+}
+
 @mixin fullScreen{
     margin: 0px;
     width: 100vw;
@@ -73,3 +77,10 @@
     }
 }
 
+.LoginPage{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

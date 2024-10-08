@@ -8,8 +8,8 @@ const Login = () => {
     }
 
     return(
-        <>
-            <Form className="loginPage"
+        <div className='LoginPage'>
+            <Form className="loginForm"
                 variant= 'filled'
                 componentsize= 'large'
             >
@@ -45,7 +45,7 @@ const Login = () => {
                 </Form.Item>
             </Form>
         
-        </>
+        </div>
     )
 }
 
