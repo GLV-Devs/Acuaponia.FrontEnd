@@ -1,24 +1,62 @@
 import { Form, Input, Button } from 'antd'
+import {encrypt} from '../functions/hash'
+import { appContext } from '../context/appContext'
+import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
-    const onSubmit = () => {
-        let usuario = document.getElementById('Usuario').value
-        let contraseña = document.getElementById('Password').value
+    // const [messageApi, contextHandler] = message.useMessage()
+    // const navigate = useNavigate()
+    // const { setUserData, setLogged } = useContext(appContext)
+    // const [error, setError] = useState('')
+    // const [errorDisplay, setErrorDisplay] = useState(false)
+
+    const onSubmit = async () => {
+        let user = document.getElementById('User').value
+        let password = document.getElementById('Password').value
+
+        const data = {
+            user: user,
+            password: await encrypt(password),
+        }
+        // let res = await login(data)
+        // if(res.status == 200){
+        //     setLogged(true)
+        //     setUserData(res.data)
+        //     navigate('/Dashboard')
+        // }else if(res.status == 403){
+        //     messageApi.open({
+        //         type: "error",
+        //         content: 'Usuario no encontrado'
+        //     })
+        // }else if(res.status == 401){
+        //     messageApi.open({
+        //         type: "error",
+        //         content: 'Contraseña invalida'
+        //     })
+        // }else if(res.status == 500){
+        //     messageApi.open({
+        //         type: "error",
+        //         content: 'Error del servidor'
+        //     })
+        // }    
     }
 
     return(
         <div className='LoginPage'>
+            {/* {contextHandler} */}
             <Form className="loginForm"
                 variant= 'filled'
                 componentsize= 'large'
             >
-                <h1>Iniciar sesion</h1>
+                <h1>INICIAR SESIÓN</h1>
                 <Form.Item
-                    name='Usuario'
+                    name='User'
                     rules={[
                         {
                             required: true,
+                            message: 'Por favor ingrese su usuario',
                         },
                     ]}
                 >
@@ -34,12 +72,14 @@ const Login = () => {
                         },
                     ]}
                 >
-                    <Input.Password className='centeredPlaceholder' placeholder='Su contraseña aquí...'/>
+                    <Input.Password className='customPassword' placeholder='      Su contraseña aquí...'/>
                 </Form.Item>
 
+                {/* { errorDisplay && <h2 style={{color: "tomato"}}>{error}</h2> } */}
+
                 <Form.Item>
-                    <Button htmlType="submit" type="primary">
-                        Iniciar
+                    <Button className='logInButton' htmlType="submit" type="primary">
+                        INICIAR
                     </Button>
                 </Form.Item>
             </Form>

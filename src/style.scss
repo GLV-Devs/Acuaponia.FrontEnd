@@ -83,10 +83,11 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(21, 20, 31);
+    background-color: var(--bgColor);
+    
     .loginForm{
-        background-color: rgb(25, 24, 37);
-        border-radius: 2rem;
+        background-color: var(--moduleBgColor);
+        border-radius: 1rem;
         width: 70vw;
         height: 75vh;
         display: flex;
@@ -95,16 +96,48 @@ body{
         justify-content: center;
         color: rgb(233, 92, 255);
         box-shadow: 0px 0px 5px 5px rgba(233, 92, 255, 0.1);
+        
         .centeredPlaceholder{
-            width: 40vw;
+            width: 50vw;
+            height: 8vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
+            background-color: rgb(21, 20, 31);
+            color: white;
         }
+        
         .centeredPlaceholder::placeholder{
             color: rgb(63, 63, 87);
+        }
+
+        .customPassword{
+            width: 50vw;
+            height: 8vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            background-color: rgb(21, 20, 31);
+            color: white;
+        }
+
+        .customPassword ::placeholder{
+            text-align: center;
+            color: rgb(63, 63, 87);
+        }
+
+        .logInButton{
+            color: white;
+            background-color: rgb(233, 92, 255);
+            font-weight: 600;
+            box-shadow: 0px 0px 5px 5px rgba(233, 92, 255, 0.1);
+        }
+        .logInButton:hover{
+            background-color: rgb(233, 92, 255);
+            color: white;
+            box-shadow: 0px 0px 5px 5px rgba(233, 92, 255, 0.2);
         }
     }
 }
