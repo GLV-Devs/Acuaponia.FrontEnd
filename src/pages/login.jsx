@@ -19,7 +19,6 @@ const Login = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Por favor ingrese un correo electronico valido',
                         },
                     ]}
                 >
