@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, message } from 'antd'
 import { encrypt } from '../functions/hash'
 import { appContext } from '../context/appContext'
 import { useContext, useState } from 'react'
@@ -18,9 +18,10 @@ const Login = () => {
         let password = document.getElementById('Password').value
 
         const data = {
-            user: user,
+            identifier: user,
             passwordSHA256: await encrypt(password),
         }
+        console.log(data)
         let res = await login(data)
         console.log(res)
         if(res.status == 200){
@@ -30,7 +31,7 @@ const Login = () => {
         }else if(res.status == 403){
             messageApi.open({
                 type: "error",
-                content: 'Usuario no encontrado'
+                content: 'Credenciales invalidas'
             })
         }else if(res.status == 401){
             messageApi.open({
@@ -80,7 +81,7 @@ const Login = () => {
                 {/* { errorDisplay && <h2 style={{color: "tomato"}}>{error}</h2> } */}
 
                 <Form.Item>
-                    <Button className='logInButton' htmlType="submit" type="primary">
+                    <Button className='logInButton' htmlType="submit" type="primary" onClick={onSubmit}>
                         INICIAR
                     </Button>
                 </Form.Item>
