@@ -1,13 +1,14 @@
 import { Input, Button } from "antd"
 import { useEffect, useState } from "react"
 import { DoubleRightOutlined, AppstoreAddOutlined, SlidersOutlined, ExportOutlined, SwapRightOutlined } from "@ant-design/icons"
+import { getSubServers } from '../client/ClientePrueba'
 
 const SubServerSearch = () => {
 
     const [showList, setShowList] = useState([])
     useEffect(() => {
-        // pedir lista de sub servidores
-    })
+        console.log(getSubServers())
+    }, [])
 
     return(
         <div className='SubServerSearch'>

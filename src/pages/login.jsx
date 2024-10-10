@@ -1,9 +1,9 @@
 import { Form, Input, Button } from 'antd'
-import {encrypt} from '../functions/hash'
+import { encrypt } from '../functions/hash'
 import { appContext } from '../context/appContext'
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import { login } from '../client/ClientePrueba'
 
 const Login = () => {
 
@@ -21,7 +21,7 @@ const Login = () => {
             user: user,
             passwordSHA256: await encrypt(password),
         }
-        let res = await client.identity.login(data)
+        let res = await login(data)
         console.log(res)
         if(res.status == 200){
             setLogged(true)
