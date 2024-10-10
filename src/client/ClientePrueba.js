@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const url = 'http://localhost:3000'
+const url = 'https://acuaponia-servidorprincipal.azurewebsites.net'
 let sessionToken
 
 export async function login(data){
@@ -54,6 +54,33 @@ export async function getSubserverDevicePeripheral(deviceId){
         let res = await axios.get(`${url}/api/app/devices/peripherals/${deviceId}`, {headers: {'Authorization': `Session ${sessionToken}`}})
         return res
     }catch(err){
+        return err
+    }
+}
+
+export async function getAllNotifications(){
+    try{
+        let res = await axios.get(`${url}/api/app/notifications`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
+
+export async function getAccount(){
+    try{
+        let res = await axios.get(`${url}/api/app/account`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
+
+export async function postSubServerReport(data){
+    try{
+        let res = await axios.post(`${url}/api/app/reports`, data, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    } catch(err){
         return err
     }
 }
