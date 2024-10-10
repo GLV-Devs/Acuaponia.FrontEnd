@@ -19,7 +19,7 @@ import { mainServerClientUserPermissionsModule } from "./Modules/userPermissionM
 
 //main
 
-class mainServerClient{
+export class mainServerClient{
 	//El httpErrorHandler es una funcion como la que le paso al then y catch
 	//de axios y recibe un solo parametro que se llama errorResponse.
 	constructor(loginData, serverUrl, httpErrorHandler){
