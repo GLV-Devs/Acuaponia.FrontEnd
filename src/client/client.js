@@ -48,7 +48,7 @@ class mainServerClient{
 
 	httpGet(endPoint){
 		let res
-		axios.get(composeUrl(endPoint))
+		axios.get(composeUrl(endPoint), {headers: {'Authorization': `Session ${this.sessionKey}`}})
 		.then((httpRes) => res = httpRes.data)
 		.catch((err) => {
 			if(err.status == 401){
@@ -69,7 +69,7 @@ class mainServerClient{
 
 	httpDelete(endPoint){
 		let res
-		axios.delete(composeUrl(endPoint))
+		axios.delete(composeUrl(endPoint), {headers: {'Authorization': `Session ${this.sessionKey}`}})
 		.then((httpRes) => res = httpRes.data)
 		.catch((err) => {
 			if(err.status == 401){
@@ -90,7 +90,7 @@ class mainServerClient{
 
 	httpPost(endPoint, data){
 		let res
-		axios.post(composeUrl(endPoint), data)
+		axios.post(composeUrl(endPoint), data, {headers: {'Authorization': `Session ${this.sessionKey}`}})
 		.then((httpRes) => res = httpRes.data)
 		.catch((err) => {
 			if(err.status == 401){
@@ -111,7 +111,7 @@ class mainServerClient{
 
 	httpPatch(endPoint, data){
 		let res
-		axios.patch(composeUrl(endPoint), data)
+		axios.patch(composeUrl(endPoint), data, {headers: {'Authorization': `Session ${this.sessionKey}`}})
 		.then((httpRes) => res = httpRes.data)
 		.catch((err) => {
 			if(err.status = 401){
@@ -132,7 +132,7 @@ class mainServerClient{
 
 	httpPut(endPoint, data){
 		let res
-		axios.put(composeUrl(endPoint), data)
+		axios.put(composeUrl(endPoint), data, {headers: {'Authorization': `Session ${this.sessionKey}`}})
 		.then((httpRes) => res = httpRes.data)
 		.catch((err) => {
 			if(err.status == 401){
@@ -155,7 +155,7 @@ class mainServerClient{
 		if(isLoggedIn == true){
 			return 
 		}else{
-			return this.identity.login(this.loginData);
+			this.sessionKey = this.identity.login(this.loginData);
 		}
 	}
 }
