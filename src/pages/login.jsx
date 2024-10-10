@@ -4,13 +4,14 @@ import { appContext } from '../context/appContext'
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
 const Login = () => {
 
-    // const [messageApi, contextHandler] = message.useMessage()
-    // const navigate = useNavigate()
-    // const { setUserData, setLogged } = useContext(appContext)
-    // const [error, setError] = useState('')
-    // const [errorDisplay, setErrorDisplay] = useState(false)
+    const [messageApi, contextHandler] = message.useMessage()
+    const navigate = useNavigate()
+    const { client } = useContext(appContext)
+    const [error, setError] = useState('')
+    const [errorDisplay, setErrorDisplay] = useState(false)
 
     const onSubmit = async () => {
         let user = document.getElementById('User').value
@@ -18,34 +19,35 @@ const Login = () => {
 
         const data = {
             user: user,
-            password: await encrypt(password),
+            passwordSHA256: await encrypt(password),
         }
-        // let res = await login(data)
-        // if(res.status == 200){
-        //     setLogged(true)
-        //     setUserData(res.data)
-        //     navigate('/Dashboard')
-        // }else if(res.status == 403){
-        //     messageApi.open({
-        //         type: "error",
-        //         content: 'Usuario no encontrado'
-        //     })
-        // }else if(res.status == 401){
-        //     messageApi.open({
-        //         type: "error",
-        //         content: 'Contraseña invalida'
-        //     })
-        // }else if(res.status == 500){
-        //     messageApi.open({
-        //         type: "error",
-        //         content: 'Error del servidor'
-        //     })
-        // }    
+        let res = await client.identity.login(data)
+        console.log(res)
+        if(res.status == 200){
+            setLogged(true)
+            setUserData(res.data)
+            navigate('/Dashboard')
+        }else if(res.status == 403){
+            messageApi.open({
+                type: "error",
+                content: 'Usuario no encontrado'
+            })
+        }else if(res.status == 401){
+            messageApi.open({
+                type: "error",
+                content: 'Contraseña invalida'
+            })
+        }else if(res.status == 500){
+            messageApi.open({
+                type: "error",
+                content: 'Error del servidor'
+            })
+        }    
     }
 
     return(
         <div className='LoginPage'>
-            {/* {contextHandler} */}
+            {contextHandler}
             <Form className="loginForm"
                 variant= 'filled'
                 componentsize= 'large'

@@ -4,7 +4,7 @@ import { mainServerClient } from '../client/client'
 
 const AppContextProvider = ({children}) => {
 
-    const mainServerClient = new mainServerClient(loginData, serverUrl, httpErrorHandler)
+    const client = new mainServerClient(loginData, serverUrl, httpErrorHandler)
 
     return(
         <appContext.Provider value={{

@@ -23,7 +23,7 @@ export class mainServerClient{
 	//El httpErrorHandler es una funcion como la que le paso al then y catch
 	//de axios y recibe un solo parametro que se llama errorResponse.
 	constructor(loginData, serverUrl, httpErrorHandler){
-		this.loginData = identifier,
+		this.loginData = loginData,
 		this.serverUrl = serverUrl,
 		this.httpErrorHandler = httpErrorHandler,
 		this.accounts = new mainServerClientAccountModule(this)
