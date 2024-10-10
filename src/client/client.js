@@ -155,7 +155,7 @@ class mainServerClient{
 		if(isLoggedIn == true){
 			return 
 		}else{
-			//Aqui me loggeo con login data y pongo isLoggedIn verdadero
+			return this.identity.login(this.loginData);
 		}
 	}
 }
