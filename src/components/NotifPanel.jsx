@@ -1,7 +1,7 @@
 import { BellOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { getAllNotifications } from '../client/ClientePrueba'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const NotifPanel = ({close}) => {
 
@@ -9,9 +9,11 @@ const NotifPanel = ({close}) => {
         color: '#6f8fc2',
         fontSize: '25px'
     }
+    const [showList, setShowList] = useState([])
 
     const getNotif = async () => {
         let res = await getAllNotifications()
+        setShowList(res.data.data)
         console.log(res)
     }
 
@@ -37,18 +39,22 @@ const NotifPanel = ({close}) => {
             </div>
 
             <div className='list'>
-                <div className='listElement'>
-                    <UserOutlined />
-                    <div className='info'>
-                        <h3></h3>
-                        <p></p>
-                        <h4></h4>
-                        <div>
-                            <p></p>
-                            <p></p>
+                {showList.map((item) => (
+                    <div className='listElement' key={item.id}>
+                        <UserOutlined style={{color: '#6f8fc2', fontSize: '50px'}}/>
+                        <div className='info'>
+                            <h3 className='normalInfo'>Titulo de la notif</h3>
+                            <p className='normalInfo'>Subservidor: {item.subServerId}</p>
+                            <h5 className='normalInfo'>contenido de la notif lorem ipsum dolor lorem ipsum dolor lorem ipsum </h5>
+                            <div className='dateTime'>
+                                <p className='date'>
+                                    {new Date(item.notificationDate).getDate()}/{new Date(item.notificationDate).getMonth()}/{new Date(item.notificationDate).getFullYear()}
+                                </p>
+                                <p className='time'>{new Date(item.notificationDate).getHours()}:{new Date(item.notificationDate).getMinutes()}</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </div>)
+                )}
             </div>
         </div>
     )

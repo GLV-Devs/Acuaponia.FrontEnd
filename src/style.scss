@@ -4,6 +4,8 @@
     --navbarColor: #191825;
     --highlightColor: #e95cff;
     --notifPanelColorLetter: #6f8fc2;
+    --notifBorder: #1c1c28;
+    --fuchsiaShadow: 0px 0px 10px 5px rgba(233, 92, 255, 0.3);
 }
 
 body{
@@ -22,14 +24,18 @@ body{
 }
 
 @mixin panels{
-    width: 250px;
+    width: 300px;
     background-color: var(--moduleBgColor);
     height: calc(100vh - 160px);
     position: relative;
     top: 4vh;
-    left: calc(100vw - 300px);
+    left: calc(100vw - 350px);
     border-radius: 15px;
     padding: 15px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 
     .bar{
         display: flex;
@@ -83,6 +89,41 @@ body{
         gap: 8px;
         justify-content: center;
         align-items: center;
+    }
+
+    .list{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .listElement{
+            display: flex;
+            box-shadow: var(--fuchsiaShadow);
+            border-radius: 15px;
+            padding: 10px;
+
+            .info{
+                display: flex;
+                flex-direction: column;
+
+                p{font-size: 15px;}
+    
+                .normalInfo{
+                    color: var(--notifPanelColorLetter);
+                    margin: 0px;
+                }
+
+                .dateTime{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .date{color: fuchsia; margin: 0px;}
+                    .time{color: green; margin: 0px;}
+                }
+                
+            }
+        }
     }
 }
 

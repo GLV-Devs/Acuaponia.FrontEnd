@@ -50,6 +50,8 @@ const Login = () => {
                 type: "error",
                 content: 'Error del servidor'
             })
+        }else{
+            setLoading(false)
         }
     }
 
