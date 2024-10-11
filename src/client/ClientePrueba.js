@@ -6,7 +6,7 @@ let sessionToken
 export async function login(data){
     try{
         let res = await axios.patch(`${url}/api/app/identity`, data)
-        sessionToken = res.data.sessionToken
+        sessionToken = res.data.data[0].key
         return res
     }catch(err){
         return err

@@ -1,11 +1,18 @@
 import { useState } from 'react'
-import { getSubServers } from '../client/ClientePrueba'
+import { useEffect } from 'react'
+import { getSubServerReports } from '../client/ClientePrueba'
 
 const Dashboard = () => {
 
     const [list, setList] = useState([])
     useEffect(() => {
-        console.log(getSubServers())
+        async function fetchSubServers(){
+            let res = await getSubServerReports()
+            console.log(res)
+        }
+
+        fetchSubServers()
+        
     }, [])
 
     return(

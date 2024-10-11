@@ -9,9 +9,10 @@ const Login = () => {
 
     const [messageApi, contextHandler] = message.useMessage()
     const navigate = useNavigate()
-    const { client } = useContext(appContext)
+    const { setLogged, setUserData } = useContext(appContext)
     const [error, setError] = useState('')
     const [errorDisplay, setErrorDisplay] = useState(false)
+    
 
     const onSubmit = async () => {
         let user = document.getElementById('User').value
@@ -19,7 +20,7 @@ const Login = () => {
 
         const data = {
             identifier: user,
-            passwordSHA256: await encrypt(password),
+            passwordSHA256: (await encrypt(password)).toUpperCase(),
         }
         console.log(data)
         let res = await login(data)
@@ -78,7 +79,7 @@ const Login = () => {
                     <Input.Password className='customPassword' placeholder='      Su contraseña aquí...'/>
                 </Form.Item>
 
-                {/* { errorDisplay && <h2 style={{color: "tomato"}}>{error}</h2> } */}
+                { errorDisplay && <h2 style={{color: "tomato"}}>{error}</h2> }
 
                 <Form.Item>
                     <Button className='logInButton' htmlType="submit" type="primary" onClick={onSubmit}>
