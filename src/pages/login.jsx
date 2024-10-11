@@ -52,6 +52,10 @@ const Login = () => {
             })
         }else{
             setLoading(false)
+            messageApi.open({
+                type: 'error',
+                content: 'Se volvio a apagar la base de datos ._.'
+            })
         }
     }
 

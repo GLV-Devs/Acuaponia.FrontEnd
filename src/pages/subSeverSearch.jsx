@@ -1,14 +1,12 @@
 import { Input, Button } from "antd"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { DoubleRightOutlined, AppstoreAddOutlined, SlidersOutlined, ExportOutlined, SwapRightOutlined } from "@ant-design/icons"
 import { getSubServers } from '../client/ClientePrueba'
+import { appContext } from '../context/appContext'
 
 const SubServerSearch = () => {
 
-    const [showList, setShowList] = useState([])
-    useEffect(() => {
-        console.log(getSubServers())
-    }, [])
+    const {subServers} = useContext(appContext)
 
     return(
         <div className='SubServerSearch'>
@@ -18,25 +16,29 @@ const SubServerSearch = () => {
                 <Button> <ExportOutlined/> </Button>
             </div>
 
-            <div>
+            <div className="content">
                 <div className="LatPanel">
-                    { showList.map(() => (<div>
-                        <SwapRightOutlined/>
-                        <p>nombre</p>
-                        <div className='badge'></div>
-                    </div>)) }
+                    { subServers.map((item) => (
+                        <div key={item.id} className="ListItem">
+                            <SwapRightOutlined/>
+                            <p>{item.id}</p>
+                            <div className='badge'></div>
+                        </div>
+                    ))}
                 </div>
-                <div className="blockList">
-                    { showList.map((item) => (<div key={item.id}>
-                        <div>
-                            <div><AppstoreAddOutlined/></div>
-                            <DoubleRightOutlined rotate={45}/>
+                <div className="BlockList">
+                    { subServers.map((item) => (
+                        <div key={item.id} className="ListItem">
+                            <div>
+                                <div><AppstoreAddOutlined/></div>
+                                <DoubleRightOutlined rotate={45}/>
+                            </div>
+                            <div>
+                                <h5>{item.id}</h5>
+                                <p>{item.lastHeartBeat}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h5>Nombre</h5>
-                            <p>Subtitulo</p>
-                        </div>
-                    </div>)) }
+                    ))}
                 </div>
             </div>
         </div>

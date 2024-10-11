@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { useEffect } from 'react'
-import { getSubServerReports } from '../client/ClientePrueba'
+import { getSubServerReports, getSubServers } from '../client/ClientePrueba'
 import { appContext } from '../context/appContext'
 
 const Dashboard = () => {
@@ -8,7 +8,7 @@ const Dashboard = () => {
     const {subServers, setSubServers} = useContext(appContext)
 
     async function fetchSubServers(){
-        let res = await getSubServerReports()
+        let res = await getSubServers()
         setSubServers(res.data.data)
     }
 
