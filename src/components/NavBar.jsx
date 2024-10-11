@@ -2,29 +2,41 @@ import { UserOutlined, SettingOutlined, BellOutlined, BarsOutlined } from '@ant-
 import { useNavigate } from 'react-router-dom'
 import NotifPanel from './NotifPanel'
 import { useState } from 'react'
+import ConfigPanel from './ConfigPanel'
 
 const NavBar = () => {
 
+    const [configPanelOpen, setConfigPanelOpen] = useState(false)
+    const [notifPanelOpen, setNotifPanelOpen] = useState(false)
     const navigate = useNavigate()
     const iconStyle = {
         color: '#e95cff',
         fontSize: '35px'
     }
 
-    const [notifOpen, setNotifOpen] = useState(false)
+    const openNotif = () => {
+        setConfigPanelOpen(false)
+        setNotifPanelOpen(!notifPanelOpen)
+    }
+
+    const openConfig = () => {
+        setConfigPanelOpen(!configPanelOpen)
+        setNotifPanelOpen(false)
+    }
 
     return(
         <>
             <div className="NavBar">
                 <UserOutlined onClick={() => navigate('/')} style={iconStyle}/>
                 <div>
-                    <SettingOutlined onClick={() => navigate('/')} style={iconStyle}/>
-                    <BellOutlined onClick={() => navigate('/')} style={iconStyle}/>
+                    <SettingOutlined onClick={openConfig} style={iconStyle}/>
+                    <BellOutlined onClick={openNotif} style={iconStyle}/>
                     <BarsOutlined onClick={() => navigate('/')} style={iconStyle}/>
                 </div>
             </div>
 
-            { notifOpen && <NotifPanel close={() => setNotifOpen(false)}/> }
+            { notifPanelOpen && <NotifPanel close={() => setNotifPanelOpen(false)}/> }
+            { configPanelOpen && <ConfigPanel close={() => setConfigPanelOpen(false)}/> }
         </>
     )
 }

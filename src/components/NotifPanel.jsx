@@ -1,20 +1,32 @@
 import { BellOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
+import { getAllNotifications } from '../client/ClientePrueba'
+import { useEffect } from 'react'
 
 const NotifPanel = ({close}) => {
 
     const iconStyle = {
-        color: '#6f8fc2'
+        color: '#6f8fc2',
+        fontSize: '25px'
     }
+
+    const getNotif = async () => {
+        let res = await getAllNotifications()
+        console.log(res)
+    }
+
+    useEffect(() => {
+        getNotif()
+    }, [])
 
     return(
         <div className="NotifPanel">
             <div className='bar'>
                 <div>
                     <BellOutlined style={iconStyle}/>
-                    <h4>Notificaciones</h4>
+                    <h3>Notificaciones</h3>
                 </div>
-                <CloseOutlined style={iconStyle} onClick={close}/>
+                <CloseOutlined style={iconStyle} onClick={close} className='closeButton'/>
             </div>
 
             <div className='filters'>

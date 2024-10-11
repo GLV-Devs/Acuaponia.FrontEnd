@@ -1,12 +1,20 @@
 import { UserOutlined, MobileOutlined, BellOutlined, AppstoreAddOutlined, SettingOutlined, CloseOutlined } from "@ant-design/icons"
 
-const ConfigPanel = () => {
+const ConfigPanel = ({close}) => {
+
+    const iconStyle = {
+        color: '#6f8fc2',
+        fontSize: '25px'
+    }
+
     return(
         <div className="ConfigPanel ">
             <div className='bar'>
-                <SettingOutlined/>
-                <p>Ajustes</p>
-                <CloseOutlined />
+                <div>
+                    <SettingOutlined style={iconStyle}/>
+                    <h3>Ajustes</h3>
+                </div>
+                <CloseOutlined style={iconStyle} onClick={close} className='closeButton'/>
             </div>
 
             <div className="Buttons">
@@ -42,3 +50,5 @@ const ConfigPanel = () => {
         </div>
     )
 }
+
+export default ConfigPanel
