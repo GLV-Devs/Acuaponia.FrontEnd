@@ -127,6 +127,31 @@ body{
     }
 }
 
+.ConfigPanel{
+    .Buttons{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .Button{
+            box-shadow: var(--fuchsiaShadow);
+            display: flex;
+            color: var(--notifPanelColorLetter);
+            border-radius: 15px;
+            padding: 10px 15px;
+            gap: 15px;
+
+            &:hover{
+                cursor: pointer;
+            }
+
+            div{
+                h4, p{margin: 0px;}
+            }
+        }
+    }
+}
+
 
 // .NotifPanel{
 //     color: #6f8fc2;

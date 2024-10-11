@@ -2,45 +2,50 @@ import { UserOutlined, MobileOutlined, BellOutlined, AppstoreAddOutlined, Settin
 
 const ConfigPanel = ({close}) => {
 
-    const iconStyle = {
+    const iconHeaderStyle = {
         color: '#6f8fc2',
         fontSize: '25px'
+    }
+
+    const iconMenuStyle = {
+        color: '#6f8fc2',
+        fontSize: '40px'
     }
 
     return(
         <div className="ConfigPanel ">
             <div className='bar'>
                 <div>
-                    <SettingOutlined style={iconStyle}/>
+                    <SettingOutlined style={iconHeaderStyle}/>
                     <h3>Ajustes</h3>
                 </div>
-                <CloseOutlined style={iconStyle} onClick={close} className='closeButton'/>
+                <CloseOutlined style={iconHeaderStyle} onClick={close} className='closeButton'/>
             </div>
 
             <div className="Buttons">
                 <div className="Button">
-                    <UserOutlined/>
+                    <UserOutlined style={iconMenuStyle}/>
                     <div>
                         <h4>Titulo</h4>
                         <p>subtitulo</p>
                     </div>
                 </div>
                 <div className="Button">
-                    <MobileOutlined/>
+                    <MobileOutlined style={iconMenuStyle}/>
                     <div>
                         <h4>Titulo</h4>
                         <p>subtitulo</p>
                     </div>
                 </div>
                 <div className="Button">
-                    <AppstoreAddOutlined />
+                    <AppstoreAddOutlined style={iconMenuStyle}/>
                     <div>
                         <h4>Titulo</h4>
                         <p>subtitulo</p>
                     </div>
                 </div>
                 <div className="Button">
-                    <BellOutlined/>
+                    <BellOutlined style={iconMenuStyle}/>
                     <div>
                         <h4>Titulo</h4>
                         <p>subtitulo</p>
