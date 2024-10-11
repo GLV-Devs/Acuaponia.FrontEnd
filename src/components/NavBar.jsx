@@ -31,7 +31,7 @@ const NavBar = () => {
                 <div>
                     <SettingOutlined onClick={openConfig} style={iconStyle}/>
                     <BellOutlined onClick={openNotif} style={iconStyle}/>
-                    <BarsOutlined onClick={() => navigate('/')} style={iconStyle}/>
+                    <BarsOutlined onClick={() => navigate('/SubServerSearch')} style={iconStyle}/>
                 </div>
             </div>
 

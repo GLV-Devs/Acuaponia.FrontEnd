@@ -1,7 +1,8 @@
 import { BellOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { getAllNotifications } from '../client/ClientePrueba'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { appContext } from '../context/appContext'
 
 const NotifPanel = ({close}) => {
 
@@ -9,11 +10,11 @@ const NotifPanel = ({close}) => {
         color: '#6f8fc2',
         fontSize: '25px'
     }
-    const [showList, setShowList] = useState([])
+    const {notifications, setNotifications} = useContext(appContext) 
 
     const getNotif = async () => {
         let res = await getAllNotifications()
-        setShowList(res.data.data)
+        setNotifications(res.data.data)
         console.log(res)
     }
 
@@ -39,7 +40,7 @@ const NotifPanel = ({close}) => {
             </div>
 
             <div className='list'>
-                {showList.map((item) => (
+                {notifications.map((item) => (
                     <div className='listElement' key={item.id}>
                         <UserOutlined style={{color: '#6f8fc2', fontSize: '50px'}}/>
                         <div className='info'>

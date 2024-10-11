@@ -7,6 +7,8 @@ const AppContextProvider = ({children}) => {
     // const client = new mainServerClient(loginData, serverUrl, httpErrorHandler)
     const [logged, setLogged] = useState(false)
     const [userData, setUserData] = useState({})
+    const [subServers, setSubServers] = useState([])
+    const [notifications, setNotifications] = useState([])
 
     return(
         <appContext.Provider value={{
@@ -14,8 +16,11 @@ const AppContextProvider = ({children}) => {
             logged,
             setLogged,
             userData,
-            setUserData
-
+            setUserData,
+            subServers,
+            setSubServers,
+            notifications,
+            setNotifications,
         }}>
             {children}
         </appContext.Provider>
