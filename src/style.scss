@@ -8,6 +8,8 @@
     --fuchsiaShadow: 0px 0px 10px 5px rgba(233, 92, 255, 0.3);
 }
 
+html{background-color: var(--bgColor);}
+
 body{
     margin: 0px;
 }
@@ -19,7 +21,7 @@ body{
 }
 
 @mixin pages{
-    height: (100vw - 70px);
+    height: (100vw - 70px - 30px);
     background-color: var(--bgColor);
 }
 
@@ -28,7 +30,7 @@ body{
     background-color: var(--moduleBgColor);
     height: calc(100vh - 160px);
     position: relative;
-    top: 4vh;
+    top: 10px;
     left: calc(100vw - 350px);
     border-radius: 15px;
     padding: 15px;
@@ -62,7 +64,8 @@ body{
 }
 
 .NavBar{
-    width: calc(100vw - 140px);
+    width: calc(100vw - 120px - 30px);
+    margin: 15px;
     height: 70px;
     display: flex;
     flex-direction: row;
