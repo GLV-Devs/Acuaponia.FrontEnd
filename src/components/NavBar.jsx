@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import NotifPanel from './NotifPanel'
 import { useState } from 'react'
 import ConfigPanel from './ConfigPanel'
+import { navBarIconStyle } from '../AntDIconStyles'
 
 const NavBar = () => {
 
@@ -10,10 +11,6 @@ const NavBar = () => {
     const [notifPanelOpen, setNotifPanelOpen] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
-    const iconStyle = {
-        color: '#e95cff',
-        fontSize: '35px'
-    }
 
     const openNotif = () => {
         setConfigPanelOpen(false)
@@ -26,7 +23,6 @@ const NavBar = () => {
     }
 
     const switchSubServerPages = () => {
-        console.log(location)
         if(location.pathname == '/SubServerSearch'){
             navigate('/Dashboard')
         }else{
@@ -37,11 +33,11 @@ const NavBar = () => {
     return(
         <>
             <div className="NavBar">
-                <UserOutlined onClick={() => navigate('/Profile')} style={iconStyle}/>
+                <UserOutlined onClick={() => navigate('/Profile')} style={navBarIconStyle}/>
                 <div>
-                    <SettingOutlined onClick={openConfig} style={iconStyle}/>
-                    <BellOutlined onClick={openNotif} style={iconStyle}/>
-                    <BarsOutlined onClick={() => switchSubServerPages()} style={iconStyle}/>
+                    <SettingOutlined onClick={openConfig} style={navBarIconStyle}/>
+                    <BellOutlined onClick={openNotif} style={navBarIconStyle}/>
+                    <BarsOutlined onClick={() => switchSubServerPages()} style={navBarIconStyle}/>
                 </div>
             </div>
 
