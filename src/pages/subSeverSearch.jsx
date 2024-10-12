@@ -7,13 +7,22 @@ import { appContext } from '../context/appContext'
 const SubServerSearch = () => {
 
     const {subServers} = useContext(appContext)
+    const slideStyle = {
+        color: '#587099',
+        fontSize: '20px',
+    }
+    const exportStyle = {
+        color: '#ffb700',
+        fontSize: '25px',
+        
+    }
 
     return(
         <div className='SubServerSearch'>
             <div className="searchBar">
-                <Input placeholder="Buscar..."/>
-                <SlidersOutlined/>
-                <Button> <ExportOutlined/> </Button>
+                <Input className='inputSearchBar' variant='filled' placeholder="Buscar..."/>
+                <SlidersOutlined style={slideStyle}/>
+                <Button className='buttonExport' type="text"> <ExportOutlined style={exportStyle}/> </Button>
             </div>
 
             <div className="content">

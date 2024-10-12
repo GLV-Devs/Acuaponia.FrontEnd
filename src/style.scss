@@ -2,13 +2,20 @@
     --bgColor: #16141f;
     --moduleBgColor: #191925;
     --navbarColor: #191825;
+    --searchBarColor: #15141f;
     --highlightColor: #e95cff;
     --notifPanelColorLetter: #6f8fc2;
     --notifBorder: #1c1c28;
     --fuchsiaShadow: 0px 0px 10px 5px rgba(233, 92, 255, 0.3);
+    --placeholderColor: #3f3f57;
+    --shadowsColor: rgba(22, 6, 37, 0.9);
+    
 }
 
-html{background-color: var(--bgColor);}
+html{
+    background-color: var(--bgColor);
+    scrollbar-width: none;
+}
 
 body{
     margin: 0px;
@@ -74,6 +81,10 @@ body{
     padding: 0px 60px;
     background-color: var(--navbarColor);
     border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px var(--shadowsColor);
+    border-width: 2px;
+        border-style: solid;
+        border-color: #1c1c28;
 
     div{
         display: flex;
@@ -86,6 +97,7 @@ body{
 .NotifPanel, .ConfigPanel{@include panels;}
 
 .NotifPanel{
+    scrollbar-width: none;
     .filters{
         display: flex;
         flex-wrap: wrap;
@@ -222,7 +234,7 @@ body{
         }
         
         .centeredPlaceholder::placeholder{
-            color: rgb(63, 63, 87);
+            color: var(--placeholderColor);
         }
 
         .customPassword{
@@ -238,7 +250,7 @@ body{
 
         .customPassword ::placeholder{
             text-align: center;
-            color: rgb(63, 63, 87);
+            color: var(--placeholderColor);
         }
 
         .logInButton{
@@ -263,9 +275,22 @@ body{
         padding: 30px;
         background-color: var(--moduleBgColor);
         border-radius: 15px;
+        border-width: 3px;
+        border-style: solid;
+        border-color: #1c1c28;
         width: calc(100vw - 30px - 60px);
         display: flex;
         gap: 15px;
+        .inputSearchBar{
+            background-color: var(--searchBarColor);
+            color: white;
+        }
+        .inputSearchBar::placeholder{
+            color: var(--placeholderColor);
+        }
+        .buttonExport{
+            box-shadow: 0px 0px 6px 6px var(--shadowsColor);
+        }
     }
 
     .content{
