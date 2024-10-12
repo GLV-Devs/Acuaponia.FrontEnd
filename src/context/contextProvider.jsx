@@ -6,9 +6,10 @@ const AppContextProvider = ({children}) => {
 
     // const client = new mainServerClient(loginData, serverUrl, httpErrorHandler)
     const [logged, setLogged] = useState(false)
-    const [userData, setUserData] = useState({})
-    const [subServers, setSubServers] = useState([])
-    const [notifications, setNotifications] = useState([])
+    const [userData, setUserData] = useState(null)
+    const [subServers, setSubServers] = useState(null)
+    const [notifications, setNotifications] = useState(null)
+
 
     return(
         <appContext.Provider value={{

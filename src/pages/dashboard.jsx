@@ -1,19 +1,23 @@
 import { useContext, useState } from 'react'
 import { useEffect } from 'react'
-import { getSubServerReports, getSubServers } from '../client/ClientePrueba'
+import { getSubServerReports, getSubServers, getAccount, getAllNotifications } from '../client/ClientePrueba'
 import { appContext } from '../context/appContext'
 
 const Dashboard = () => {
 
-    const {subServers, setSubServers} = useContext(appContext)
+    const {subServers, setSubServers, setUserData, setNotifications} = useContext(appContext)
 
-    async function fetchSubServers(){
-        let res = await getSubServers()
-        setSubServers(res.data.data)
+    async function getAllInfo(){
+        let subserverRes = await getSubServers()
+        let userDataRes = await getAccount()
+        let notificationsRes = await getAllNotifications()
+        setSubServers(subserverRes.data.data)
+        setUserData(userDataRes.data.data[0])
+        setNotifications(notificationsRes.data.data)
     }
 
     useEffect(() => {
-        fetchSubServers()
+        getAllInfo()
     }, [])
 
     return(

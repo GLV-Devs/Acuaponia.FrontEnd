@@ -14,8 +14,7 @@
     --urgentColor: #01bc85;
     --newColor: #e4421c;
     --bordersColor: #1c1c28;
-    --mediumColor: #ffb700;
-    
+    --mediumColor: #ffb700;  
 }
 
 html{
@@ -45,15 +44,16 @@ body{
     width: 300px;
     background-color: var(--searchBarColor);
     height: calc(100vh - 160px);
-    position: relative;
-    top: 10px;
-    left: calc(100vw - 350px);
+    position: absolute;
+    top: 105px;
+    left: calc(100vw - 345px);
     border-radius: 15px;
     padding: 15px;
     overflow: scroll;
     display: flex;
     box-shadow: 0px 0px 10px 10px var(--shadowsColor);
-    
+    z-index: 15;
+
     .InsidePanel{
         background-color: var(--moduleBgColor);
         width: 290px;

@@ -1,5 +1,5 @@
 import { BellOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import { Button, Skeleton } from 'antd'
 import { getAllNotifications } from '../client/ClientePrueba'
 import { useContext, useEffect, useState } from 'react'
 import { appContext } from '../context/appContext'
@@ -12,15 +12,14 @@ const NotifPanel = ({close}) => {
     }
     const {notifications, setNotifications} = useContext(appContext) 
 
-    const getNotif = async () => {
-        let res = await getAllNotifications()
-        setNotifications(res.data.data)
-        console.log(res)
-    }
+    // const getNotif = async () => {
+    //     let res = await getAllNotifications()
+    //     setNotifications(res.data.data)
+    // }
 
-    useEffect(() => {
-        getNotif()
-    }, [])
+    // useEffect(() => {
+    //     getNotif()
+    // }, [])
 
     return(
         <div className="NotifPanel">
@@ -40,7 +39,13 @@ const NotifPanel = ({close}) => {
                     <Button type='text'>Baja <div className='badge4'/></Button>
                 </div>
 
-                <div className='list'>
+
+                {notifications == null ? (
+                    <>
+                        <Skeleton active/>
+                        <Skeleton active/>
+                    </>
+                ):(<div className='list'>
                     {notifications.map((item) => (
                         <div className='listElement' key={item.id}>
                             <UserOutlined style={{color: '#6f8fc2', fontSize: '40px'}}/>
@@ -57,7 +62,7 @@ const NotifPanel = ({close}) => {
                             </div>
                         </div>)
                     )}
-                </div>
+                </div>)}
             </div>
         </div>    
     )
