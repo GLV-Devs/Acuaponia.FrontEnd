@@ -1,4 +1,4 @@
-import { Input, Button } from "antd"
+import { Input, Button, Skeleton } from "antd"
 import { useContext, useEffect, useState } from "react"
 import { DoubleRightOutlined, AppstoreAddOutlined, SlidersOutlined, ExportOutlined, SwapRightOutlined } from "@ant-design/icons"
 import { getSubServers } from '../client/ClientePrueba'
@@ -19,37 +19,47 @@ const SubServerSearch = () => {
 
     return(
         <div className='SubServerSearch'>
-            <div className="searchBar">
-                <Input className='inputSearchBar' variant='filled' placeholder="Buscar..."/>
-                <SlidersOutlined style={slideStyle}/>
-                <Button className='buttonExport' type="text"> <ExportOutlined style={exportStyle}/> </Button>
-            </div>
+            <h1 className='title'>Sub Servidores</h1>
+            {subServers == null ? (
+                <>    
+                    <Skeleton active/>
+                    <Skeleton active/>
+                </>
+            ):(
+                <>
+                    <div className="searchBar">
+                        <Input className='inputSearchBar' variant='filled' placeholder="Buscar..."/>
+                        <SlidersOutlined style={slideStyle}/>
+                        <Button className='buttonExport' type="text"> <ExportOutlined style={exportStyle}/> </Button>
+                    </div>
 
-            <div className="content">
-                <div className="LatPanel">
-                    { subServers.map((item) => (
-                        <div key={item.id} className="ListItem">
-                            <SwapRightOutlined/>
-                            <p>{item.id}</p>
-                            <div className='badge'></div>
+                    <div className="content">
+                        <div className="LatPanel">
+                            { subServers.map((item) => (
+                                <div key={item.id} className="ListItem">
+                                    <SwapRightOutlined/>
+                                    <p>{item.id}</p>
+                                    <div className='badge'></div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-                <div className="BlockList">
-                    { subServers.map((item) => (
-                        <div key={item.id} className="ListItem">
-                            <div>
-                                <div><AppstoreAddOutlined/></div>
-                                <DoubleRightOutlined rotate={45}/>
-                            </div>
-                            <div>
-                                <h5>{item.id}</h5>
-                                <p>{item.lastHeartBeat}</p>
-                            </div>
+                        <div className="BlockList">
+                            { subServers.map((item) => (
+                                <div key={item.id} className="ListItem">
+                                    <div>
+                                        <div><AppstoreAddOutlined/></div>
+                                        <DoubleRightOutlined rotate={45}/>
+                                    </div>
+                                    <div>
+                                        <h5>{item.id}</h5>
+                                        <p>{item.lastHeartBeat}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-            </div>
+                    </div>      
+                </>
+            )}
         </div>
     )
 }
