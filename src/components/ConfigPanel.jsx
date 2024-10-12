@@ -3,7 +3,7 @@ import { UserOutlined, MobileOutlined, BellOutlined, AppstoreAddOutlined, Settin
 const ConfigPanel = ({close}) => {
 
     const iconHeaderStyle = {
-        color: '#6f8fc2',
+        color: '#e95cff',
         fontSize: '25px'
     }
 
@@ -14,41 +14,43 @@ const ConfigPanel = ({close}) => {
 
     return(
         <div className="ConfigPanel ">
-            <div className='bar'>
-                <div>
-                    <SettingOutlined style={iconHeaderStyle}/>
-                    <h3>Ajustes</h3>
+            <div className="InsidePanel">
+                <div className='bar'>
+                    <div>
+                        <SettingOutlined style={iconHeaderStyle}/>
+                        <h3>Ajustes</h3>
+                    </div>
+                    <CloseOutlined style={iconHeaderStyle} onClick={close} className='closeButton'/>
                 </div>
-                <CloseOutlined style={iconHeaderStyle} onClick={close} className='closeButton'/>
-            </div>
 
-            <div className="Buttons">
-                <div className="Button">
-                    <UserOutlined style={iconMenuStyle}/>
-                    <div>
-                        <h4>Titulo</h4>
-                        <p>subtitulo</p>
+                <div className="Buttons">
+                    <div className="Button">
+                        <UserOutlined style={iconMenuStyle}/>
+                        <div>
+                            <h4>Usuario</h4>
+                            <p>Creacion de Usuario</p>
+                        </div>
                     </div>
-                </div>
-                <div className="Button">
-                    <MobileOutlined style={iconMenuStyle}/>
-                    <div>
-                        <h4>Titulo</h4>
-                        <p>subtitulo</p>
+                    <div className="Button">
+                        <MobileOutlined style={iconMenuStyle}/>
+                        <div>
+                            <h4>Dispositivo</h4>
+                            <p>Creacion de Dispositivo</p>
+                        </div>
                     </div>
-                </div>
-                <div className="Button">
-                    <AppstoreAddOutlined style={iconMenuStyle}/>
-                    <div>
-                        <h4>Titulo</h4>
-                        <p>subtitulo</p>
+                    <div className="Button">
+                        <AppstoreAddOutlined style={iconMenuStyle}/>
+                        <div>
+                            <h4>Reportes</h4>
+                            <p>Creacion de reportes</p>
+                        </div>
                     </div>
-                </div>
-                <div className="Button">
-                    <BellOutlined style={iconMenuStyle}/>
-                    <div>
-                        <h4>Titulo</h4>
-                        <p>subtitulo</p>
+                    <div className="Button">
+                        <BellOutlined style={iconMenuStyle}/>
+                        <div>
+                            <h4>Titulo</h4>
+                            <p>subtitulo</p>
+                        </div>
                     </div>
                 </div>
             </div>
