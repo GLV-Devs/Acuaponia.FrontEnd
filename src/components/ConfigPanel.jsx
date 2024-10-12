@@ -26,22 +26,22 @@ const ConfigPanel = ({close}) => {
                     <CloseOutlined style={iconHeaderStyle} onClick={close} className='closeButton'/>
                 </div>
 
-                <div className="Buttons" onClick={() => {navigate ('/userCreation'); setConfigModalOpen(false)}}>
-                    <div className="Button">
+                <div className="Buttons">
+                    <div className="Button" onClick={() => {navigate ('/userCreation'); close()}}>
                         <UserOutlined style={iconMenuStyle}/>
                         <div>
                             <h4>Usuario</h4>
                             <p>Creacion de Usuario</p>
                         </div>
                     </div>
-                    <div className="Button">
+                    <div className="Button" onClick={() => {navigate ('/deviceCreation'); close()}}>
                         <MobileOutlined style={iconMenuStyle}/>
                         <div>
                             <h4>Dispositivo</h4>
                             <p>Creacion de Dispositivo</p>
                         </div>
                     </div>
-                    <div className="Button">
+                    <div className="Button" onClick={() => {navigate ('/reportCreation'); close()}}>
                         <AppstoreAddOutlined style={iconMenuStyle}/>
                         <div>
                             <h4>Reportes</h4>

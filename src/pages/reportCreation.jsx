@@ -7,9 +7,15 @@ const ReportCreation = () => {
     const navigate = useNavigate()
 
     return(
-        <>
+        <div className='moduleCreation'>
+            <Form className='creationForm'
+                variant='filled'
+                size='large'
+            >
+                <h1>Creacion de reportes</h1>
+            </Form>
         
-        </>
+        </div>
     )
 }
 

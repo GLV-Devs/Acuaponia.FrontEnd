@@ -399,3 +399,17 @@ body{
         }
     }
 }
+
+.moduleCreation{
+    height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .creationForm{
+        background-color: var(--moduleBgColor);
+        width: 70vw;
+        height: 75vh;
+        
+    }
+
+}
