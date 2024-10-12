@@ -69,7 +69,7 @@ export async function getAllNotifications(){
 
 export async function getAccount(){
     try{
-        let res = await axios.get(`${url}/api/app/account`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        let res = await axios.get(`${url}/api/app/accounts`, {headers: {'Authorization': `Session ${sessionToken}`}})
         return res
     }catch(err){
         return err

@@ -27,7 +27,7 @@ const NavBar = () => {
     return(
         <>
             <div className="NavBar">
-                <UserOutlined onClick={() => navigate('/')} style={iconStyle}/>
+                <UserOutlined onClick={() => navigate('/Profile')} style={iconStyle}/>
                 <div>
                     <SettingOutlined onClick={openConfig} style={iconStyle}/>
                     <BellOutlined onClick={openNotif} style={iconStyle}/>
