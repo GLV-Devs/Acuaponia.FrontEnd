@@ -1,4 +1,5 @@
 import { UserOutlined, MobileOutlined, BellOutlined, AppstoreAddOutlined, SettingOutlined, CloseOutlined } from "@ant-design/icons"
+import { useNavigate } from "react-router-dom"
 
 const ConfigPanel = ({close}) => {
 
@@ -12,6 +13,8 @@ const ConfigPanel = ({close}) => {
         fontSize: '40px'
     }
 
+    const navigate = useNavigate()
+
     return(
         <div className="ConfigPanel ">
             <div className="InsidePanel">
@@ -23,7 +26,7 @@ const ConfigPanel = ({close}) => {
                     <CloseOutlined style={iconHeaderStyle} onClick={close} className='closeButton'/>
                 </div>
 
-                <div className="Buttons">
+                <div className="Buttons" onClick={() => {navigate ('/userCreation'); setConfigModalOpen(false)}}>
                     <div className="Button">
                         <UserOutlined style={iconMenuStyle}/>
                         <div>
