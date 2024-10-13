@@ -9,6 +9,11 @@ export const barPanelIconStyles = {
 }
 
 export const buttonPanelIconStyle = {
-	color: '#6f8fc2',
+	color: '#e95cff',
 	fontSize: '40px'
+}
+
+export const backButtonStyle = {
+	color: '#01bc85',
+	fontSize: '25px'
 }

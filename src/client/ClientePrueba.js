@@ -85,3 +85,12 @@ export async function postSubServerReport(data){
     }
 }
 
+export async function postCreateAccount(data){
+    try{
+        let res = await axios.post(`${url}/api/app/identity`, data, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
+

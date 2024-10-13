@@ -9,7 +9,7 @@ const Profile = () => {
 
     const {userData, setUserData, subServers} = useContext(appContext)
     const dividerStyle = {
-        borderColor: 'blue',
+        borderColor: '#e95cff',
         borderWidth: '2px'
     }
 
@@ -24,17 +24,19 @@ const Profile = () => {
 
     return(
         <div className='Profile'>
-            <h1 className='titles'>Bienvenido</h1>
-            <h1 className='titles'>{userData.realName}</h1>
-
+            <div className='bar'>
+                <h1 className='titles'>Bienvenido</h1>
+                <h1 className='titles'>{userData.realName}</h1>
+            </div>
             <div className='card'>
+                <div className='settingBar'><SettingOutlined style={buttonPanelIconStyle}/></div>
                 <div className='picContainer'>
                     { userData.img == null ? (
-                        <UserOutlined style={{fontSize: '300px', color: '#6f8fc2'}}/>
+                        <UserOutlined style={{fontSize: '225px', color: '#6f8fc2'}}/>
                     ):(
                         <img />
                     )  }
-                    <SettingOutlined style={buttonPanelIconStyle}/>
+                    
                 </div>
                 <h2>{userData.realName}</h2>
                 <Divider dashed style={dividerStyle}/>
