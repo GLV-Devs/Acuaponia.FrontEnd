@@ -17,7 +17,6 @@ const Dashboard = () => {
         setUserData(userDataRes.data.data[0])
         setNotifications(notificationsRes.data.data)
         setSubServerReports(reportsRes.data.data)
-        console.log(reportsRes.data.data)
     }
 
     useEffect(() => {

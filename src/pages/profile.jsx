@@ -3,24 +3,17 @@ import { appContext } from '../context/appContext'
 import { SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { Divider, Skeleton } from "antd";
 import { buttonPanelIconStyle } from '../AntDIconStyles'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
 
-    const {userData, setUserData, subServers, subServerReports} = useContext(appContext)
-    console.log(subServers)
+    const {userData, setUserData, subServers, subServerReports, setCurrentSubServer} = useContext(appContext)
+    const navigate = useNavigate()
+
     const dividerStyle = {
         borderColor: '#e95cff',
         borderWidth: '2px'
     }
-
-    // const getUserInfo = async () => {
-    //     let res = await getAccount()
-    //     setUserData(res.data.data[0])
-    // }
-
-    // useEffect(() => {
-    //     getUserInfo()
-    // }, [])
 
     return(
         <div className='Profile'>
@@ -76,7 +69,7 @@ const Profile = () => {
                         <h1 className='title'>Sub servidores</h1>
                         <div className='subSerberContainer'>
                             { subServers.map((item) => (
-                                <div className='itemSubServer' key={item.id}>
+                                <div className='itemSubServer' key={item.id} onClick={() => {setCurrentSubServer(item.id); navigate('/SubServer')}}>
                                     <h3>{item.name}</h3>
                                     <h4>{item.id}</h4>
                                     <Divider dashed style={{borderColor: '#6f8fc2'}}/>
