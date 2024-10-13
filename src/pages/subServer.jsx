@@ -3,14 +3,16 @@ import { useContext, useState, useEffect } from 'react'
 import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
 import { getSubServerInfo } from '../client/ClientePrueba'
+import DispPanel from '../components/DispPanel'
+import ReactPanel from '../components/ReactPanel'
 
 const SubServer = () => {
 
     const {currentSubServer, subServerReports} = useContext(appContext)
     const [info, setInfo] = useState(null)
     const [reports, setReports] = useState([])
-    console.log(currentSubServer)
-    console.log(subServerReports)
+    const [dispPanelOpen, setDispPanelOpen] = useState(false)
+    const [reactPanelOpen, setReactPanelOpen] = useState(false)
 
     useEffect(() => {
         getInfo(currentSubServer)
@@ -38,14 +40,14 @@ const SubServer = () => {
                             <h1>{info.name}</h1>
                         </div>
                         <div className="Buttons">
-                            <div className="Button1">
+                            <div className="Button1" onClick={() => setDispPanelOpen(true)}>
                                 <h1>Dispositivos</h1>
                                 <MobileOutlined style={{color: 'fuchsia', fontSize: '65px'}}/>
                             </div>
                             <div className="Button2">
                                 <h2>Sesion del sub servidor</h2>
                             </div>
-                            <div className="Button3">
+                            <div className="Button3" onClick={() => setReactPanelOpen(true)}>
                                 <LaptopOutlined style={{color: 'yellow', fontSize: '65px'}}/>
                                 <h1>Reactores</h1>
                             </div>
@@ -81,7 +83,10 @@ const SubServer = () => {
                                 </div>
                             )) }
                         </div>
-                    </div>      
+                    </div>
+
+                    { dispPanelOpen && <DispPanel close={() => setDispPanelOpen(false)}/> }
+                    { reactPanelOpen && <ReactPanel close={() => setReactPanelOpen(false)}/> }      
                 </>
             )}
         </div>

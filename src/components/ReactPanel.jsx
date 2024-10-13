@@ -1,12 +1,12 @@
-import { LaptopOutlined, closeOutlined } from "@ant-design/icons"
+import { LaptopOutlined, CloseOutlined, SettingOutlined } from "@ant-design/icons"
 
-const ReactPanel = () => {
+const ReactPanel = ({close}) => {
 	return(
 		<div className='ReactPanel'>
 			<div className='bar'>
                 <SettingOutlined/>
                 <p>Reactores</p>
-                <CloseOutlined />
+                <CloseOutlined onClick={close}/>
             </div>
 
             <div className="Buttons">
