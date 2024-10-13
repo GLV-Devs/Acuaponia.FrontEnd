@@ -6,16 +6,18 @@ import { Skeleton, Input } from 'antd'
 
 const Dashboard = () => {
 
-    const {subServers, setSubServers, setUserData, setNotifications} = useContext(appContext)
+    const {subServers, setSubServers, setUserData, setNotifications, setSubServerReports} = useContext(appContext)
 
     async function getAllInfo(){
         let subserverRes = await getSubServers()
         let userDataRes = await getAccount()
         let notificationsRes = await getAllNotifications()
+        let reportsRes = await getSubServerReports()
         setSubServers(subserverRes.data.data)
         setUserData(userDataRes.data.data[0])
         setNotifications(notificationsRes.data.data)
-        console.log(userDataRes)
+        setSubServerReports(reportsRes.data.data)
+        console.log(reportsRes.data.data)
     }
 
     useEffect(() => {

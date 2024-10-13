@@ -62,7 +62,7 @@ const Login = () => {
     return(
         <div className='LoginPage'>
             {contextHandler}
-            <Spin spinning={loading}>
+            {/*<Spin spinning={loading}>*/}
             <Form className="loginForm"
                 variant= 'filled'
                 componentsize= 'large'
@@ -100,7 +100,7 @@ const Login = () => {
                     </Button>
                 </Form.Item>
             </Form>
-            </Spin>
+            {/*</Spin>*/}
         </div>
     )
 }
