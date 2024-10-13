@@ -461,6 +461,9 @@ body{
     }
 
     .ReportesSection{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         .title{color: var(--notifPanelColorLetter);}
 
         .reportContainer{
@@ -506,6 +509,8 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
+        .title{color: var(--notifPanelColorLetter);}
+
 
         .subSerberContainer{
             display: flex;
@@ -518,6 +523,9 @@ body{
                 border-radius: 15px;
                 width: 35vw;
                 padding: 20px;
+                color: var(--notifPanelColorLetter);
+
+                &:hover{cursor: pointer;}
             }
         }
     }
