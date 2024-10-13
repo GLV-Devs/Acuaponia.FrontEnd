@@ -3,10 +3,14 @@ import { useContext, useEffect, useState } from "react"
 import { DoubleRightOutlined, AppstoreAddOutlined, SlidersOutlined, ExportOutlined, SwapRightOutlined } from "@ant-design/icons"
 import { getSubServers } from '../client/ClientePrueba'
 import { appContext } from '../context/appContext'
+import { useNavigate } from "react-router-dom"
 
 const SubServerSearch = () => {
 
-    const {subServers} = useContext(appContext)
+    const {subServers, setCurrentSubServer} = useContext(appContext)
+    const navigate = useNavigate()
+
+    console.log(subServers)
     const slideStyle = {
         color: '#587099',
         fontSize: '20px',
@@ -16,6 +20,7 @@ const SubServerSearch = () => {
         fontSize: '25px',
         
     }
+
 
     return(
         <div className='SubServerSearch'>
@@ -36,21 +41,24 @@ const SubServerSearch = () => {
                     <div className="content">
                         <div className="LatPanel">
                             { subServers.map((item) => (
-                                <div key={item.id} className="ListItem">
-                                    <SwapRightOutlined/>
-                                    <p>{item.id}</p>
+                                <div key={item.id} className="ListItem" onClick={() => {setCurrentSubServer(item.id); navigate('/SubServer')}}>
+                                    <div className="left">
+                                        <SwapRightOutlined/>
+                                        <p>{item.name}</p>
+                                    </div>
                                     <div className='badge'></div>
                                 </div>
                             ))}
                         </div>
                         <div className="BlockList">
                             { subServers.map((item) => (
-                                <div key={item.id} className="ListItem">
-                                    <div>
-                                        <div><AppstoreAddOutlined/></div>
-                                        <DoubleRightOutlined rotate={45}/>
+                                <div key={item.id} className="ListItem" onClick={() => {setCurrentSubServer(item.id); navigate('/SubServer')}}>
+                                    <div className="banner">
+                                        <div className="subServerIcon"><AppstoreAddOutlined style={{color:'#e95cff', fontSize:'45px'}}/></div>
+                                        <div><DoubleRightOutlined rotate={315}/></div>
                                     </div>
-                                    <div>
+                                    <div className='Info'>
+                                        <h3>{item.name}</h3>
                                         <h5>{item.id}</h5>
                                         <p>{item.lastHeartBeat}</p>
                                     </div>

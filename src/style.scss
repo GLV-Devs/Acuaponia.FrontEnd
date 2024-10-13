@@ -266,41 +266,6 @@ body{
     }
 }
 
-
-// .NotifPanel{
-//     color: #6f8fc2;
-
-//     .bar{
-//         display: flex;
-//         align-items: center;
-//         justify-content: space-between;
-//     }
-
-//     .filters{
-//         display: flex;
-//         flex-wrap: wrap;
-//     }
-
-//     .list{
-//         display: flex;
-//         flex-direction: column;
-
-//         .listElement{
-//             border: 2px solid #1c1c28;
-//             box-shadow: 0px 0px 10px 10px rgba(233, 92, 255, 0.6);
-//             display: flex;
-//             flex-direction: row;
-//             align-items: baseline;
-
-//             .info{
-//                 display: flex;
-//                 flex-direction: column;
-//                 align-items: start;
-//             }
-//         }
-//     }
-// }
-
 .LoginPage{
     width: 100vw;
     height: 100vh;
@@ -403,21 +368,88 @@ body{
         color: var(--notifPanelColorLetter);
 
         .LatPanel{
-            width: 25vw;
+            width: 24vw;
+            height: calc(100vh - 300px);
             background-color: var(--moduleBgColor);
             padding: 10px;
             border-radius: 15px;
+            border-style: solid;
+            border-color: var(--bordersColor);
 
             .ListItem{
                 display: flex;
                 align-items: center;
-                gap: 5px;
+                justify-content: space-between;
+                padding: 0px 10px;
+                font-size: 12px;
+                background-color: var(--searchBarColor);
+                transition: transform 0.3s ease-out;
+
+                &:hover{
+                        transform: scale(1.02);
+                        cursor: pointer;
+                }
+                
+
+                .left{
+                    display: flex;
+                }
+
+                .badge{
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    background-color: var(--highlightColor);
+                }
             }
         }
 
         .BlockList{
             width: 75vw;
             background-color: var(--moduleBgColor);   //este color no es para todo el modulo, hay que quitarlo
+            border-radius: 15px;
+            border-style: solid;
+            border-color: var(--bordersColor);
+            display: flex;
+            gap: 20px;
+            .ListItem{
+                background: linear-gradient(#202032, #161722);
+                width: 180px;
+                height: 150px;
+                display: flex;
+                flex-direction: column;
+                border-radius: 15px;
+                margin:18px;
+                transition: transform 0.3s ease-out;
+
+                &:hover{
+                        transform: scale(1.05);
+                        cursor: pointer;
+                }
+
+                .banner{
+                    display: flex;
+                    padding: 5px;
+                    justify-content: space-between;
+                    
+                    .subServerIcon{
+                        background-color: var(--newColor);
+                        position: relative;
+                        bottom: 12px;
+                        right: 12px;
+                        padding: 8px;
+                        border-radius: 50%;
+                        box-shadow: 0px 0px 5px 5px var(--shadowsColor);
+                    }
+                }
+
+                .Info{
+                    display: flex;
+                    flex-direction: column;
+                    h3{margin:0px 5px; font-weight: 500; font-size: 16px;}
+                    h5{margin: 5px; font-weight: 400; ;}
+                }
+            }
         }
     }
 }
@@ -464,7 +496,7 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
-        .title{color: var(--notifPanelColorLetter);}
+        .title{color: var(--highlightColor);}
 
         .reportContainer{
             display: flex;
@@ -475,31 +507,34 @@ body{
                 display: flex;
                 align-items: start;
                 background-color: var(--moduleBgColor);
-                box-shadow: var(--fuchsiaShadow);
+                box-shadow: 0px 0px 5px 5px var(--shadowsColor);
                 border-radius: 15px;
                 padding: 20px;
                 width: 35vw;
-                // height: 200px;
+                height: 125px;
                 gap: 15px;
 
-                .badge{width: 70px; height: 70px; background-color: fuchsia; border-radius: 50%}
+                .badge{width: 70px; height: 70px; background-color: var(--highlightColor); border-radius: 50%}
 
                 .info{
                     display: flex;
                     flex-direction: column;
                     align-items: self-start;
+                    width: calc(35vw - 70px - 15px);
                     color: var(--notifPanelColorLetter);
-                    h4{margin: 0px}
+                    h1{margin: 4px 0px;}
+                    h4{margin: 0px; font-weight: 300;}
 
                     .dateTime{
                         display: flex;
                         align-items: center;
-                        gap: 100%;
+                        width: calc(35vw - 70px - 15px);
+                        justify-content: space-between;
 
-                        .date{color: green;}
-                        .time{color: fuchsia;}
+                        .date{color: var(--urgentColor); font-size: 12px;}
+                        .time{color: var(--highlightColor); font-size: 12px;}
                     }
-                        .yellow{color: yellow;}
+                        .yellow{color: var(--mediumColor);}
                 }
             }
         }
@@ -509,7 +544,7 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
-        .title{color: var(--notifPanelColorLetter);}
+        .title{color: var(--highlightColor);}
 
 
         .subSerberContainer{
@@ -519,7 +554,7 @@ body{
 
             .itemSubServer{
                 background-color: var(--moduleBgColor);
-                box-shadow: var(--fuchsiaShadow);
+                box-shadow: 0px 0px 5px 5px var(--shadowsColor);
                 border-radius: 15px;
                 width: 35vw;
                 padding: 20px;

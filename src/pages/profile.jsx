@@ -72,7 +72,7 @@ const Profile = () => {
                                 <div className='itemSubServer' key={item.id} onClick={() => {setCurrentSubServer(item.id); navigate('/SubServer')}}>
                                     <h3>{item.name}</h3>
                                     <h4>{item.id}</h4>
-                                    <Divider dashed style={{borderColor: '#6f8fc2'}}/>
+                                    <Divider dashed style={{borderColor: '#ffb700'}}/>
                                     <h3>
                                         {new Date(item.lastHeartbeat).getDate()}/{new Date(item.lastHeartbeat).getMonth()}/{new Date(item.lastHeartbeat).getFullYear()} {new Date(item.lastHeartbeat).getHours()}:{new Date(item.lastHeartbeat).getMinutes()}
                                     </h3>
