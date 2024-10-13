@@ -42,7 +42,7 @@ export async function getSubServerReports(){
 
 export async function getSubServerDevices(subServerId){
     try{
-        let res = await axios.get(`${url}/api/app/devices/$subServerId`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        let res = await axios.get(`${url}/api/app/devices/${subServerId}`, {headers: {'Authorization': `Session ${sessionToken}`}})
         return res
     }catch(err){
         return err

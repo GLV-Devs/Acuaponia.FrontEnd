@@ -2,27 +2,36 @@ import { LeftOutlined, LaptopOutlined, MobileOutlined } from "@ant-design/icons"
 import { useContext, useState, useEffect } from 'react'
 import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
-import { getSubServerInfo } from '../client/ClientePrueba'
+import { getSubServerInfo, getSubServerDevices } from '../client/ClientePrueba'
 import DispPanel from '../components/DispPanel'
 import ReactPanel from '../components/ReactPanel'
 
 
 const SubServer = () => {
 
-    const {currentSubServer, subServerReports} = useContext(appContext)
+    const {currentSubServer, subServerReports, setSubServerDevices} = useContext(appContext)
     const [info, setInfo] = useState(null)
     const [reports, setReports] = useState([])
     const [dispPanelOpen, setDispPanelOpen] = useState(false)
     const [reactPanelOpen, setReactPanelOpen] = useState(false)
 
+    
+
     useEffect(() => {
         getInfo(currentSubServer)
+        getDevices(currentSubServer)
     }, [])
 
     async function getInfo(id){
         let resInfo = await getSubServerInfo(id)
         console.log(resInfo.data.data[0])
         setInfo(resInfo.data.data[0])
+    }
+
+    async function getDevices(id){
+        let resDevices = await getSubServerDevices(id)
+        console.log(resDevices)
+        setSubServerDevices(resDevices.data.data)
     }
 
     return(

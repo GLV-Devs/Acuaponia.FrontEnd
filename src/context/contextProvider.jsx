@@ -12,6 +12,9 @@ const AppContextProvider = ({children}) => {
     const [subServerReports, setSubServerReports] = useState(null)
     const [currentSubServer, setCurrentSubServer] = useState(null)
     const [subServerDevices, setSubServerDevices] = useState(null)
+    const [currentDevice, setCurrentDevice] = useState(null)
+    const [devicePeripherals, setDevicePeripherals] = useState(null)
+    const [currentPeripheral, setCurrentPeripheral] = useState(null)
 
     return(
         <appContext.Provider value={{
@@ -29,7 +32,13 @@ const AppContextProvider = ({children}) => {
             currentSubServer,
             setCurrentSubServer,
             subServerDevices,
-            setSubServerDevices
+            setSubServerDevices,
+            currentDevice,
+            setCurrentDevice,
+            devicePeripherals,
+            setDevicePeripherals,
+            currentPeripheral,
+            setCurrentPeripheral
         }}>
             {children}
         </appContext.Provider>
