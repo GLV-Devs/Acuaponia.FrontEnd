@@ -131,7 +131,7 @@ body{
     }
 }
 
-.NotifPanel, .ConfigPanel{@include panels;}
+.NotifPanel, .ConfigPanel, .DispPanel, .ReactPanel{@include panels;}
 
 .NotifPanel{
     scrollbar-width: none;
@@ -240,6 +240,84 @@ body{
 
 .ConfigPanel{
     scrollbar-width: none;
+
+    .Buttons{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .Button{
+            box-shadow: 0px 0px 5px 5px var(--shadowsColor);
+            display: flex;
+            color: var(--notifPanelColorLetter);
+            border-radius: 15px;
+            padding: 10px 15px;
+            gap: 15px;
+
+            &:hover{
+                cursor: pointer;
+            }
+
+            div{
+                h4{margin: 0px} 
+                p{font-size: 12px; font-weight: 300 ;margin: 0px;}
+            }
+        }
+    }
+}
+
+.DispPanel{
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+
+    .bar{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--notifPanelColorLetter);
+        margin-bottom: 10px;
+    }
+
+    .Buttons{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .Button{
+            box-shadow: 0px 0px 5px 5px var(--shadowsColor);
+            display: flex;
+            color: var(--notifPanelColorLetter);
+            border-radius: 15px;
+            padding: 10px 15px;
+            gap: 15px;
+
+            &:hover{
+                cursor: pointer;
+            }
+
+            div{
+                h4{margin: 0px} 
+                p{font-size: 12px; font-weight: 300 ;margin: 0px;}
+            }
+        }
+    }
+}
+
+.ReactPanel{
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+
+    .bar{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--notifPanelColorLetter);
+        margin-bottom: 10px;
+    }
 
     .Buttons{
         display: flex;
@@ -651,8 +729,11 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    
     .section1{
         color: var(--notifPanelColorLetter);
+        
+        h1{ font-weight: 500; font-size: 30px;}
 
         .bar{
             display: flex;
@@ -670,12 +751,17 @@ body{
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                text-align: center;
                 gap: 15px;
                 border-radius: 15px;
-                box-shadow: var(--fuchsiaShadow);
+                box-shadow: 0px 0px 5px 5px var(--shadowsColor);
 
                 &:hover{cursor: pointer;}
             }
+
+            .Button1, .Button3{color: var(--notifPanelColorLetter);}
+
+            .Button2{color: var(--highlightColor)}
         }
     }
 
@@ -685,8 +771,24 @@ body{
         width: 90vw;
         color: var(--notifPanelColorLetter);
         
+        h1{ font-weight: 500; font-size: 30px;}
 
-        .bar{display: flex; align-items: center; justify-content: space-between; gap: 50vw;}
+        .bar{
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 50vw;
+        
+            Input{
+                background-color: var(--searchBarColor);
+                box-shadow: 0px 0px 5px 5px var(--shadowsColor);
+                color: var(--notifPanelColorLetter);
+
+                &::placeholder{
+                    color: var(--placeholderColor);
+                }
+            }
+        }
 
         .reportsContainer{
 
@@ -694,11 +796,13 @@ body{
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                box-shadow: var(--fuchsiaShadow);
+                box-shadow: 0px 0px 5px 5px var(--shadowsColor);
                 border-radius: 15px;
                 padding: 0px 20px;
 
-                .badge{background: fuchsia; width: 30px; height: 30px; border-radius: 50%}
+                h3{font-weight: 500; font-size: 17px;}
+
+                .badge{background: var(--highlightColor); width: 30px; height: 30px; border-radius: 50%}
             }
         }
     }

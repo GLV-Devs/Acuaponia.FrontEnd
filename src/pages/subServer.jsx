@@ -6,6 +6,7 @@ import { getSubServerInfo } from '../client/ClientePrueba'
 import DispPanel from '../components/DispPanel'
 import ReactPanel from '../components/ReactPanel'
 
+
 const SubServer = () => {
 
     const {currentSubServer, subServerReports} = useContext(appContext)
@@ -36,19 +37,19 @@ const SubServer = () => {
                 <>
                     <div className="section1">
                         <div className='bar'>
-                            <LeftOutlined style={{color: 'lightGreen', fontSize: '40px'}}/>
+                            <LeftOutlined style={{color: '#01bc85', fontSize: '40px'}}/>
                             <h1>{info.name}</h1>
                         </div>
                         <div className="Buttons">
                             <div className="Button1" onClick={() => setDispPanelOpen(true)}>
                                 <h1>Dispositivos</h1>
-                                <MobileOutlined style={{color: 'fuchsia', fontSize: '65px'}}/>
+                                <MobileOutlined style={{color: '#e95cff', fontSize: '65px'}}/>
                             </div>
                             <div className="Button2">
                                 <h2>Sesion del sub servidor</h2>
                             </div>
                             <div className="Button3" onClick={() => setReactPanelOpen(true)}>
-                                <LaptopOutlined style={{color: 'yellow', fontSize: '65px'}}/>
+                                <LaptopOutlined style={{color: '#ffb700', fontSize: '65px'}}/>
                                 <h1>Reactores</h1>
                             </div>
                         </div>
@@ -69,7 +70,7 @@ const SubServer = () => {
                     <div className="section4">
                         <div className='bar'>
                             <h1>Reportes</h1>
-                            <Input placeholder='Buscar...'/>
+                            <Input variant="filled" placeholder='Buscar...'/>
                         </div>
                         <div className='reportsContainer'>
                             { subServerReports.map((item) => (

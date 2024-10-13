@@ -13,10 +13,13 @@ const Dashboard = () => {
         let userDataRes = await getAccount()
         let notificationsRes = await getAllNotifications()
         let reportsRes = await getSubServerReports()
+
+
         setSubServers(subserverRes.data.data)
         setUserData(userDataRes.data.data[0])
         setNotifications(notificationsRes.data.data)
         setSubServerReports(reportsRes.data.data)
+        
     }
 
     useEffect(() => {

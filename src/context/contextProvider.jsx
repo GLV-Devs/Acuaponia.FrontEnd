@@ -11,6 +11,7 @@ const AppContextProvider = ({children}) => {
     const [notifications, setNotifications] = useState(null)
     const [subServerReports, setSubServerReports] = useState(null)
     const [currentSubServer, setCurrentSubServer] = useState(null)
+    const [subServerDevices, setSubServerDevices] = useState(null)
 
     return(
         <appContext.Provider value={{
@@ -27,6 +28,8 @@ const AppContextProvider = ({children}) => {
             setSubServerReports,
             currentSubServer,
             setCurrentSubServer,
+            subServerDevices,
+            setSubServerDevices
         }}>
             {children}
         </appContext.Provider>

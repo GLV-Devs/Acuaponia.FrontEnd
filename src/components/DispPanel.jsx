@@ -1,6 +1,7 @@
 import { LaptopOutlined, MobileOutlined, CloseOutlined, SettingOutlined } from "@ant-design/icons"
 
 const DispPanel = ({close}) => {
+    
 	return(
 		<div className='DispPanel'>
 			<div className='bar'>
