@@ -2,17 +2,65 @@ import { Form, Select, Input, DatePicker, Button, message } from 'antd'
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { postSubServerReport } from '../client/ClientePrueba'
+import { appContext } from '../context/appContext'
 
 const ReportCreation = () => {
     const navigate = useNavigate()
-    
-    const handleChange = (value) => {
-        console.log(`selected ${value}`)
-    }
+    const { subServers, subServerDevices, devicePeripherals } = useContext(appContext)
+    let subServersSelect
+    let subServerDevicesSelect
+    let devicePeripheralsSelect
+    const [selectedDevice, setSelectedDevice] = useState('')
+    const [selectedPeripheral, setSelectedPeripheral] = useState('')
+    const [selectedDate, setSelectedDate] = useState(null)
+
+    subServers.forEach(item => {
+        if(subServersSelect == undefined){
+            subServersSelect = [{value: item.id, label: item.name }]
+        }else{
+            subServersSelect = [...subServersSelect, {value: item.id, label: item.name }]
+        }
+    });
+
+    subServerDevices.forEach(item => {
+        if(subServerDevicesSelect == undefined){
+            subServerDevicesSelect = [{value: item.id, label: item.name }]
+        }else{
+            subServerDevicesSelect = [...subServerDevicesSelect, {value: item.id, label: item.name }]
+        }
+    });
+
+    devicePeripherals.forEach(item => {
+        if(devicePeripheralsSelect == undefined){
+            devicePeripheralsSelect = [{value: item.index, label: item.name }]
+        }else{
+            devicePeripheralsSelect = [...devicePeripheralsSelect, {value: item.index, label: item.name }]
+        }
+    });
 
     const onChange = (date, dateString) => {
         console.log(date, dateString);
     };
+
+    const handleSubmit = async () => {
+        const valueField = document.getElementById('value').value
+
+        let date
+        if(selectedDate == null){
+            date = new Date()
+        }else{
+            date = selectedDate
+        }
+
+        const data = {
+            deviceId: selectedDevice,
+            dateRecorded: date,
+            deviceIndex: selectedPeripheral,
+            value: valueField,
+        }
+        let res = await postSubServerReport(data)
+        console.log(res)
+    }
 
     return(
         <div className='moduleCreation'>
@@ -36,12 +84,8 @@ const ReportCreation = () => {
                     <Select
                         className='Select'
                         placeholder='Selecciona un sub servidor'
-                        onChange={handleChange}
-                    >
-                        <Option value='subServer1'>Sub servidor 1</Option>
-                        <Option value='subServer2'>Sub servidor 2</Option>
-                        <Option value='subServer3'>Sub servidor 3</Option>
-                    </Select>
+                        options={subServersSelect}
+                    />
                 </Form.Item>
                 <Form.Item
                     className='FormItem'
@@ -57,12 +101,9 @@ const ReportCreation = () => {
                     <Select
                         className='Select'
                         placeholder='Selecciona un dispositivo'
-                        onChange={handleChange}
-                    >
-                        <Option value='device1'>Dispositivo 1</Option>
-                        <Option value='device2'>Dispositivo 2</Option>
-                        <Option value='device3'>Dispositivo 3</Option>
-                    </Select>
+                        onChange={(e) => setSelectedDevice(e)}
+                        options={subServerDevicesSelect}
+                    />
                 </Form.Item>
                 <Form.Item
                     className='FormItem'
@@ -78,12 +119,9 @@ const ReportCreation = () => {
                     <Select
                         className='Select'
                         placeholder='Selecciona un periferico'
-                        onChange={handleChange}
-                    >
-                        <Option value='peripheral1'>Periferico 1</Option>
-                        <Option value='peripheral2'>Periferico 2</Option>
-                        <Option value='peripheral3'>Periferico 3</Option>
-                    </Select>
+                        onChange={(e) => setSelectedPeripheral(e)}
+                        options={devicePeripheralsSelect}
+                    />
                 </Form.Item>
                 <Form.Item
                     className='FormItem'
@@ -95,7 +133,7 @@ const ReportCreation = () => {
                             message: 'Por favor seleccione una fecha'
                         }
                     ]}>
-                        <DatePicker onChange={onChange}/>
+                        <DatePicker onChange={(a, b) => setSelectedDate(b)}/>
                     </Form.Item>
                 <Form.Item
                     className='FormItem'
@@ -110,6 +148,7 @@ const ReportCreation = () => {
                 >
                     <Input placeholder='Valor'/>
                 </Form.Item>
+                <Button onClick={handleSubmit}>Crear</Button>
             </Form>
         
         </div>
