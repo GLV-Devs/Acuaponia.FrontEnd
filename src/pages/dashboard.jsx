@@ -1,25 +1,25 @@
 import { useContext, useState } from 'react'
 import { useEffect } from 'react'
-import { getSubServerReports, getSubServers, getAccount, getAllNotifications } from '../client/ClientePrueba'
+import { getSubServerReports, getSubServers, getAccount, getAllNotifications, getSubserverDevicePeripheralModel } from '../client/ClientePrueba'
 import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
 
 const Dashboard = () => {
 
-    const {subServers, setSubServers, setUserData, setNotifications, setSubServerReports} = useContext(appContext)
+    const {subServers, setSubServers, setUserData, setNotifications, setSubServerReports, setDevicePeripheralsModel} = useContext(appContext)
 
     async function getAllInfo(){
         let subserverRes = await getSubServers()
         let userDataRes = await getAccount()
         let notificationsRes = await getAllNotifications()
         let reportsRes = await getSubServerReports()
-
+        let resDevicePeripheralsModel = await getSubserverDevicePeripheralModel()
 
         setSubServers(subserverRes.data.data)
         setUserData(userDataRes.data.data[0])
         setNotifications(notificationsRes.data.data)
         setSubServerReports(reportsRes.data.data)
-        
+        setDevicePeripheralsModel(resDevicePeripheralsModel.data.data)
     }
 
     useEffect(() => {

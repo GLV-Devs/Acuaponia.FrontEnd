@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom"
 import { LeftOutlined,DoubleRightOutlined, AppstoreAddOutlined } from '@ant-design/icons'
 import { backButtonStyle } from '../AntDIconStyles'
 import { Skeleton } from "antd"
+import { searchReportValueKind, searchDevicePeripheralsModel } from '../functions/lists'
 
 const IndividualDevice = () => {
 
-    const {subServerDevices, currentDevice, setDevicePeripherals, devicePeripherals, subServerReports} = useContext(appContext)
+    const {subServerDevices, currentDevice, setDevicePeripherals, devicePeripherals, subServerReports, devicePeripheralsModel, reportValueKind} = useContext(appContext)
     const navigate = useNavigate()
     let currentDeviceInfo = []
-
-
 
     useEffect(() => {
         getDevicePeripheral(currentDevice)
@@ -20,13 +19,28 @@ const IndividualDevice = () => {
 
     async function getDevicePeripheral(currentDevice){
         let resDevicePeripherals = await getSubserverDevicePeripheral(currentDevice)
-        setDevicePeripherals(resDevicePeripherals.data.data)
+        console.log(resDevicePeripherals)
+        let originalList = resDevicePeripherals.data.data
+        let secondList
+        originalList.forEach(item => {
+            let i = 0
+            if(secondList == undefined){
+                secondList = [{
+                    ...item,
+                    devicePeripheralsModelName: searchDevicePeripheralsModel(devicePeripheralsModel, resDevicePeripherals.data.data[i].actionType),
+                    reportValueKindName: searchReportValueKind(reportValueKind, resDevicePeripherals.data.data[i].reportValueKind)
+                }]
+            }else{
+                secondList = [secondList, {
+                    ...item,
+                    devicePeripheralsModelName: searchDevicePeripheralsModel(devicePeripheralsModel, resDevicePeripherals.data.data[i].actionType),
+                    reportValueKindName: searchReportValueKind(reportValueKind, resDevicePeripherals.data.data[i].reportValueKind)
+                }]
+            }
+            i = i+1
+        });
+        setDevicePeripherals(secondList)
     }
-
-    async function getDevicePeripheralModel(){
-        let resDevicePeripheralsModel = await getSubserverDevicePeripheralModel()
-        console.log(resDevicePeripheralsModel)
-    }    
     
     function getCurrentDevice(currentDevice){
         if (currentDevice === null) {
@@ -43,9 +57,6 @@ const IndividualDevice = () => {
     }
 
     getCurrentDevice(currentDevice)
-    console.log(devicePeripherals)
-    console.log(subServerReports)
-    getDevicePeripheralModel()
 
     return(
         <div className="individualDevice">
@@ -139,6 +150,8 @@ const IndividualDevice = () => {
                                         </div>
                                         <div className='Info'>
                                             <h3>{item.name}</h3>
+                                            <h3>{item.devicePeripheralsModelName}</h3>
+                                            <h3>{item.reportValueKindName}</h3>
                                             <h5>{item.id}</h5>
                                             <p>{item.lastHeartBeat}</p>
                                         </div>

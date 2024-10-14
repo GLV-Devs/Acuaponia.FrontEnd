@@ -15,6 +15,18 @@ const AppContextProvider = ({children}) => {
     const [currentDevice, setCurrentDevice] = useState(null)
     const [devicePeripherals, setDevicePeripherals] = useState(null)
     const [currentPeripheral, setCurrentPeripheral] = useState(null)
+    const [devicePeripheralsModel, setDevicePeripheralsModel] = useState(null)
+    const [reportValueKind, setReportValueKind] = useState([
+        'WaterPh',
+        'AirHumidity',
+        'DissolvedOxygen',
+        'Ammonia',
+        'WaterFlowLiterPerMinute',
+        'WaterLevelPercent',
+        'WaterLevelLiters',
+        'BiomassKilograms',
+        'TemperatureKelvin'
+    ])
 
     return(
         <appContext.Provider value={{
@@ -38,7 +50,10 @@ const AppContextProvider = ({children}) => {
             devicePeripherals,
             setDevicePeripherals,
             currentPeripheral,
-            setCurrentPeripheral
+            setCurrentPeripheral,
+            devicePeripheralsModel,
+            setDevicePeripheralsModel,
+            reportValueKind
         }}>
             {children}
         </appContext.Provider>
