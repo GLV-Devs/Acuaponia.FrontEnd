@@ -173,9 +173,9 @@ const IndividualDevice = () => {
                     <h2>Reportes</h2>
                     <div className="List">
                         <div className="info">
-                            <h4>Periferico</h4>
+                            <h4>ValueKind</h4>
                             <h4>Valor</h4>
-                            <h4>Indice</h4>
+                            <h4>Periferico</h4>
                             <h4>Sub servidor</h4>
                             <h4>Fecha</h4>
                         </div>
@@ -184,13 +184,13 @@ const IndividualDevice = () => {
                                 <div className="badge"></div>
                                 <div className="info">
                                     <div className="Portion">
-                                        <h4>{item.devicePeripheral.name}</h4>
+                                        <h4>{item.deviceIndex}</h4>
                                     </div>
                                     <div className="Portion">
                                         <h4>{item.value}</h4>
                                     </div>
                                     <div className="Portion">
-                                        <h4>{item.deviceIndex}</h4>
+                                        <h4>{item.devicePeripheral.name}</h4>
                                     </div>
                                     <div className="Portion">
                                         <h4>Sub servidor: {item.subServerId}</h4>
