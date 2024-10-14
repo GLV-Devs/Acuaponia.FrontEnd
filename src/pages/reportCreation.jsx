@@ -23,6 +23,7 @@ const ReportCreation = () => {
                 <h1>Creacion de reportes</h1>
 
                 <Form.Item
+                    className='FormItem'
                     label='Sub servidor'
                     name='subServer'
                     rules={[
@@ -33,6 +34,7 @@ const ReportCreation = () => {
                     ]}
                 >
                     <Select
+                        className='Select'
                         placeholder='Selecciona un sub servidor'
                         onChange={handleChange}
                     >
@@ -42,6 +44,7 @@ const ReportCreation = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item
+                    className='FormItem'
                     label='Dispositivo'
                     name='device'
                     rules={[
@@ -52,6 +55,7 @@ const ReportCreation = () => {
                     ]}
                 >
                     <Select
+                        className='Select'
                         placeholder='Selecciona un dispositivo'
                         onChange={handleChange}
                     >
@@ -61,6 +65,7 @@ const ReportCreation = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item
+                    className='FormItem'
                     label='Periferico'
                     name='peripheral'
                     rules={[
@@ -71,6 +76,7 @@ const ReportCreation = () => {
                     ]}
                 >
                     <Select
+                        className='Select'
                         placeholder='Selecciona un periferico'
                         onChange={handleChange}
                     >
@@ -80,6 +86,7 @@ const ReportCreation = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item
+                    className='FormItem'
                     label='Fecha'
                     name='date'
                     rules={[
@@ -91,6 +98,7 @@ const ReportCreation = () => {
                         <DatePicker onChange={onChange}/>
                     </Form.Item>
                 <Form.Item
+                    className='FormItem'
                     label='Valor'
                     name='value'
                     rules={[
