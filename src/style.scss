@@ -973,8 +973,75 @@ body{
                     .Info{
                         display: flex;
                         flex-direction: column;
-                        h3{margin:0px 5px; font-weight: 500; font-size: 15px;}
-                        h5{margin: 5px; font-weight: 400; ;}
+                        h3{margin: 0px 5px; font-weight: 500; font-size: 15px;}
+                        h5{margin: 15px 20px; font-weight: 400; font-size: 12px; text-align: end;}
+                        h4{margin: 0px 5px; font-weight: 400; font-size: 9px;}
+
+                    }
+                }
+            }
+        }
+    }
+
+    .Section4{
+        .Reports{
+            display:flex;
+            flex-direction: column;
+            gap: 0px;
+            color: var(--notifPanelColorLetter);
+            height: 300px;
+            
+            h2 {margin: 0px; padding: 10px; font-size: 25px; font-weight: 500;}
+            .List{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .info{
+                    width: 90vw;
+                    display: grid;
+                    grid-template-columns: 1fr 0.5fr 0.5fr 1fr 1fr;
+                    justify-content: center;
+                    justify-items: center;
+
+                    h4{margin:10px -2px;}
+                    .dateTime{
+                        width: 100%;
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+                        justify-content: center
+                    }
+                }
+
+                .ListItem{
+                    display: flex;
+                    flex-direction: row;
+                    gap: 8px;
+                    padding: 8px;
+                    align-items: center;
+                    width: 96vw;
+                    height: 30px;
+                    background-color: var(--navbarColor);
+                    border-radius: 10px;
+                    box-shadow: 0px 0px 5px 5px var(--shadowsColor);   
+                    
+                    h1{font-size: 12px; margin: 0px;}
+                    h4{font-size: 10px; margin: 0px;}
+
+                    .badge{width: 20px; height: 20px; background-color: var(--highlightColor); border-radius: 50%; }
+
+                    .info{
+                        width: 90vw;
+                        display: grid;
+                        grid-template-columns: 1fr 0.5fr 0.5fr 1fr 1fr;
+                        justify-content: center;
+                        align-items: center;
+                        justify-items: center;
+                        .date{
+                            display: flex;
+                            flex-direction: column;
+                        }
                     }
                 }
             }

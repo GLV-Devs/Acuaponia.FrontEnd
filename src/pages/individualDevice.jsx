@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react"
 import { appContext } from "../context/appContext"
-import { getSubserverDevicePeripheral, getSubserverDevicePeripheralModel } from "../client/ClientePrueba"
+import { getSubserverDevicePeripheral, getSubServerReports } from "../client/ClientePrueba"
 import { useNavigate } from "react-router-dom"
 import { LeftOutlined,DoubleRightOutlined, AppstoreAddOutlined } from '@ant-design/icons'
 import { backButtonStyle } from '../AntDIconStyles'
@@ -13,9 +13,12 @@ const IndividualDevice = () => {
     const navigate = useNavigate()
     let currentDeviceInfo = []
 
+
+
     useEffect(() => {
         getDevicePeripheral(currentDevice)
     }, [])
+
 
     async function getDevicePeripheral(currentDevice){
         let resDevicePeripherals = await getSubserverDevicePeripheral(currentDevice)
@@ -31,16 +34,18 @@ const IndividualDevice = () => {
                     reportValueKindName: searchReportValueKind(reportValueKind, resDevicePeripherals.data.data[i].reportValueKind)
                 }]
             }else{
-                secondList = [secondList, {
+                secondList = [...secondList, {
                     ...item,
                     devicePeripheralsModelName: searchDevicePeripheralsModel(devicePeripheralsModel, resDevicePeripherals.data.data[i].actionType),
                     reportValueKindName: searchReportValueKind(reportValueKind, resDevicePeripherals.data.data[i].reportValueKind)
                 }]
             }
-            i = i+1
+            i = i+1 
         });
         setDevicePeripherals(secondList)
-    }    
+    }
+    
+    
     
     function getCurrentDevice(currentDevice){
         if (currentDevice === null) {
@@ -57,6 +62,9 @@ const IndividualDevice = () => {
     }
 
     getCurrentDevice(currentDevice)
+    console.log(subServerReports)
+    console.log(devicePeripherals)
+    
 
     return(
         <div className="individualDevice">
@@ -150,10 +158,8 @@ const IndividualDevice = () => {
                                         </div>
                                         <div className='Info'>
                                             <h3>{item.name}</h3>
-                                            <h3>{item.devicePeripheralsModelName}</h3>
-                                            <h3>{item.reportValueKindName}</h3>
-                                            <h5>{item.id}</h5>
-                                            <p>{item.lastHeartBeat}</p>
+                                            <h4>{item.devicePeripheralsModelName}</h4>
+                                            <h5>{item.reportValueKindName}</h5>
                                         </div>
                                     </div>
                                 ))}
@@ -166,17 +172,34 @@ const IndividualDevice = () => {
                 <div className="Reports">
                     <h2>Reportes</h2>
                     <div className="List">
+                        <div className="info">
+                            <h4>Periferico</h4>
+                            <h4>Valor</h4>
+                            <h4>Indice</h4>
+                            <h4>Sub servidor</h4>
+                            <h4>Fecha</h4>
+                        </div>
                         { subServerReports.map((item) => (
                             <div key={item.id} className="ListItem">
                                 <div className="badge"></div>
                                 <div className="info">
-                                    <h1>Periferico: {item.devicePeripheral.name}</h1>
-                                    <h4>Hecho por: {item.reporterUserId}</h4>
+                                    <div className="Portion">
+                                        <h4>{item.devicePeripheral.name}</h4>
+                                    </div>
+                                    <div className="Portion">
+                                        <h4>{item.value}</h4>
+                                    </div>
+                                    <div className="Portion">
+                                        <h4>{item.deviceIndex}</h4>
+                                    </div>
+                                    <div className="Portion">
+                                        <h4>Sub servidor: {item.subServerId}</h4>
+                                    </div>
                                     <div className="dateTime">
                                         <h4 className="date">{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth()}/{new Date(item.dateRecorded).getFullYear()}</h4>
                                         <h4 className="time">{new Date(item.dateRecorded).getHours()}:{new Date(item.dateRecorded).getMinutes()}</h4>
                                     </div>
-                                    <h4 className="yellow">Pertenece a: {item.subServerId}</h4>
+                                    
                                 </div>
                             </div>
                         ))}
