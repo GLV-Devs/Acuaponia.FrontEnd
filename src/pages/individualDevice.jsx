@@ -40,7 +40,7 @@ const IndividualDevice = () => {
             i = i+1
         });
         setDevicePeripherals(secondList)
-    }
+    }    
     
     function getCurrentDevice(currentDevice){
         if (currentDevice === null) {
