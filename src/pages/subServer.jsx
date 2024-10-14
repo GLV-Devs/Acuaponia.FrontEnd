@@ -26,6 +26,16 @@ const SubServer = () => {
         let resInfo = await getSubServerInfo(id)
         console.log(resInfo.data.data[0])
         setInfo(resInfo.data.data[0])
+    }        
+    
+    const openDispPanel = () => {
+        setDispPanelOpen(!dispPanelOpen)
+        setReactPanelOpen(false)
+    }
+
+    const openReactPanel = () => {
+        setReactPanelOpen(!reactPanelOpen)
+        setDispPanelOpen(false)
     }
 
     async function getDevices(id){
@@ -50,14 +60,14 @@ const SubServer = () => {
                             <h1>{info.name}</h1>
                         </div>
                         <div className="Buttons">
-                            <div className="Button1" onClick={() => setDispPanelOpen(true)}>
+                            <div className="Button1" onClick={openDispPanel}>
                                 <h1>Dispositivos</h1>
                                 <MobileOutlined style={{color: '#e95cff', fontSize: '65px'}}/>
                             </div>
                             <div className="Button2">
                                 <h2>Sesion del sub servidor</h2>
                             </div>
-                            <div className="Button3" onClick={() => setReactPanelOpen(true)}>
+                            <div className="Button3" onClick={openReactPanel}>
                                 <LaptopOutlined style={{color: '#ffb700', fontSize: '65px'}}/>
                                 <h1>Reactores</h1>
                             </div>
