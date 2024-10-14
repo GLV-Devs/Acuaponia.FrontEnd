@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react"
 import { appContext } from "../context/appContext"
-import { getSubserverDevicePeripheral } from "../client/ClientePrueba"
+import { getSubserverDevicePeripheral, getSubserverDevicePeripheralModel } from "../client/ClientePrueba"
 import { useNavigate } from "react-router-dom"
 import { LeftOutlined,DoubleRightOutlined, AppstoreAddOutlined } from '@ant-design/icons'
 import { backButtonStyle } from '../AntDIconStyles'
@@ -8,7 +8,7 @@ import { Skeleton } from "antd"
 
 const IndividualDevice = () => {
 
-    const {subServerDevices, currentDevice, setDevicePeripherals, devicePeripherals} = useContext(appContext)
+    const {subServerDevices, currentDevice, setDevicePeripherals, devicePeripherals, subServerReports} = useContext(appContext)
     const navigate = useNavigate()
     let currentDeviceInfo = []
 
@@ -22,6 +22,11 @@ const IndividualDevice = () => {
         let resDevicePeripherals = await getSubserverDevicePeripheral(currentDevice)
         setDevicePeripherals(resDevicePeripherals.data.data)
     }
+
+    async function getDevicePeripheralModel(){
+        let resDevicePeripheralsModel = await getSubserverDevicePeripheralModel()
+        console.log(resDevicePeripheralsModel)
+    }    
     
     function getCurrentDevice(currentDevice){
         if (currentDevice === null) {
@@ -39,6 +44,8 @@ const IndividualDevice = () => {
 
     getCurrentDevice(currentDevice)
     console.log(devicePeripherals)
+    console.log(subServerReports)
+    getDevicePeripheralModel()
 
     return(
         <div className="individualDevice">
@@ -143,7 +150,26 @@ const IndividualDevice = () => {
             </div>
 
             <div className="Section4">
-                <div className="Reports"></div>
+                <div className="Reports">
+                    <h2>Reportes</h2>
+                    <div className="List">
+                        { subServerReports.map((item) => (
+                            <div key={item.id} className="ListItem">
+                                <div className="badge"></div>
+                                <div className="info">
+                                    <h1>Periferico: {item.devicePeripheral.name}</h1>
+                                    <h4>Hecho por: {item.reporterUserId}</h4>
+                                    <div className="dateTime">
+                                        <h4 className="date">{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth()}/{new Date(item.dateRecorded).getFullYear()}</h4>
+                                        <h4 className="time">{new Date(item.dateRecorded).getHours()}:{new Date(item.dateRecorded).getMinutes()}</h4>
+                                    </div>
+                                    <h4 className="yellow">Pertenece a: {item.subServerId}</h4>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
             </div>
         
         </div>
