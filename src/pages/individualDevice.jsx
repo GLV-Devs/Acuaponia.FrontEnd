@@ -2,8 +2,9 @@ import { useContext, useEffect } from "react"
 import { appContext } from "../context/appContext"
 import { getSubserverDevicePeripheral } from "../client/ClientePrueba"
 import { useNavigate } from "react-router-dom"
-import { LeftOutlined } from '@ant-design/icons'
+import { LeftOutlined,DoubleRightOutlined, AppstoreAddOutlined } from '@ant-design/icons'
 import { backButtonStyle } from '../AntDIconStyles'
+import { Skeleton } from "antd"
 
 const IndividualDevice = () => {
 
@@ -46,69 +47,103 @@ const IndividualDevice = () => {
                 <h1>Informacion del Dispositivo</h1>
             </div>
 
-            <div className="Section1">
-                <p className="CardHeader">{currentDeviceInfo.name}</p>  
-                
-                <div className="CardContentHeader">
-                    <p className="subTitle">{currentDeviceInfo.uniqueIdHexSHA512}</p>
+            <div className="Section12">
+                <div className="Section1">
+                    <p className="CardHeader">{currentDeviceInfo.name}</p>  
                     
-                    <div className="CardContent">
+                    <div className="CardContentHeader">
+                        <p className="subTitle">{currentDeviceInfo.uniqueIdHexSHA512}</p>
                         
-                        <div className="List">
-                            <div className="badge"></div>
-                            <h4>LastHeartbeat: </h4>
-                            <div className="Date">
-                                <p>{new Date(currentDeviceInfo.lastHeartbeat).getDate()}/{new Date(currentDeviceInfo.lastHeartbeat).getMonth()}/{new Date(currentDeviceInfo.lastHeartbeat).getFullYear()}</p>
-                                <p>{new Date(currentDeviceInfo.lastHeartbeat).getHours()}:{new Date(currentDeviceInfo.lastHeartbeat).getMinutes()}</p>
-                            </div> 
-                        </div>  
-                        <div className="List">
-                            <div className="badge"></div>
-                            <h4>Notas:</h4>
-                            <p>{currentDeviceInfo.notes}</p>
+                        <div className="CardContent">
+                            
+                            <div className="List">
+                                <div className="badge"></div>
+                                <h4>LastHeartbeat: </h4>
+                                <div className="Date">
+                                    <p>{new Date(currentDeviceInfo.lastHeartbeat).getDate()}/{new Date(currentDeviceInfo.lastHeartbeat).getMonth()}/{new Date(currentDeviceInfo.lastHeartbeat).getFullYear()}</p>
+                                    <p>{new Date(currentDeviceInfo.lastHeartbeat).getHours()}:{new Date(currentDeviceInfo.lastHeartbeat).getMinutes()}</p>
+                                </div> 
+                            </div>  
+                            <div className="List">
+                                <div className="badge"></div>
+                                <h4>Notas:</h4>
+                                <p>{currentDeviceInfo.notes}</p>
+                            </div>
+                            <div className="List">
+                                <div className="badge"></div>
+                                <h4>Hardware Type: </h4>
+                                <p>{currentDeviceInfo.hardwareType}</p>
+                            </div>
+                            <div className="List">
+                                <div className="badge"></div>
+                                <h4>Hardware Architecture: </h4>
+                                <p>{currentDeviceInfo.hardwareArchitecture}</p>
+                            </div>
+                            <div className="List">
+                                <div className="badge"></div>
+                                <h4>Hardware Features: </h4>
+                                <p>{currentDeviceInfo.hardwareFeatures}</p>
+                            </div>
+                            <div className="List">
+                                <div className="badge"></div>
+                                <h4>Hardware Connection Type: </h4>
+                                <p>{currentDeviceInfo.connectionType}</p>
+                            </div>
+                            <div className="List">
+                                <div className="badge"></div>
+                                <h4>Hardware Connection Slot: </h4>
+                                <p>{currentDeviceInfo.connectionSlot}</p>
+                            </div>
+                            <div className="List">
+                                <div className="badge"></div>
+                                <h4>Assigned firmware: </h4>
+                                <p>{currentDeviceInfo.assignedFirmwareId}</p>
+                            </div>
+                            <div className="List">
+                                <div className="badge"></div>
+                                <h4>Owner SubServer: </h4>
+                                <p>{currentDeviceInfo.ownerSubServerId}</p>
+                            </div>
+                            
                         </div>
-                        <div className="List">
-                            <div className="badge"></div>
-                            <h4>Hardware Type: </h4>
-                            <p>{currentDeviceInfo.hardwareType}</p>
-                        </div>
-                        <div className="List">
-                            <div className="badge"></div>
-                            <h4>Hardware Architecture: </h4>
-                            <p>{currentDeviceInfo.hardwareArchitecture}</p>
-                        </div>
-                        <div className="List">
-                            <div className="badge"></div>
-                            <h4>Hardware Features: </h4>
-                            <p>{currentDeviceInfo.hardwareFeatures}</p>
-                        </div>
-                        <div className="List">
-                            <div className="badge"></div>
-                            <h4>Hardware Connection Type: </h4>
-                            <p>{currentDeviceInfo.connectionType}</p>
-                        </div>
-                        <div className="List">
-                            <div className="badge"></div>
-                            <h4>Hardware Connection Slot: </h4>
-                            <p>{currentDeviceInfo.connectionSlot}</p>
-                        </div>
-                        <div className="List">
-                            <div className="badge"></div>
-                            <h4>Assigned firmware: </h4>
-                            <p>{currentDeviceInfo.assignedFirmwareId}</p>
-                        </div>
-                        <div className="List">
-                            <div className="badge"></div>
-                            <h4>Owner SubServer: </h4>
-                            <p>{currentDeviceInfo.ownerSubServerId}</p>
-                        </div>
-                        
                     </div>
+                </div>
+                <div className="Section2">
+
                 </div>
             </div>
 
-            <div className="Section2">
+            <div className="Section3">
+                <div className="BlockList">
+                
+                    <h2>Perifericos</h2>
+                    {devicePeripherals == null ? (
+                        <>
+                            <Skeleton active/>
+                            <Skeleton active/>
+                        </>
+                        ):(
+                            <div className="List">
+                                { devicePeripherals.map((item) => (
+                                    <div key={item.id} className="ListItem">
+                                        <div className="banner">
+                                            <div className="subServerIcon"><AppstoreAddOutlined style={{color:'#e95cff', fontSize:'45px'}}/></div>
+                                            <div><DoubleRightOutlined rotate={315}/></div>
+                                        </div>
+                                        <div className='Info'>
+                                            <h3>{item.name}</h3>
+                                            <h5>{item.id}</h5>
+                                            <p>{item.lastHeartBeat}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                </div>
+            </div>
 
+            <div className="Section4">
+                <div className="Reports"></div>
             </div>
         
         </div>

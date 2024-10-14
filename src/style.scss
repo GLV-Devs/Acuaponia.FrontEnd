@@ -821,78 +821,161 @@ body{
         }
     }
 
-    .Section1{
-        margin: 20px;
+    .Section12{
+        margin: 0px;
+        padding: 0px;
         display: flex;
-        flex-direction: column;
-        gap: 0;
-        color: var(--notifPanelColorLetter);
+        flex-direction: row;
+        align-items: center;
 
-        .CardHeader{
-            width: fit-content;
-            margin: 0px;
-            padding: 10px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            background-color: var(--navbarColor);
-            font-size: 14px;
-            box-shadow: 0px 0px 5px 5px var(--shadowsColor);
-        }
-
-        .CardContentHeader{
-            width: 35vw;
-            background-color: var(--navbarColor);
-            word-wrap: break-word;
-            white-space: normal;
-            box-shadow: 0px 9px 5px 3px var(--shadowsColor);
-            border-bottom-right-radius: 10px;
-            border-bottom-left-radius: 10px;
-            border-top-right-radius: 10px;
-            padding: 10px;
-            margin: 0;
-
-
-            p{margin: 0px}
-            .subTitle{
-                padding: 8px;
-                font-size: 8px;
-
-            }
-
-            .CardContent{
-                background-color: var(--searchBarColor);
-                border-radius: 10px;
+        .Section1{
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            color: var(--notifPanelColorLetter);
+    
+            .CardHeader{
+                width: fit-content;
+                margin: 0px;
                 padding: 10px;
-                display: flex;
-                flex-direction: column;
-                gap:5px;
-
-                .List{
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                background-color: var(--navbarColor);
+                font-size: 14px;
+                box-shadow: 0px 0px 5px 5px var(--shadowsColor);
+            }
+    
+            .CardContentHeader{
+                width: 35vw;
+                background-color: var(--navbarColor);
+                word-wrap: break-word;
+                white-space: normal;
+                box-shadow: 0px 9px 5px 3px var(--shadowsColor);
+                border-bottom-right-radius: 10px;
+                border-bottom-left-radius: 10px;
+                border-top-right-radius: 10px;
+                padding: 10px;
+                margin: 0;
+    
+    
+                p{margin: 0px}
+                .subTitle{
+                    padding: 8px;
+                    font-size: 8px;
+    
+                }
+    
+                .CardContent{
+                    background-color: var(--searchBarColor);
+                    border-radius: 10px;
+                    padding: 10px;
                     display: flex;
-                    align-items: first baseline;
-                    gap: 10px;
-                    font-size: 12px;
-
-                    p{
-                        word-wrap: break-word;
-                        //word-break: break-all;
-                        white-space: normal;
+                    flex-direction: column;
+                    gap:5px;
+    
+                    .List{
+                        display: flex;
+                        align-items: first baseline;
+                        gap: 10px;
+                        font-size: 12px;
+    
+                        p{
+                            word-wrap: break-word;
+                            white-space: normal;
+                        }
+    
+                        h4{margin: 0px;}
+    
+                        .badge{
+                            width: 10px;
+                            height: 10px;
+                            border-radius: 50%;
+                            background-color: var(--highlightColor);
+                        }
                     }
-
-                    h4{margin: 0px;}
-
-                    .badge{
-                        width: 10px;
-                        height: 10px;
-                        border-radius: 50%;
-                        background-color: var(--highlightColor);
+    
+                    .Date{
+                        display: flex;
+                        gap: 10px;
+                        font-size: 11px;   
                     }
                 }
+            }
+        }
 
-                .Date{
+        .Section2{
+            background-color: var(--navbarColor);
+            width: 59vw;
+            height: 290px;
+        }
+    }
+
+    .Section3{
+        color: var(--notifPanelColorLetter);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        
+
+        .BlockList{
+            background-color: var(--navbarColor);
+            width: 98vw;
+            height:240px;
+            border: var(--bordersColor) 2px solid;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px 5px var(--shadowsColor);
+            justify-content: center;
+            margin-bottom: 10px;
+            
+            h2{ margin: 0px; padding: 10px; font-size: 20px; font-weight: 500;}
+
+            .List{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+                padding: 10px;
+
+                .ListItem{
+                    background: linear-gradient(#202032, #161722);
+                    width: 180px;
+                    height: 150px;
                     display: flex;
-                    gap: 10px;
-                    font-size: 11px;   
+                    flex-direction: column;
+                    border-radius: 15px;
+                    margin:18px;
+                    transition: transform 0.3s ease-out;
+        
+                    &:hover{
+                            transform: scale(1.05);
+                            cursor: pointer;
+                    }
+        
+                    .banner{
+                        display: flex;
+                        padding: 5px;
+                        justify-content: space-between;
+                        
+                        .subServerIcon{
+                            background-color: var(--newColor);
+                            position: relative;
+                            bottom: 12px;
+                            right: 12px;
+                            padding: 8px;
+                            border-radius: 50%;
+                            box-shadow: 0px 0px 5px 5px var(--shadowsColor);
+                        }
+                    }
+        
+                    .Info{
+                        display: flex;
+                        flex-direction: column;
+                        h3{margin:0px 5px; font-weight: 500; font-size: 15px;}
+                        h5{margin: 5px; font-weight: 400; ;}
+                    }
                 }
             }
         }
