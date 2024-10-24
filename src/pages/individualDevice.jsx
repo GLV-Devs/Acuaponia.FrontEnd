@@ -65,6 +65,7 @@ const IndividualDevice = () => {
     console.log(subServerReports)
     console.log(devicePeripherals)
     
+    
 
     return(
         <div className="individualDevice">
@@ -187,16 +188,16 @@ const IndividualDevice = () => {
                                         <h4>{item.deviceIndex}</h4>
                                     </div>
                                     <div className="Portion">
-                                        <h4>{item.value}</h4>
+                                        <h4>{parseFloat(item.value).toFixed(2)}</h4>
                                     </div>
                                     <div className="Portion">
                                         <h4>{item.devicePeripheral.name}</h4>
                                     </div>
                                     <div className="Portion">
-                                        <h4>Sub servidor: {item.subServerId}</h4>
+                                        <h4>{item.subServerId}</h4>
                                     </div>
                                     <div className="dateTime">
-                                        <h4 className="date">{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth()}/{new Date(item.dateRecorded).getFullYear()}</h4>
+                                        <h4 className="date">{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth() + 1}/{new Date(item.dateRecorded).getFullYear()}</h4>
                                         <h4 className="time">{new Date(item.dateRecorded).getHours()}:{new Date(item.dateRecorded).getMinutes()}</h4>
                                     </div>
                                     

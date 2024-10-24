@@ -1,0 +1,23 @@
+-Acomodar reportes
+    -En subservidores (mostrar nombre de dispositivo, no id), ademas mostrar el valueKind ademas de añadirle encabezados (como en dispositivos)
+    -En dispositivos filtrar para cada dispositivo, mostrar propiedad de valueKind, no el id, mostrar nombre de subservidor, no id
+
+-Hacer modal de cerrar sesion
+
+-arreglar el height de perifericos para que se adapte o hacer boton de ver mas y que depliegue los demas perifericos
+
+- En dispositivos mostrar las ultimas mediciones hechas en recuadro secundario
+
+-en usuario acomodar la informacion que se ve
+
+-continuar con reactores (ver reactores asociados a un subservidor), ver config de cada reactor
+
+-Hacer pantalla/modal de la sesion del subservidor (PREGUNTAR A DIEGO COMO MANEJAR ESTO) la notificacion te lleva a un apartado donde se puede aceptar o rechazar la solicitud de sesion
+
+-Apartado de administracion
+    -mostrar usuarios a los que tiene acceso
+    -Pantalla de configuracion de permisos a usuarios
+
+-Manejo de Permisos
+
+-Filtrado de notificaciones, poder marcar como vistas 
