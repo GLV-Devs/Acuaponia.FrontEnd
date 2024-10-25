@@ -5,7 +5,8 @@ import { Skeleton, Input } from 'antd'
 import { getSubServerInfo, getSubServerDevices } from '../client/ClientePrueba'
 import DispPanel from '../components/DispPanel'
 import ReactPanel from '../components/ReactPanel'
-
+import { useNavigate } from "react-router-dom"
+import { backButtonStyle } from '../AntDIconStyles'
 
 const SubServer = () => {
 
@@ -14,7 +15,7 @@ const SubServer = () => {
     const [reports, setReports] = useState([])
     const [dispPanelOpen, setDispPanelOpen] = useState(false)
     const [reactPanelOpen, setReactPanelOpen] = useState(false)
-
+    const navigate = useNavigate()
     
 
     useEffect(() => {
@@ -56,7 +57,7 @@ const SubServer = () => {
                 <>
                     <div className="section1">
                         <div className='bar'>
-                            <LeftOutlined style={{color: '#01bc85', fontSize: '40px'}}/>
+                        <LeftOutlined style={backButtonStyle} onClick={() => {navigate (-1)}}/>
                             <h1>{info.name}</h1>
                         </div>
                         <div className="Buttons">
@@ -99,7 +100,7 @@ const SubServer = () => {
                                     <h3>{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth()}/{new Date(item.dateRecorded).getFullYear()}</h3>
                                     <h3>{new Date(item.dateRecorded).getHours()}:{new Date(item.dateRecorded).getMinutes()}</h3>
                                     <h3>Device: {item.deviceIndex}</h3>
-                                    <h3>Value: {item.value}</h3>
+                                    <h3>Value: {parseFloat(item.value).toFixed(2)}</h3>
                                 </div>
                             )) }
                         </div>

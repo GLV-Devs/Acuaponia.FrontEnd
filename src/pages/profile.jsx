@@ -1,9 +1,10 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { appContext } from '../context/appContext'
 import { SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { Divider, Skeleton } from "antd";
 import { buttonPanelIconStyle } from '../AntDIconStyles'
 import { useNavigate } from 'react-router-dom'
+
 
 const Profile = () => {
 
@@ -14,6 +15,7 @@ const Profile = () => {
         borderColor: '#e95cff',
         borderWidth: '2px'
     }
+
 
     return(
         <div className='Profile'>
@@ -52,13 +54,13 @@ const Profile = () => {
                                 <div className='itemReport' key={item.id}>
                                     <div className='badge'></div>
                                     <div className='info'>
-                                        <h1>Titulo</h1>
-                                        <h4>subtitulo</h4>
+                                        <h1>{item.devicePeripheral.name}</h1>
+                                        <h4>Device: {item.deviceIndex}</h4>
                                         <div className='dateTime'>
                                             <h4 className='date'>{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth()}/{new Date(item.dateRecorded).getFullYear()}</h4>
                                             <h4 className='time'>{new Date(item.dateRecorded).getHours()}:{new Date(item.dateRecorded).getMinutes()}</h4>
                                         </div>
-                                        <h4 className='yellow'>yellow</h4>
+                                        <h4 className='yellow'>Value: {parseFloat(item.value).toFixed(2)}</h4>
                                     </div>
                                 </div>
                             )) }
@@ -67,7 +69,7 @@ const Profile = () => {
 
                     <div className='SubServersSection'>
                         <h1 className='title'>Sub servidores</h1>
-                        <div className='subSerberContainer'>
+                        <div className='subServerContainer'>
                             { subServers.map((item) => (
                                 <div className='itemSubServer' key={item.id} onClick={() => {setCurrentSubServer(item.id); navigate('/SubServer')}}>
                                     <h3>{item.name}</h3>

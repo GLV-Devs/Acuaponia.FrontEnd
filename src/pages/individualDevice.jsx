@@ -1,19 +1,23 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { appContext } from "../context/appContext"
 import { getSubserverDevicePeripheral, getSubServerReports } from "../client/ClientePrueba"
 import { useNavigate } from "react-router-dom"
 import { LeftOutlined,DoubleRightOutlined, AppstoreAddOutlined } from '@ant-design/icons'
 import { backButtonStyle } from '../AntDIconStyles'
-import { Skeleton } from "antd"
+import { Skeleton, Button } from "antd"
 import { searchReportValueKind, searchDevicePeripheralsModel } from '../functions/lists'
 
 const IndividualDevice = () => {
 
     const {subServerDevices, currentDevice, setDevicePeripherals, devicePeripherals, subServerReports, devicePeripheralsModel, reportValueKind} = useContext(appContext)
     const navigate = useNavigate()
+    const [isExpanded, setIsExpanded] = useState(false)
     let currentDeviceInfo = []
 
 
+    const toggleExpand = () => {
+        setIsExpanded(!isExpanded);
+    }
 
     useEffect(() => {
         getDevicePeripheral(currentDevice)
@@ -64,6 +68,7 @@ const IndividualDevice = () => {
     getCurrentDevice(currentDevice)
     console.log(subServerReports)
     console.log(devicePeripherals)
+    console.log(isExpanded)
     
     
 
@@ -141,7 +146,7 @@ const IndividualDevice = () => {
             </div>
 
             <div className="Section3">
-                <div className="BlockList">
+                <div className={`BlockList ${isExpanded ? "expanded" : ""}`}>
                 
                     <h2>Perifericos</h2>
                     {devicePeripherals == null ? (
@@ -167,6 +172,9 @@ const IndividualDevice = () => {
                             </div>
                         )}
                 </div>
+                <Button onClick={toggleExpand}>
+                    {isExpanded ? "View Less" : "View More"}
+                </Button>
             </div>
 
             <div className="Section4">

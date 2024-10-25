@@ -574,12 +574,14 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
+        
         .title{color: var(--highlightColor);}
 
         .reportContainer{
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            justify-content: center;
 
             .itemReport{
                 display: flex;
@@ -600,8 +602,10 @@ body{
                     align-items: self-start;
                     width: calc(35vw - 70px - 15px);
                     color: var(--notifPanelColorLetter);
-                    h1{margin: 4px 0px;}
+                    h1{margin: 4px 0px; font-size: 20px; word-wrap: break-word;
+                        white-space: normal; word-break: break-all;}
                     h4{margin: 0px; font-weight: 300;}
+
 
                     .dateTime{
                         display: flex;
@@ -625,7 +629,7 @@ body{
         .title{color: var(--highlightColor);}
 
 
-        .subSerberContainer{
+        .subServerContainer{
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
@@ -929,9 +933,14 @@ body{
             box-shadow: 0px 0px 5px 5px var(--shadowsColor);
             justify-content: center;
             margin-bottom: 10px;
+            overflow: hidden;
             
             h2{ margin: 0px; padding: 10px; font-size: 20px; font-weight: 500;}
 
+            &.expanded{
+                height: auto;
+            }
+            
             .List{
                 display: flex;
                 flex-wrap: wrap;

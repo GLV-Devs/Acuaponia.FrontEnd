@@ -13,6 +13,7 @@ export async function login(data){
     }
 }
 
+
 export async function getSubServers(){
     try{
         let res = await axios.get(`${url}/api/app/subservers`, {headers: {'Authorization': `Session ${sessionToken}`}})

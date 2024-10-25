@@ -4,7 +4,9 @@
 
 -Hacer modal de cerrar sesion
 
--arreglar el height de perifericos para que se adapte o hacer boton de ver mas y que depliegue los demas perifericos
+-arreglar el height de perifericos para que se adapte o hacer boton de ver mas y que depliegue los demas perifericos Losto a medias
+
+-acomodar info perifericos
 
 - En dispositivos mostrar las ultimas mediciones hechas en recuadro secundario
 
