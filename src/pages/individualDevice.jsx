@@ -13,6 +13,7 @@ const IndividualDevice = () => {
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
     let currentDeviceInfo = []
+    let currentDeviceReports = []
 
 
     const toggleExpand = () => {
@@ -58,17 +59,37 @@ const IndividualDevice = () => {
             const deviceIndex = subServerDevices.findIndex(device => device.id === currentDevice)
             if (deviceIndex !== -1) {
                 currentDeviceInfo = subServerDevices[deviceIndex]
-                console.log(currentDeviceInfo)
             } else {
                 console.log('Device not found')
             }
         }
     }
 
+    function getReports(currentDevice){
+        if (currentDevice === null) {
+            console.log('No device selected');
+            return;
+        }
+    
+        currentDeviceReports = subServerReports.filter(device => device.deviceId === currentDevice);
+        
+        if (currentDeviceReports.length > 0) {
+            currentDeviceReports.sort((a, b) => new Date(b.dateRecorded) - new Date(a.dateRecorded));
+            return currentDeviceReports; 
+            
+        } else {
+            console.log('Device not found');
+            return null;
+        }
+    }
+
+
     getCurrentDevice(currentDevice)
-    console.log(subServerReports)
+    getReports(currentDevice)
+    //console.log(subServerReports)
     console.log(devicePeripherals)
-    console.log(isExpanded)
+    //console.log(currentDeviceReports)
+    
     
     
 
@@ -188,7 +209,7 @@ const IndividualDevice = () => {
                             <h4>Sub servidor</h4>
                             <h4>Fecha</h4>
                         </div>
-                        { subServerReports.map((item) => (
+                        { currentDeviceReports.map((item) => (
                             <div key={item.id} className="ListItem">
                                 <div className="badge"></div>
                                 <div className="info">

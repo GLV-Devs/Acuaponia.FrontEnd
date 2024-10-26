@@ -77,6 +77,15 @@ export async function getAccount(){
     }
 }
 
+export async function getReactors(){
+    try{
+        let res = await axios.get(`${url}/api/app/reactors`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    } catch(err){
+        return err
+    }
+}
+
 export async function postSubServerReport(data){
     try{
         let res = await axios.post(`${url}/api/app/reports`, data, {headers: {'Authorization': `Session ${sessionToken}`}})

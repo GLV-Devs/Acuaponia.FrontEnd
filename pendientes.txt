@@ -1,10 +1,10 @@
 -Acomodar reportes
     -En subservidores (mostrar nombre de dispositivo, no id), ademas mostrar el valueKind ademas de añadirle encabezados (como en dispositivos)
-    -En dispositivos filtrar para cada dispositivo, mostrar propiedad de valueKind, no el id, mostrar nombre de subservidor, no id
+    -En dispositivos filtrar para cada dispositivo, mostrar propiedad de valueKind, no el id, mostrar nombre de subservidor, no id. LOSTO PRIMERA PARTE
 
 -Hacer modal de cerrar sesion
 
--arreglar el height de perifericos para que se adapte o hacer boton de ver mas y que depliegue los demas perifericos Losto a medias
+-arreglar el height de perifericos para que se adapte o hacer boton de ver mas y que depliegue los demas perifericos LOSTO A MEDIAS
 
 -acomodar info perifericos
 

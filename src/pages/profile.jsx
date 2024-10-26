@@ -16,6 +16,8 @@ const Profile = () => {
         borderWidth: '2px'
     }
 
+    console.log(userData)
+
 
     return(
         <div className='Profile'>
