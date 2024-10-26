@@ -8,3 +8,7 @@ export function searchReportValueKind(list, id){
     let response = list[id]
     return response
 }
+export function searchPeripheral(list, id){
+    let response = list.find((item) => item.index == id)
+    return response.reportValueKind
+}

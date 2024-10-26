@@ -10,7 +10,7 @@ const SubServerSearch = () => {
     const {subServers, setCurrentSubServer} = useContext(appContext)
     const navigate = useNavigate()
 
-    console.log(subServers)
+    // console.log(subServers)
     const slideStyle = {
         color: '#587099',
         fontSize: '20px',

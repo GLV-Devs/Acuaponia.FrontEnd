@@ -2,7 +2,7 @@ import { LeftOutlined, LaptopOutlined, MobileOutlined } from "@ant-design/icons"
 import { useContext, useState, useEffect } from 'react'
 import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
-import { getSubServerInfo, getSubServerDevices, getSubServerReactors } from '../client/ClientePrueba'
+import { getSubServerInfo, getSubServerDevices, getSubServerReactors, getAllPeripherals } from '../client/ClientePrueba'
 import DispPanel from '../components/DispPanel'
 import ReactPanel from '../components/ReactPanel'
 import { useNavigate } from "react-router-dom"
@@ -10,7 +10,16 @@ import { backButtonStyle } from '../AntDIconStyles'
 
 const SubServer = () => {
 
-    const {currentSubServer, subServerReports, setSubServerDevices, setSubServerReactor, subServerReactor} = useContext(appContext)
+    const {
+        currentSubServer,
+        subServerReports,
+        setSubServerDevices,
+        setSubServerReactor,
+        subServerReactor,
+        allPeripherals,
+        setAllPeripherals
+    } = useContext(appContext)
+
     const [info, setInfo] = useState(null)
     const [dispPanelOpen, setDispPanelOpen] = useState(false)
     const [reactPanelOpen, setReactPanelOpen] = useState(false)
@@ -21,11 +30,12 @@ const SubServer = () => {
         getInfo(currentSubServer)
         getDevices(currentSubServer)
         getReactors(currentSubServer)
+        getPeripherals(currentSubServer)
     }, [])
 
     async function getInfo(id){
         let resInfo = await getSubServerInfo(id)
-        console.log(resInfo.data.data[0])
+        // console.log(resInfo.data.data[0])
         setInfo(resInfo.data.data[0])
     }        
     
@@ -41,7 +51,7 @@ const SubServer = () => {
 
     async function getDevices(id){
         let resDevices = await getSubServerDevices(id)
-        console.log(resDevices)
+        // console.log(resDevices)
         setSubServerDevices(resDevices.data.data)
     }
 
@@ -49,6 +59,12 @@ const SubServer = () => {
         let resReactor = await getSubServerReactors(id)
         console.log(resReactor)
         setSubServerReactor(resReactor.data.data)
+    }
+
+    async function getPeripherals(id){
+        let resPeripherals = await getAllPeripherals(id)
+        console.log(resPeripherals.data.data)
+        // setAllPeripherals(resPeripherals.data.data)
     }
 
     return(

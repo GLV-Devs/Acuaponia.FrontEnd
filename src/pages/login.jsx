@@ -25,9 +25,9 @@ const Login = () => {
             identifier: user,
             passwordSHA256: (await encrypt(password)).toUpperCase(),
         }
-        console.log(data)
+        // console.log(data)
         let res = await login(data)
-        console.log(res)
+        // console.log(res)
         if(res.status == 200){
             setLogged(true)
             setUserData(res.data)

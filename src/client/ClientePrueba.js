@@ -122,3 +122,13 @@ export async function getSubserverDevicePeripheralModel(){
     }
 }
 
+
+
+export async function getAllPeripherals(subServerId){
+    try{
+        let res = await axios.get(`${url}/api/app/devices/peripherals/subserver/${subServerId}`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
