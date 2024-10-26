@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { useEffect } from 'react'
-import { getSubServerReports, getSubServers, getAccount, getAllNotifications, getSubserverDevicePeripheralModel, getUserInfo } from '../client/ClientePrueba'
+import { getSubServerReports, getSubServers, getAccount, getAllNotifications, getSubserverDevicePeripheralModel } from '../client/ClientePrueba'
 import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
 
