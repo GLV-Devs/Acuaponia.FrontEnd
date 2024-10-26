@@ -27,6 +27,7 @@ const AppContextProvider = ({children}) => {
         'BiomassKilograms',
         'TemperatureKelvin'
     ])
+    const [subServerReactor, setSubServerReactor] = useState(null)
 
     return(
         <appContext.Provider value={{
@@ -53,7 +54,9 @@ const AppContextProvider = ({children}) => {
             setCurrentPeripheral,
             devicePeripheralsModel,
             setDevicePeripheralsModel,
-            reportValueKind
+            reportValueKind,
+            subServerReactor,
+            setSubServerReactor
         }}>
             {children}
         </appContext.Provider>

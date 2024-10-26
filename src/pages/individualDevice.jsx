@@ -88,7 +88,7 @@ const IndividualDevice = () => {
     getReports(currentDevice)
     //console.log(subServerReports)
     console.log(devicePeripherals)
-    //console.log(currentDeviceReports)
+    console.log(currentDeviceReports)
     
     
     

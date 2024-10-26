@@ -38,7 +38,6 @@ const DispPanel = ({close}) => {
                     ))}
                 </div>)
             }
-
             
 		</div>
 	)

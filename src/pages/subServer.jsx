@@ -2,7 +2,7 @@ import { LeftOutlined, LaptopOutlined, MobileOutlined } from "@ant-design/icons"
 import { useContext, useState, useEffect } from 'react'
 import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
-import { getSubServerInfo, getSubServerDevices } from '../client/ClientePrueba'
+import { getSubServerInfo, getSubServerDevices, getSubServerReactors } from '../client/ClientePrueba'
 import DispPanel from '../components/DispPanel'
 import ReactPanel from '../components/ReactPanel'
 import { useNavigate } from "react-router-dom"
@@ -10,9 +10,8 @@ import { backButtonStyle } from '../AntDIconStyles'
 
 const SubServer = () => {
 
-    const {currentSubServer, subServerReports, setSubServerDevices} = useContext(appContext)
+    const {currentSubServer, subServerReports, setSubServerDevices, setSubServerReactor, subServerReactor} = useContext(appContext)
     const [info, setInfo] = useState(null)
-    const [reports, setReports] = useState([])
     const [dispPanelOpen, setDispPanelOpen] = useState(false)
     const [reactPanelOpen, setReactPanelOpen] = useState(false)
     const navigate = useNavigate()
@@ -21,6 +20,7 @@ const SubServer = () => {
     useEffect(() => {
         getInfo(currentSubServer)
         getDevices(currentSubServer)
+        getReactors(currentSubServer)
     }, [])
 
     async function getInfo(id){
@@ -43,6 +43,12 @@ const SubServer = () => {
         let resDevices = await getSubServerDevices(id)
         console.log(resDevices)
         setSubServerDevices(resDevices.data.data)
+    }
+
+    async function getReactors(id){
+        let resReactor = await getSubServerReactors(id)
+        console.log(resReactor)
+        setSubServerReactor(resReactor.data.data)
     }
 
     return(
