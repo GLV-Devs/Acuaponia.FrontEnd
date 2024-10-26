@@ -18,6 +18,13 @@ const ConfigPanel = ({close}) => {
                 </div>
 
                 <div className="Buttons">
+                <div className="Button" onClick={ () => {navigate ('/adminPanel')}}>
+                    <SettingOutlined style={buttonPanelIconStyle}/>
+                        <div>
+                            <h4>Administracion</h4>
+                            <p>Panel de administracion</p>
+                        </div>
+                    </div>
                     <div className="Button" onClick={() => {navigate ('/userCreation'); close()}}>
                         <UserOutlined style={buttonPanelIconStyle}/>
                         <div>
@@ -37,13 +44,6 @@ const ConfigPanel = ({close}) => {
                         <div>
                             <h4>Reportes</h4>
                             <p>Creacion de reportes</p>
-                        </div>
-                    </div>
-                    <div className="Button">
-                        <BellOutlined style={buttonPanelIconStyle}/>
-                        <div>
-                            <h4>Titulo</h4>
-                            <p>subtitulo</p>
                         </div>
                     </div>
                 </div>

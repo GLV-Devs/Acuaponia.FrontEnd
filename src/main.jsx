@@ -15,6 +15,8 @@ import UserCreation from './pages/userCreation'
 import DeviceCreation from './pages/deviceCreation'
 import ReportCreation from './pages/reportCreation'
 import NotificationCreation from './pages/notificationCreation'
+import AdminPanel from './pages/adminPanel'
+import AssignPermissions from './pages/assignPermissions'
 import './style.scss'
 
 const router = createBrowserRouter([
@@ -71,6 +73,14 @@ const router = createBrowserRouter([
         path: '/NotificationCreation',
         element: <NotificationCreation/>
       },
+      {
+        path: '/AdminPanel',
+        element: <AdminPanel/>,       
+      },
+      {
+        path: '/AssignPermissions',
+        element: <AssignPermissions/>
+      }
       
     ]
   }

@@ -12,7 +12,7 @@
 
 -en usuario acomodar la informacion que se ve
 
--continuar con reactores (ver reactores asociados a un subservidor), ver config de cada reactor
+-continuar con reactores (ver reactores asociados a un subservidor), ver config de cada reactor (LISTO PORQUE NO TENEMOS REACTORES)
 
 -Hacer pantalla/modal de la sesion del subservidor (PREGUNTAR A DIEGO COMO MANEJAR ESTO) la notificacion te lleva a un apartado donde se puede aceptar o rechazar la solicitud de sesion
 

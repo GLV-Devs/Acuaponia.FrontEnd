@@ -28,6 +28,8 @@ const AppContextProvider = ({children}) => {
         'TemperatureKelvin'
     ])
     const [subServerReactor, setSubServerReactor] = useState(null)
+    const [allUsers, setAllUsers] = useState(null)
+    const [selectedUser, setSelectedUser] = useState(null)
 
     return(
         <appContext.Provider value={{
@@ -56,7 +58,11 @@ const AppContextProvider = ({children}) => {
             setDevicePeripheralsModel,
             reportValueKind,
             subServerReactor,
-            setSubServerReactor
+            setSubServerReactor,
+            allUsers,
+            setAllUsers,
+            selectedUser,
+            setSelectedUser
         }}>
             {children}
         </appContext.Provider>

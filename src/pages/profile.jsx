@@ -44,12 +44,12 @@ const Profile = () => {
                         </div>
                         <h2>{userData.realName}</h2>
                         <Divider dashed style={dividerStyle}/>
-                        <h2>Correo</h2>
+                        <h2>{userData.email}</h2>
                         <Divider dashed style={dividerStyle}/>
                         <h2>Telefono</h2>
                     </div>
 
-                    <div className='ReportesSection'>
+                    {/* <div className='ReportesSection'>
                         <h1 className='title'>Reportes</h1>
                         <div className='reportContainer'>
                             { subServerReports.map((item) => (
@@ -67,7 +67,7 @@ const Profile = () => {
                                 </div>
                             )) }
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className='SubServersSection'>
                         <h1 className='title'>Sub servidores</h1>

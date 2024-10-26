@@ -30,7 +30,7 @@ const DispPanel = ({close}) => {
                             <MobileOutlined/>
                             <div>
                                 <h4>{item.name}</h4>
-                                <p>{item.uniqueIdHexSHA512}</p>
+                                <p className="hex">{item.uniqueIdHexSHA512}</p>
                                 <p className='date'>{new Date(item.lastHeartbeat).getDate()}/{new Date(item.lastHeartbeat).getMonth()}/{new Date(item.lastHeartbeat).getFullYear()}</p>
                                 <p className='time'>{new Date(item.lastHeartbeat).getHours()}:{new Date(item.lastHeartbeat).getMinutes()}</p>
                             </div>

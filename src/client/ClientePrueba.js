@@ -77,6 +77,15 @@ export async function getAccount(){
     }
 }
 
+export async function getAccountsAll(){
+    try{
+        let res = await axios.get(`${url}/api/app/accounts/all`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
+
 export async function getSubServerReactors(subServerId){
     try{
         let res = await axios.get(`${url}/api/app/subservers/${subServerId}/reactors/config`, {headers: {'Authorization': `Session ${sessionToken}`}})
