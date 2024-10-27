@@ -115,7 +115,7 @@ export async function postCreateAccount(data){
 
 export async function getSubserverDevicePeripheralModel(){
     try{
-        let res = await axios.get(`${url}/api/app/devices/peripherals`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Session ${sessionToken}`}})
         return res
     }catch(err){
         return err

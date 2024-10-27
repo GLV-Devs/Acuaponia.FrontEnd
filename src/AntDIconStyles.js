@@ -1,3 +1,5 @@
+import { toPadding } from "chart.js/helpers"
+
 export const navBarIconStyle = {
 	color: '#e95cff',
     fontSize: '35px'
@@ -16,4 +18,9 @@ export const buttonPanelIconStyle = {
 export const backButtonStyle = {
 	color: '#01bc85',
 	fontSize: '25px'
+}
+
+export const saveStyle = {
+	color: '#01bc85',
+	fontSize: '25px',
 }

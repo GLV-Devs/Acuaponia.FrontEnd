@@ -741,11 +741,10 @@ body{
 
         .item{
             display: flex;        
-
-            .switchLabel{
-                color:var(--notifPanelColorLetter)
-            }
-    
+            align-items: center;
+            gap:10px;
+            color: var(--notifPanelColorLetter);
+            font-size: 13px;
         }
     }
 }
@@ -1174,4 +1173,67 @@ body{
         }
     }
     
+}
+
+.modulePermissions{
+    height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .creationForm{
+        background-color: var(--moduleBgColor);
+        width: 70vw;
+        height: 75vh;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--highlightColor);
+        box-shadow: 0px 0px 5px 5px var(--shadowsColor);
+
+        .ant-form-item{
+            margin:0px;
+        }
+
+        .upperBar{
+            height:4vh;
+            width: 80%;
+            display: flex;
+            gap: 5vw;
+            align-items: center;
+            justify-content: space-between;
+            margin: 35px 0px;
+    
+            h1{
+                margin: 0px;
+            }
+
+            Button{
+                background-color: rgb(17, 17, 28);
+                border: none;
+            }
+        }
+
+        .permissions{
+            height: 70vh;
+            width: 80%;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            display: flex;
+            flex-direction: column;
+            
+            
+
+            .item{
+                display: flex;        
+                align-items: center;
+                justify-content: space-between;
+                gap:10px;
+                color: var(--notifPanelColorLetter);
+                font-size: 13px;
+            }
+        }
+    }
 }
