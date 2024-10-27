@@ -5,7 +5,7 @@ import { Button, Form, Switch } from 'antd'
 import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { appContext } from '../context/appContext'
-import { each } from 'chart.js/helpers'
+import { patchAdjustUserPermissions } from '../client/ClientePrueba'
 
 
 const AssignPermissions = () => {
@@ -41,8 +41,14 @@ const AssignPermissions = () => {
         ]
         
         let Permissions = data.map(item => item ? 1 : 0).join("")
+        let binaryPermissions = parseInt(Permissions, 2)
+        let permissionsObject = { binaryPermissions }
+
+        let res = await patchAdjustUserPermissions(selectedUser, permissionsObject)
         
-        console.log(Permissions)
+        
+        console.log(res)
+        console.log(permissionsObject)
     }
 
 

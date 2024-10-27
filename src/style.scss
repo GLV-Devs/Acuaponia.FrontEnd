@@ -815,6 +815,25 @@ body{
         }
 
         .reportsContainer{
+            
+            .info{
+                width: 88vw;
+                display: grid;
+                grid-template-columns: 0.9fr 0.5fr 1.2fr 1.1fr 0.5fr 1fr;
+                justify-content: center;
+                justify-items: center;
+                margin-left: 50px;
+               // margin-right: 10px;
+
+                h4{margin:10px -2px;}
+                .dateTime{
+                    width: 100%;
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: center
+                }
+            }
 
             .reportItem{
                 display: flex;

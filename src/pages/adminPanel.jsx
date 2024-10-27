@@ -23,7 +23,7 @@ const AdminPanel = () => {
 
     useEffect(() => {
         getUsers()
-        console.log(allUsers)  
+        
     }, [])
     
     

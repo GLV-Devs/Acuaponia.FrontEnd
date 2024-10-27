@@ -46,7 +46,7 @@ const Profile = () => {
                         <Divider dashed style={dividerStyle}/>
                         <h2>{userData.email}</h2>
                         <Divider dashed style={dividerStyle}/>
-                        <h2>Telefono</h2>
+                        
                     </div>
 
                     {/* <div className='ReportesSection'>

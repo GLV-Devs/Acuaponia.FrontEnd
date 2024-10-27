@@ -129,6 +129,14 @@ const SubServer = () => {
                             <Input variant="filled" placeholder='Buscar...'/>
                         </div>
                         <div className='reportsContainer'>
+                            <div className="info">
+                                <h4>Fecha</h4>
+                                <h4>Hora</h4>
+                                <h4>Dispositivo</h4>
+                                <h4>Periferico</h4>
+                                <h4>Tipo</h4>
+                                <h4>Valor</h4>
+                            </div>
                             { showList.map((item) => (
                                 <div className='reportItem' key={item.id}>
                                     <div className='badge'></div>
@@ -137,7 +145,7 @@ const SubServer = () => {
                                     <h3>{item.deviceName}</h3>
                                     <h3>{item.peripheralName}</h3>
                                     <h3>{item.reportValueKindName}</h3>
-                                    <h3>Value: {parseFloat(item.value).toFixed(2)}</h3>
+                                    <h3>{parseFloat(item.value).toFixed(2)}</h3>
                                 </div>
                             )) }
                         </div>

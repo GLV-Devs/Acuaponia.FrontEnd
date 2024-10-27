@@ -4,15 +4,9 @@
 
 -Hacer modal de cerrar sesion
 
--arreglar el height de perifericos para que se adapte o hacer boton de ver mas y que depliegue los demas perifericos LOSTO A MEDIAS
-
 -acomodar info perifericos
 
 - En dispositivos mostrar las ultimas mediciones hechas en recuadro secundario
-
--en usuario acomodar la informacion que se ve
-
--continuar con reactores (ver reactores asociados a un subservidor), ver config de cada reactor (LISTO PORQUE NO TENEMOS REACTORES)
 
 -Hacer pantalla/modal de la sesion del subservidor (PREGUNTAR A DIEGO COMO MANEJAR ESTO) la notificacion te lleva a un apartado donde se puede aceptar o rechazar la solicitud de sesion
 
