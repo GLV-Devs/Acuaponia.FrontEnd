@@ -30,7 +30,7 @@ const AppContextProvider = ({children}) => {
     const [subServerReactor, setSubServerReactor] = useState(null)
     const [allUsers, setAllUsers] = useState(null)
     const [selectedUser, setSelectedUser] = useState(null)
-    const [allPeripherals, setAllPeripherals] = useState(null)
+    const [allPeripherals, setAllPeripherals] = useState([])
 
     return(
         <appContext.Provider value={{

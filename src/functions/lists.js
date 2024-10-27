@@ -4,7 +4,6 @@ export function searchDevicePeripheralsModel(list, id){
 }
 
 export function searchReportValueKind(list, id){
-    console.log(id)
     let response = list[id]
     return response
 }

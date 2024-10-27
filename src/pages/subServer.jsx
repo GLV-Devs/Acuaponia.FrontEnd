@@ -7,6 +7,7 @@ import DispPanel from '../components/DispPanel'
 import ReactPanel from '../components/ReactPanel'
 import { useNavigate } from "react-router-dom"
 import { backButtonStyle } from '../AntDIconStyles'
+import { searchReportValueKind, searchPeripheral } from "../functions/lists"
 
 const SubServer = () => {
 
@@ -17,28 +18,20 @@ const SubServer = () => {
         setSubServerReactor,
         subServerReactor,
         allPeripherals,
-        setAllPeripherals
+        setAllPeripherals,
+        reportValueKind
     } = useContext(appContext)
 
     const [info, setInfo] = useState(null)
     const [dispPanelOpen, setDispPanelOpen] = useState(false)
     const [reactPanelOpen, setReactPanelOpen] = useState(false)
+    const [showList, setShowList] = useState([])
     const navigate = useNavigate()
-    
 
     useEffect(() => {
-        getInfo(currentSubServer)
-        getDevices(currentSubServer)
-        getReactors(currentSubServer)
-        getPeripherals(currentSubServer)
+        requestInformation()
     }, [])
 
-    async function getInfo(id){
-        let resInfo = await getSubServerInfo(id)
-        // console.log(resInfo.data.data[0])
-        setInfo(resInfo.data.data[0])
-    }        
-    
     const openDispPanel = () => {
         setDispPanelOpen(!dispPanelOpen)
         setReactPanelOpen(false)
@@ -49,22 +42,37 @@ const SubServer = () => {
         setDispPanelOpen(false)
     }
 
-    async function getDevices(id){
-        let resDevices = await getSubServerDevices(id)
-        // console.log(resDevices)
-        setSubServerDevices(resDevices.data.data)
-    }
+    async function requestInformation() {
+        const querys = [
+            getSubServerInfo(currentSubServer),
+            getSubServerDevices(currentSubServer),
+            getAllPeripherals(currentSubServer)
+        ]
+        try{
+            let [resInfo, resDevices, resPeripherals] = await Promise.all(querys)
+            setInfo(resInfo.data.data[0])
+            setSubServerDevices(resDevices.data.data)
+            setAllPeripherals(resPeripherals.data.data)
+            buildReportList()
+        }catch(err){
+            console.log(err)
+        }
+    }      
 
-    async function getReactors(id){
-        let resReactor = await getSubServerReactors(id)
-        console.log(resReactor)
-        setSubServerReactor(resReactor.data.data)
-    }
-
-    async function getPeripherals(id){
-        let resPeripherals = await getAllPeripherals(id)
-        console.log(resPeripherals.data.data)
-        // setAllPeripherals(resPeripherals.data.data)
+    function buildReportList(){
+        let list = []
+        let currentDeviceIndex
+        subServerReports.forEach(item => {
+            currentDeviceIndex = item.deviceIndex
+            let res = searchPeripheral(allPeripherals, currentDeviceIndex)
+            console.log(res)
+            list.push({
+                ...item,
+                reportValueKindName: searchReportValueKind(reportValueKind, res)
+            })
+            // console.log(item)
+        });
+        setShowList(list)
     }
 
     return(
@@ -115,13 +123,12 @@ const SubServer = () => {
                             <Input variant="filled" placeholder='Buscar...'/>
                         </div>
                         <div className='reportsContainer'>
-                            { subServerReports.map((item) => (
+                            { showList.map((item) => (
                                 <div className='reportItem' key={item.id}>
                                     <div className='badge'></div>
-                                    <h3>{item.deviceId}</h3>
                                     <h3>{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth()}/{new Date(item.dateRecorded).getFullYear()}</h3>
                                     <h3>{new Date(item.dateRecorded).getHours()}:{new Date(item.dateRecorded).getMinutes()}</h3>
-                                    <h3>Device: {item.deviceIndex}</h3>
+                                    <h3>Device: {item.reportValueKindName}</h3>
                                     <h3>Value: {parseFloat(item.value).toFixed(2)}</h3>
                                 </div>
                             )) }
