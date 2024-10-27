@@ -8,6 +8,9 @@ export function searchReportValueKind(list, id){
     return response
 }
 export function searchPeripheral(list, id){
+    // console.log(list)
+    // console.log(id)
     let response = list.find((item) => item.index == id)
-    return response.reportValueKind
+    // console.log(response)
+    return response
 }

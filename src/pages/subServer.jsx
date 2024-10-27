@@ -54,6 +54,7 @@ const SubServer = () => {
             setSubServerDevices(resDevices.data.data)
             setAllPeripherals(resPeripherals.data.data)
             buildReportList()
+
         }catch(err){
             console.log(err)
         }
@@ -65,10 +66,12 @@ const SubServer = () => {
         subServerReports.forEach(item => {
             currentDeviceIndex = item.deviceIndex
             let res = searchPeripheral(allPeripherals, currentDeviceIndex)
-            console.log(res)
+            console.log(item)
+            // console.log(searchReportValueKind(reportValueKind, res.reportValueKind))
             list.push({
                 ...item,
-                reportValueKindName: searchReportValueKind(reportValueKind, res)
+                reportValueKindName: searchReportValueKind(reportValueKind, res.reportValueKind),
+                peripheralName: res.name
             })
             // console.log(item)
         });
@@ -128,7 +131,8 @@ const SubServer = () => {
                                     <div className='badge'></div>
                                     <h3>{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth()}/{new Date(item.dateRecorded).getFullYear()}</h3>
                                     <h3>{new Date(item.dateRecorded).getHours()}:{new Date(item.dateRecorded).getMinutes()}</h3>
-                                    <h3>Device: {item.reportValueKindName}</h3>
+                                    <h3>{item.peripheralName}</h3>
+                                    <h3>{item.reportValueKindName}</h3>
                                     <h3>Value: {parseFloat(item.value).toFixed(2)}</h3>
                                 </div>
                             )) }
