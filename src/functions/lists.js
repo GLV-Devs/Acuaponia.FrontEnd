@@ -14,3 +14,8 @@ export function searchPeripheral(list, id){
     // console.log(response)
     return response
 }
+
+export function searchDevice(list, id){
+    let response = list.find((item) => item.id == id)
+    return response
+}

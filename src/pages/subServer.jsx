@@ -7,7 +7,7 @@ import DispPanel from '../components/DispPanel'
 import ReactPanel from '../components/ReactPanel'
 import { useNavigate } from "react-router-dom"
 import { backButtonStyle } from '../AntDIconStyles'
-import { searchReportValueKind, searchPeripheral } from "../functions/lists"
+import { searchReportValueKind, searchPeripheral, searchDevice } from "../functions/lists"
 
 const SubServer = () => {
 
@@ -15,6 +15,7 @@ const SubServer = () => {
         currentSubServer,
         subServerReports,
         setSubServerDevices,
+        subServerDevices,
         setSubServerReactor,
         subServerReactor,
         allPeripherals,
@@ -66,12 +67,14 @@ const SubServer = () => {
         subServerReports.forEach(item => {
             currentDeviceIndex = item.deviceIndex
             let res = searchPeripheral(allPeripherals, currentDeviceIndex)
-            console.log(item)
+            // console.log(item)
+            // console.log(searchDevice(subServerDevices, item.deviceId))
             // console.log(searchReportValueKind(reportValueKind, res.reportValueKind))
             list.push({
                 ...item,
                 reportValueKindName: searchReportValueKind(reportValueKind, res.reportValueKind),
-                peripheralName: res.name
+                peripheralName: res.name,
+                deviceName: searchDevice(subServerDevices, item.deviceId).name
             })
             // console.log(item)
         });
@@ -131,6 +134,7 @@ const SubServer = () => {
                                     <div className='badge'></div>
                                     <h3>{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth()}/{new Date(item.dateRecorded).getFullYear()}</h3>
                                     <h3>{new Date(item.dateRecorded).getHours()}:{new Date(item.dateRecorded).getMinutes()}</h3>
+                                    <h3>{item.deviceName}</h3>
                                     <h3>{item.peripheralName}</h3>
                                     <h3>{item.reportValueKindName}</h3>
                                     <h3>Value: {parseFloat(item.value).toFixed(2)}</h3>
