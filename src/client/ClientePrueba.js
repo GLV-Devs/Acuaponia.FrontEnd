@@ -139,3 +139,12 @@ export async function patchAdjustUserPermissions(otherUserId, data){
         return err
     }
 }
+
+export async function logOut() {
+    try{
+        let res = await axios.delete(`${url}/api/app/identity`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
