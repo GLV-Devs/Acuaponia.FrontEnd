@@ -14,6 +14,7 @@ const SubServer = () => {
     const {
         currentSubServer,
         subServerReports,
+        setSubServerReports,
         setSubServerDevices,
         subServerDevices,
         setSubServerReactor,
@@ -79,6 +80,7 @@ const SubServer = () => {
             // console.log(item)
         });
         setShowList(list)
+        setSubServerReports(list)
     }
 
     return(

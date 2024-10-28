@@ -9,7 +9,16 @@ import { searchReportValueKind, searchDevicePeripheralsModel } from '../function
 
 const IndividualDevice = () => {
 
-    const {subServerDevices, currentDevice, setDevicePeripherals, devicePeripherals, subServerReports, devicePeripheralsModel, reportValueKind} = useContext(appContext)
+    const {
+        subServerDevices,
+        currentDevice,
+        setDevicePeripherals,
+        devicePeripherals,
+        subServerReports,
+        devicePeripheralsModel,
+        reportValueKind
+    } = useContext(appContext)
+
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
     let currentDeviceInfo = []
@@ -214,16 +223,13 @@ const IndividualDevice = () => {
                                 <div className="badge"></div>
                                 <div className="info">
                                     <div className="Portion">
-                                        <h4>{item.deviceIndex}</h4>
+                                        <h4>{item.reportValueKindName}</h4>
                                     </div>
                                     <div className="Portion">
                                         <h4>{parseFloat(item.value).toFixed(2)}</h4>
                                     </div>
                                     <div className="Portion">
                                         <h4>{item.devicePeripheral.name}</h4>
-                                    </div>
-                                    <div className="Portion">
-                                        <h4>{item.subServerId}</h4>
                                     </div>
                                     <div className="dateTime">
                                         <h4 className="date">{new Date(item.dateRecorded).getDate()}/{new Date(item.dateRecorded).getMonth() + 1}/{new Date(item.dateRecorded).getFullYear()}</h4>
