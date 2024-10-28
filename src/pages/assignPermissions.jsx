@@ -41,14 +41,13 @@ const AssignPermissions = () => {
         ]
         
         let Permissions = data.map(item => item ? 1 : 0).join("")
-        let binaryPermissions = parseInt(Permissions, 2)
-        let permissionsObject = { binaryPermissions }
+        let decimalPermissions = parseInt(Permissions, 2)
 
-        let res = await patchAdjustUserPermissions(selectedUser, permissionsObject)
+        let res = await patchAdjustUserPermissions(selectedUser, decimalPermissions)
         
         
         console.log(res)
-        console.log(permissionsObject)
+        console.log(decimalPermissions)
     }
 
 
