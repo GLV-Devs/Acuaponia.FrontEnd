@@ -212,10 +212,9 @@ const IndividualDevice = () => {
                     <h2>Reportes</h2>
                     <div className="List">
                         <div className="info">
-                            <h4>ValueKind</h4>
+                            <h4>Tipo</h4>
                             <h4>Valor</h4>
                             <h4>Periferico</h4>
-                            <h4>Sub servidor</h4>
                             <h4>Fecha</h4>
                         </div>
                         { currentDeviceReports.map((item) => (

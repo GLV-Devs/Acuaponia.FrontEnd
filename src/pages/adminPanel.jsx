@@ -1,7 +1,7 @@
 import { LeftOutlined, UserOutlined, DoubleRightOutlined } from "@ant-design/icons"
 import { backButtonStyle } from '../AntDIconStyles'
 import { useNavigate } from 'react-router-dom'
-import { Button } from 'antd'
+import { Button, Modal } from 'antd'
 import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { appContext } from '../context/appContext'
@@ -11,7 +11,16 @@ const AdminPanel = () => {
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
     const { allUsers, setAllUsers, setSelectedUser } = useContext(appContext)
-    
+    const [open, setOpen] = useState(false)
+
+    const showModal = () => {
+        setOpen(true)
+    }
+
+    const handleCancel = () => {
+        setOpen(false)
+    }
+
     const toggleExpand = () => {
             setIsExpanded(!isExpanded);
         }
@@ -45,7 +54,7 @@ const AdminPanel = () => {
                             ):(
                                 <div className="List">
                                     { allUsers.map((item) => (
-                                        <div key={item.id} className="ListItem" onClick={() => {setSelectedUser(item.id); navigate('/assignPermissions')}}>
+                                        <div key={item.id} className="ListItem" onClick={() => {setSelectedUser(item.id); showModal()}}>
                                             <div className="banner">
                                             <div className="userIcon"><UserOutlined style={{color:'#e95cff', fontSize:'45px'}}/></div>
                                             <div><DoubleRightOutlined rotate={315}/></div>
@@ -57,6 +66,25 @@ const AdminPanel = () => {
                                             </div>
                                         </div>
                                     ))}
+                                    <Modal
+                                    open={open}
+                                    onCancel={handleCancel}
+                                    title="¿Qué deseas editar?"
+                                    className="modal"
+                                    footer={
+                                        [
+                                            <Button key="info" onClick={() => navigate ('/editUser')}>
+                                                Info
+                                            </Button>,
+                                                
+                                            <Button key="permissions" onClick={() =>navigate ('/assignPermissions')}>
+                                                Permisos
+                                            </Button>
+                                        ]
+                                    }
+                                    >
+
+                                    </Modal>
                                 </div>
                             )}
                     </div>

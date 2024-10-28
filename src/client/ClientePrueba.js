@@ -133,7 +133,7 @@ export async function getAllPeripherals(subServerId){
 
 export async function patchAdjustUserPermissions(otherUserId, data){
     try{
-        let res = await axios.patch(`${url}/api/app/permissions/${otherUserId}`, data, {headers: {'Authorization': `Session ${sessionToken}`}})
+        let res = await axios.patch(`${url}/api/app/permissions/${otherUserId}`, data, {headers: {'Authorization': `Session ${sessionToken}`,'Content-Type': 'application/json'}})
         return res
     }catch(err){
         return err

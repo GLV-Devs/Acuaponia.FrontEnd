@@ -1048,7 +1048,7 @@ body{
                 .info{
                     width: 90vw;
                     display: grid;
-                    grid-template-columns: 1fr 0.5fr 0.5fr 1fr 1fr;
+                    grid-template-columns: 1fr 1fr 1fr 1fr ;
                     justify-content: center;
                     justify-items: center;
 
@@ -1082,7 +1082,7 @@ body{
                     .info{
                         width: 90vw;
                         display: grid;
-                        grid-template-columns: 1fr 0.5fr 0.5fr 1fr 1fr;
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
                         justify-content: center;
                         align-items: center;
                         justify-items: center;
@@ -1146,6 +1146,13 @@ body{
                     gap: 20px;
                     justify-content: center;
                     padding: 10px;
+
+                    .custom-modal{
+                        .ant-model-content{
+                            background-color: var(--moduleBgColor);
+                            color: var(--notifPanelColorLetter);
+                        }
+                    }
     
                     .ListItem{
                         background: linear-gradient(#202032, #161722);

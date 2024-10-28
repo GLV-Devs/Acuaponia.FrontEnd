@@ -17,6 +17,7 @@ import ReportCreation from './pages/reportCreation'
 import NotificationCreation from './pages/notificationCreation'
 import AdminPanel from './pages/adminPanel'
 import AssignPermissions from './pages/assignPermissions'
+import  EditUser  from './pages/editUser'
 import './style.scss'
 
 const router = createBrowserRouter([
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
       {
         path: '/AssignPermissions',
         element: <AssignPermissions/>
+      },
+      {
+        path: '/EditUser',
+        element: <EditUser/>
       }
       
     ]
