@@ -140,6 +140,24 @@ export async function patchAdjustUserPermissions(otherUserId, data){
     }
 }
 
+export async function patchUpdateAccount(userKey, data){
+    try{
+        let res = await axios.patch(`${url}/api/app/accounts/${userKey}`, data, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
+
+export async function patchChangePassword(data){
+    try{
+        let res = await axios.patch(`${url}/api/app/accounts/password`, data, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
+
 export async function logOut() {
     try{
         let res = await axios.delete(`${url}/api/app/identity`, {headers: {'Authorization': `Session ${sessionToken}`}})
