@@ -52,15 +52,15 @@ const NavBar = () => {
                     <Tooltip title='Notificaciones'>
                         <BellOutlined onClick={openNotif} style={navBarIconStyle}/>
                     </Tooltip>
-                    { location.pathname == '/SubServerSearch' &&
+                    { location.pathname == '/SubServerSearch' ? (
                         <Tooltip title='Dashboard'>
                             <BarsOutlined onClick={() => switchSubServerPages()} style={navBarIconStyle}/>
                         </Tooltip>
-                    }
-                    { location.pathname == '/Dashboard' &&
-                        <Tooltip title='Sub servers'>
-                            <BarsOutlined onClick={() => switchSubServerPages()} style={navBarIconStyle}/>
-                        </Tooltip>
+                        ):(
+                            <Tooltip title='Sub servers'>
+                                <BarsOutlined onClick={() => switchSubServerPages()} style={navBarIconStyle}/>
+                            </Tooltip>
+                        )
                     }
                     <Tooltip title='Cerrar Sesion'>
                         <LogoutOutlined onClick={() => setLogoutModal(true)} style={navBarIconStyle}/>
