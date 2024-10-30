@@ -48,81 +48,84 @@ const UserCreation = () => {
                     <h1>Creacion de Usuario</h1>
                 </div>
 
-                <Form.Item
-                    className='labels'
-                    label='Nombre'
-                    name='realName'
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Por favor ingrese su nombre',
-                        },
-                    ]}
-                >
-                    <Input placeholder="Nombre..."/>
-                </Form.Item>
+                <div className='form'>
+                    <Form.Item
+                        className='labels'
+                        label='Nombre'
+                        name='realName'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Por favor ingrese su nombre',
+                            },
+                        ]}
+                    >
+                        <Input placeholder="Nombre..."/>
+                    </Form.Item>
 
-                <Form.Item
-                    className='labels'
-                    label='Usuario'
-                    name='userName'
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Por favor ingrese su usuario',
-                        },
-                    ]}
-                >
-                    <Input placeholder="Usuario..."/>
-                </Form.Item>
+                    <Form.Item
+                        className='labels'
+                        label='Usuario'
+                        name='userName'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Por favor ingrese su usuario',
+                            },
+                        ]}
+                    >
+                        <Input placeholder="Usuario..."/>
+                    </Form.Item>
 
-                <Form.Item
-                    className='labels'
-                    label='Correo'
-                    name='email'
-                    rules={[
-                        {
-                            type: 'email',
-                            required: true,
-                            message: 'Por favor ingrese su correo',
-                        },
-                    ]}
-                >
-                    <Input placeholder="Correo..."/>
-                </Form.Item>
+                    <Form.Item
+                        className='labels'
+                        label='Correo'
+                        name='email'
+                        rules={[
+                            {
+                                type: 'email',
+                                required: true,
+                                message: 'Por favor ingrese su correo',
+                            },
+                        ]}
+                    >
+                        <Input placeholder="Correo..."/>
+                    </Form.Item>
 
-                <Form.Item
-                    className='labels'
-                    label='Telefono'
-                    name='phoneNumber'
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Por favor ingrese su numero de telefono',
-                        },
-                    ]}
-                >
-                    <Input placeholder="Numero de telefono..."/>
-                </Form.Item>
+                    <Form.Item
+                        className='labels'
+                        label='Telefono'
+                        name='phoneNumber'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Por favor ingrese su numero de telefono',
+                            },
+                        ]}
+                    >
+                        <Input placeholder="Numero de telefono..."/>
+                    </Form.Item>
 
-                <Form.Item
-                    className='labels'
-                    label='Contraseña'
-                    name='password'
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Por favor ingrese su contraseña',
-                        },
-                    ]}
-                >
-                    <Input.Password className='password' placeholder='     Contraseña...' />
-                </Form.Item>
-                <Form.Item>
-                    <Button className='formButton' htmlType="submit" type="primary" onClick={onSubmit}>
-                        CREAR
-                    </Button>
-                </Form.Item>
+                    <Form.Item
+                        className='labels'
+                        label='Contraseña'
+                        name='password'
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Por favor ingrese su contraseña',
+                            },
+                        ]}
+                    >
+                        <Input.Password className='password' placeholder='     Contraseña...' />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button className='formButton' htmlType="submit" type="primary" onClick={onSubmit}>
+                            CREAR
+                        </Button>
+                    </Form.Item>
+
+                </div>
             </Form>
         
         </div>

@@ -27,7 +27,7 @@ const Login = () => {
         }
         // console.log(data)
         let res = await login(data)
-        // console.log(res)
+        console.log(res)
         if(res.status == 200){
             setLogged(true)
             setUserData(res.data)

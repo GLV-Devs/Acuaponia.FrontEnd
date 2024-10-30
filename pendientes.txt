@@ -8,6 +8,4 @@
     -mostrar usuarios a los que tiene acceso
     -Pantalla de configuracion de permisos a usuarios
 
--Manejo de Permisos
-
 -Filtrado de notificaciones, poder marcar como vistas 

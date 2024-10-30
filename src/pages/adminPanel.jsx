@@ -5,12 +5,12 @@ import { Button, Modal } from 'antd'
 import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { appContext } from '../context/appContext'
-import { getAccountsAll } from '../client/ClientePrueba'
+import { getAccountsAll, getSubserverDevicePeripheralModel } from '../client/ClientePrueba'
 
 const AdminPanel = () => {
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
-    const { allUsers, setAllUsers, setSelectedUser } = useContext(appContext)
+    const { allUsers, setAllUsers, setSelectedUser, selectedUser } = useContext(appContext)
     const [open, setOpen] = useState(false)
 
     const showModal = () => {
@@ -27,14 +27,16 @@ const AdminPanel = () => {
 
     async function getUsers(){
         let res = await getAccountsAll()
+        let prueba = await getSubserverDevicePeripheralModel()
+        console.log(prueba)
         setAllUsers(res.data.data)
+        
     }
 
     useEffect(() => {
         getUsers()
         
     }, [])
-    
     
 
     return (
@@ -70,10 +72,11 @@ const AdminPanel = () => {
                                     open={open}
                                     onCancel={handleCancel}
                                     title="¿Qué deseas editar?"
-                                    className="modal"
+                                    className="custom-modal"
+                                    
                                     footer={
                                         [
-                                            <Button key="info" onClick={() => navigate ('/editUser')}>
+                                            <Button key="info" onClick={() => navigate ('/editUser') }>
                                                 Info
                                             </Button>,
                                                 
