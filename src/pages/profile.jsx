@@ -33,7 +33,7 @@ const Profile = () => {
                         <h1 className='titles'>{userData.realName}</h1>
                     </div>
                     <div className='card'>
-                        <div className='settingBar'><SettingOutlined style={buttonPanelIconStyle}/></div>
+                        <div className='settingBar'><SettingOutlined style={buttonPanelIconStyle} onClick={() => {navigate ('/editPassword')}}/></div>
                         <div className='picContainer'>
                             { userData.img == null ? (
                                 <UserOutlined style={{fontSize: '225px', color: '#6f8fc2'}}/>
