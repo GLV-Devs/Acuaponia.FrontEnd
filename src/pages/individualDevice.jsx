@@ -4,8 +4,9 @@ import { getSubserverDevicePeripheral, getSubServerReports } from "../client/Cli
 import { useNavigate } from "react-router-dom"
 import { LeftOutlined,DoubleRightOutlined, AppstoreAddOutlined } from '@ant-design/icons'
 import { backButtonStyle } from '../AntDIconStyles'
-import { Skeleton, Button } from "antd"
+import { Skeleton, Button, Modal } from "antd"
 import { searchReportValueKind, searchDevicePeripheralsModel } from '../functions/lists'
+import { IndividualPeripheral } from '../components/Modals'
 
 const IndividualDevice = () => {
 
@@ -22,6 +23,7 @@ const IndividualDevice = () => {
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
     const [selectedPeripheral, setSelectedPeripheral] = useState({})
+    const [viewPeripheralModal, setViewPeripheralModal] = useState(false)
     let currentDeviceInfo = []
     let currentDeviceReports = []
 
@@ -94,15 +96,15 @@ const IndividualDevice = () => {
     }
 
     const buildSelectedPeripheral = (info) => {
-        const array = 
         const data = {
             ...info,
-            configValues: searchDevicePeripheralsModel(devicePeripheralsModel, info.actionType).actionTypeName,
+            actionTypeName: searchDevicePeripheralsModel(devicePeripheralsModel, info.actionType).actionTypeName,
             fields: searchDevicePeripheralsModel(devicePeripheralsModel, info.actionType).fields,
 
         }
-        console.log(data)
-        console.log(devicePeripheralsModel)
+        setSelectedPeripheral(data)
+        // console.log(data)
+        // console.log(devicePeripheralsModel)
     }
 
     getCurrentDevice(currentDevice)
@@ -196,7 +198,7 @@ const IndividualDevice = () => {
                         ):(
                             <div className="List">
                                 { devicePeripherals.map((item) => (
-                                    <div key={item.id} className="ListItem" onClick={() => buildSelectedPeripheral(item)}>
+                                    <div key={item.id} className="ListItem" onClick={() => {buildSelectedPeripheral(item); setViewPeripheralModal(true)}}>
                                         <div className="banner">
                                             <div className="subServerIcon"><AppstoreAddOutlined style={{color:'#e95cff', fontSize:'45px'}}/></div>
                                             <div><DoubleRightOutlined rotate={315}/></div>
@@ -251,7 +253,11 @@ const IndividualDevice = () => {
 
                 </div>
             </div>
-        
+            <IndividualPeripheral
+                onCancel={() => setViewPeripheralModal(false)}
+                open={viewPeripheralModal}
+                info={selectedPeripheral}
+            />
         </div>
     )
 }
