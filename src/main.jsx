@@ -18,6 +18,7 @@ import NotificationCreation from './pages/notificationCreation'
 import AdminPanel from './pages/adminPanel'
 import AssignPermissions from './pages/assignPermissions'
 import  EditUser  from './pages/editUser'
+import EditPassword from './pages/editPassword'
 import './style.scss'
 
 const router = createBrowserRouter([
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: '/EditUser',
         element: <EditUser/>
+      },
+      {
+        path: '/EditPassword',
+        element: <EditPassword/>
       }
       
     ]
