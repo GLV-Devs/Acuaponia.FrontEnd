@@ -21,6 +21,7 @@ const IndividualDevice = () => {
 
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
+    const [selectedPeripheral, setSelectedPeripheral] = useState({})
     let currentDeviceInfo = []
     let currentDeviceReports = []
 
@@ -44,13 +45,13 @@ const IndividualDevice = () => {
             if(secondList == undefined){
                 secondList = [{
                     ...item,
-                    devicePeripheralsModelName: searchDevicePeripheralsModel(devicePeripheralsModel, resDevicePeripherals.data.data[i].actionType),
+                    devicePeripheralsModelName: searchDevicePeripheralsModel(devicePeripheralsModel, resDevicePeripherals.data.data[i].actionType).actionTypeName,
                     reportValueKindName: searchReportValueKind(reportValueKind, resDevicePeripherals.data.data[i].reportValueKind)
                 }]
             }else{
                 secondList = [...secondList, {
                     ...item,
-                    devicePeripheralsModelName: searchDevicePeripheralsModel(devicePeripheralsModel, resDevicePeripherals.data.data[i].actionType),
+                    devicePeripheralsModelName: searchDevicePeripheralsModel(devicePeripheralsModel, resDevicePeripherals.data.data[i].actionType).actionTypeName,
                     reportValueKindName: searchReportValueKind(reportValueKind, resDevicePeripherals.data.data[i].reportValueKind)
                 }]
             }
@@ -92,15 +93,23 @@ const IndividualDevice = () => {
         }
     }
 
+    const buildSelectedPeripheral = (info) => {
+        const array = 
+        const data = {
+            ...info,
+            configValues: searchDevicePeripheralsModel(devicePeripheralsModel, info.actionType).actionTypeName,
+            fields: searchDevicePeripheralsModel(devicePeripheralsModel, info.actionType).fields,
+
+        }
+        console.log(data)
+        console.log(devicePeripheralsModel)
+    }
 
     getCurrentDevice(currentDevice)
     getReports(currentDevice)
     //console.log(subServerReports)
     console.log(devicePeripherals)
     console.log(currentDeviceReports)
-    
-    
-    
 
     return(
         <div className="individualDevice">
@@ -187,7 +196,7 @@ const IndividualDevice = () => {
                         ):(
                             <div className="List">
                                 { devicePeripherals.map((item) => (
-                                    <div key={item.id} className="ListItem">
+                                    <div key={item.id} className="ListItem" onClick={() => buildSelectedPeripheral(item)}>
                                         <div className="banner">
                                             <div className="subServerIcon"><AppstoreAddOutlined style={{color:'#e95cff', fontSize:'45px'}}/></div>
                                             <div><DoubleRightOutlined rotate={315}/></div>

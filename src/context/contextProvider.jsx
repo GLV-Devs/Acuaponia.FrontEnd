@@ -31,6 +31,18 @@ const AppContextProvider = ({children}) => {
     const [allUsers, setAllUsers] = useState(null)
     const [selectedUser, setSelectedUser] = useState(null)
     const [allPeripherals, setAllPeripherals] = useState([])
+    const [fieldTypeList, setFieldTypeList] = useState([
+        'Pin identifier',
+        'Interrupt type',
+        'Seconds delay',
+        'Boolean'
+    ])
+    const [interruptTypeList, setinterruptTypeList] = useState([
+        'Rising',
+        'Falling',
+        'High',
+        'Low'
+    ])
 
     return(
         <appContext.Provider value={{
@@ -66,6 +78,8 @@ const AppContextProvider = ({children}) => {
             setSelectedUser,
             allPeripherals,
             setAllPeripherals,
+            fieldTypeList,
+            interruptTypeList
         }}>
             {children}
         </appContext.Provider>

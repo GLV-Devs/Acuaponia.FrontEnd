@@ -1,6 +1,6 @@
 export function searchDevicePeripheralsModel(list, id){
     let response = list.find((item) => item.actionTypeId == id)
-    return response.actionTypeName
+    return response
 }
 
 export function searchReportValueKind(list, id){
@@ -18,4 +18,9 @@ export function searchPeripheral(list, id){
 export function searchDevice(list, id){
     let response = list.find((item) => item.id == id)
     return response
+}
+
+export function searchFields(list, id){
+        let response = list[id]
+        return response
 }
