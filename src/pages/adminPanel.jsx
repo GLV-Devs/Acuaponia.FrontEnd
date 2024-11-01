@@ -1,25 +1,32 @@
 import { LeftOutlined, UserOutlined, DoubleRightOutlined } from "@ant-design/icons"
 import { backButtonStyle } from '../AntDIconStyles'
 import { useNavigate } from 'react-router-dom'
-import { Button, Modal } from 'antd'
+import { Button, Modal, Popconfirm } from 'antd'
 import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { appContext } from '../context/appContext'
-import { getAccountsAll, getSubserverDevicePeripheralModel } from '../client/ClientePrueba'
+import { getAccountsAll, deleteRequestDelete, deleteUserAccount, getUsersAccesses } from '../client/ClientePrueba'
 
 const AdminPanel = () => {
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
     const { allUsers, setAllUsers, setSelectedUser, selectedUser } = useContext(appContext)
     const [open, setOpen] = useState(false)
+    const [secondOpen, setSecondOpen] = useState(false)
+    let deleteToken 
 
     const showModal = () => {
         setOpen(true)
     }
 
+    const showSecondModal = () => {
+        setSecondOpen(true)
+    }
+
     const handleCancel = () => {
         setOpen(false)
     }
+
 
     const toggleExpand = () => {
             setIsExpanded(!isExpanded);
@@ -27,17 +34,33 @@ const AdminPanel = () => {
 
     async function getUsers(){
         let res = await getAccountsAll()
-        let prueba = await getSubserverDevicePeripheralModel()
-        console.log(prueba)
-        setAllUsers(res.data.data)
-        
+        console.log(res)
+        setAllUsers(res.data.data)        
+    }
+
+    async function deleteUserRequest(selectedUser){
+        let res = await deleteRequestDelete(selectedUser)
+        deleteToken = res.data.data[0]
+        console.log(deleteToken)
+    }
+
+    async function deleteUser(deleteToken){
+        let res = await deleteUserAccount(deleteToken)
+        console.log(res)
+    }
+
+    async function getUserAccess(userId){
+        let res = await getUsersAccesses(userId)
+        console.log(res)
     }
 
     useEffect(() => {
         getUsers()
         
     }, [])
-    
+
+    console.log(selectedUser)
+    console.log(secondOpen)    
 
     return (
         <div className="adminPanel">
@@ -71,18 +94,31 @@ const AdminPanel = () => {
                                     <Modal
                                     open={open}
                                     onCancel={handleCancel}
-                                    title="¿Qué deseas editar?"
+                                    title="¿Qué desea hacer?"
                                     className="custom-modal"
-                                    
                                     footer={
                                         [
+                                            <Button key="subServers" onClick={() => getUserAccess(selectedUser)}>
+                                                Sub servidores
+                                            </Button>,
                                             <Button key="info" onClick={() => navigate ('/editUser') }>
-                                                Info
+                                                Editar información
                                             </Button>,
                                                 
                                             <Button key="permissions" onClick={() =>navigate ('/assignPermissions')}>
-                                                Permisos
-                                            </Button>
+                                                Editar permisos
+                                            </Button>,
+                                            <Popconfirm
+                                                title="¿Está seguro de que desea eliminar este usuario?"
+                                                onConfirm={() => deleteUser(deleteToken)}
+                                                okText="Sí"
+                                                cancelText="No"
+                                            >
+                                                <Button key="delete" onClick={() => {deleteUserRequest(selectedUser); showSecondModal()}} >
+                                                Eliminar usuario
+                                                </Button>
+                                            </Popconfirm>
+                                            
                                         ]
                                     }
                                     >

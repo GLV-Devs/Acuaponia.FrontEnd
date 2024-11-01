@@ -166,3 +166,30 @@ export async function logOut() {
         return err
     }
 }
+
+export async function deleteRequestDelete(userToDelete){
+    try{
+        let res = await axios.delete(`${url}/api/app/accounts/${userToDelete}`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
+
+export async function deleteUserAccount(givenToken){
+    try{
+        let res = await axios.delete(`${url}/api/app/accounts?token=${givenToken}`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
+
+export async function getUsersAccesses(userId){
+    try{
+        let res = await axios.get(`${url}/api/app/permissions/access/user/${userId}`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
