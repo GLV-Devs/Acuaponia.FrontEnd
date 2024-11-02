@@ -1282,6 +1282,11 @@ body{
                 gap:10px;
                 color: var(--notifPanelColorLetter);
                 font-size: 13px;
+
+                label{
+                    color: var(--notifPanelColorLetter);
+                    font-size: 13px;
+                }
             }
         }
     }

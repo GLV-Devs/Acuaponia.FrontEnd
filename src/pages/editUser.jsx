@@ -8,7 +8,21 @@ import { backButtonStyle, saveStyle } from '../AntDIconStyles'
 
 const EditUser = () => {
     const navigate = useNavigate()
-    const { selectedUser } = useContext(appContext)
+    const { selectedUser, allUsers } = useContext(appContext)
+
+    let currentName 
+    let currentUserName
+    let currentEmail
+
+    allUsers.forEach(item => {
+        if(item.id == selectedUser){
+            currentName = item.realName
+            currentUserName = item.userName
+            currentEmail = item.email
+        }
+    })
+    
+
     
     const onSubmit = async () => {
         let realName = document.getElementById('realName').value
@@ -61,7 +75,7 @@ const EditUser = () => {
                             },
                         ]}
                     >
-                        <Input placeholder="Nombre..."/>
+                        <Input placeholder={currentName}/>
                     </Form.Item>
 
                     <Form.Item
@@ -75,7 +89,7 @@ const EditUser = () => {
                             },
                         ]}
                     >
-                        <Input placeholder="Usuario..."/>
+                        <Input placeholder={currentUserName}/>
                     </Form.Item>
 
                     <Form.Item
@@ -90,7 +104,7 @@ const EditUser = () => {
                             },
                         ]}
                     >
-                        <Input placeholder="Correo..."/>
+                        <Input placeholder={currentEmail}/>
                     </Form.Item>
 
                     <Form.Item
