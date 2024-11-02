@@ -10,7 +10,30 @@ import { patchAdjustUserPermissions } from '../client/ClientePrueba'
 const AssignGlobalPermission = () => {
 
     const navigate = useNavigate()
-    const { selectedUser } = useContext(appContext)
+    const { selectedUser, allUsers } = useContext(appContext)
+    let currentGlobalPermissions
+
+    allUsers.forEach(element => {
+        if(element.id == selectedUser){
+            currentGlobalPermissions = element.baseGlobalPermissions
+        }
+    });
+
+    let binaryPermissions = currentGlobalPermissions.toString(2).padStart(11, '0')
+    let permissionsArray = binaryPermissions.split('')
+    let currentPermissions = permissionsArray.map(item => item == 1 ? true : false)
+
+    let currentViewUsers = currentPermissions[10]
+    let currentViewUsersEmail = currentPermissions[9]
+    let currentViewUsersSubServerAccess = currentPermissions[8]
+    let currentEditUserPermissions = currentPermissions[7]
+    let currentDeleteUsers = currentPermissions[6]
+    let currentDeleteUSerSelf = currentPermissions[5]
+    let currentEditUsers = currentPermissions[4]
+    let currentDownloadFirmwareBinaries = currentPermissions[3]
+    let currentManageFirmware = currentPermissions[2]
+    let currentViewAllSubServers = currentPermissions[1]
+    let currentManageSubServersLogins = currentPermissions[0]
 
     const [viewUsersSwitch, setViewUsersSwitch] = useState(false)
     const [viewUsersEmailSwitch, setViewUsersEmailSwitch] = useState(false)
@@ -23,6 +46,8 @@ const AssignGlobalPermission = () => {
     const [manageFirmwareSwitch, setManageFirmwareSwitch] = useState(false)
     const [viewAllSubServersSwitch, setViewAllSubServersSwitch] = useState(false)
     const [manageSubServersLoginsSwitch, setManageSubServersLoginsSwitch] = useState(false)
+
+
     
     const onSubmit = async () => {
         let data  = [
@@ -48,10 +73,7 @@ const AssignGlobalPermission = () => {
         console.log(res)
         console.log(decimalPermissions)
     }
-
-
-
-
+    
     console.log(selectedUser)
 
     return (
@@ -72,7 +94,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Ver todos los usuarios</p>
-                            <Switch onChange={(e) => setViewUsersSwitch(e)}/>
+                            <Switch onChange={(e) => setViewUsersSwitch(e)} defaultValue={currentViewUsers}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -80,7 +102,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Ver correo de los usuarios</p>
-                            <Switch onChange={(e) => setViewUsersEmailSwitch(e)}/>
+                            <Switch onChange={(e) => setViewUsersEmailSwitch(e)} defaultValue={currentViewUsersEmail}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -88,7 +110,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Ver Subservidores a los que acceden otros usuarios</p>
-                            <Switch onChange={(e) => setViewUsersSubServerAccessSwitch(e)}/>
+                            <Switch onChange={(e) => setViewUsersSubServerAccessSwitch(e)} defaultValue={currentViewUsersSubServerAccess}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -96,7 +118,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Editar permisos de usuarios</p>
-                            <Switch onChange={(e) => setEditUserPermissionsSwitch(e)}/>
+                            <Switch onChange={(e) => setEditUserPermissionsSwitch(e)} defaultValue={currentEditUserPermissions}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -104,7 +126,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Eliminar usuarios</p>
-                            <Switch onChange={(e) => setDeleteUsersSwitch(e)}/>
+                            <Switch onChange={(e) => setDeleteUsersSwitch(e)} defaultValue={currentDeleteUsers}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -112,7 +134,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Eliminar usuario propio</p>
-                            <Switch onChange={(e) => setDeleteUSerSelfSwitch(e)}/>
+                            <Switch onChange={(e) => setDeleteUSerSelfSwitch(e)} defaultValue={currentDeleteUSerSelf}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -120,7 +142,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Editar usuarios</p>
-                            <Switch onChange={(e) => setEditUsersSwitch(e)}/>
+                            <Switch onChange={(e) => setEditUsersSwitch(e)} defaultValue={currentEditUsers}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -128,7 +150,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Descargar binarios de Firmware</p>
-                            <Switch onChange={(e) => setDownloadFirmwareBinariesSwitch(e)}/>
+                            <Switch onChange={(e) => setDownloadFirmwareBinariesSwitch(e)} defaultValue={currentDownloadFirmwareBinaries}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -136,7 +158,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Manipular Firmwares</p>
-                            <Switch onChange={(e) => setManageFirmwareSwitch(e)}/>
+                            <Switch onChange={(e) => setManageFirmwareSwitch(e)} defaultValue={currentManageFirmware}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -144,7 +166,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Ver todos los sub servidores</p>
-                            <Switch onChange={(e) => setViewAllSubServersSwitch(e)}/>
+                            <Switch onChange={(e) => setViewAllSubServersSwitch(e)} defaultValue={currentViewAllSubServers}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -152,7 +174,7 @@ const AssignGlobalPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Administrar sesiones de SubServidor</p>
-                            <Switch onChange={(e) => setManageSubServersLoginsSwitch(e)}/>
+                            <Switch onChange={(e) => setManageSubServersLoginsSwitch(e)} defaultValue={currentManageSubServersLogins}/>
                         </div>
                     </Form.Item>
                 </div>

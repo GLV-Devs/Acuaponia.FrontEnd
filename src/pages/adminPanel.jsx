@@ -59,8 +59,8 @@ const AdminPanel = () => {
         
     }, [])
 
-    console.log(selectedUser)
-    console.log(secondOpen)    
+    console.log(allUsers)
+    //console.log(secondOpen)    
 
     return (
         <div className="adminPanel">
