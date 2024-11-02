@@ -95,7 +95,8 @@ const IndividualDevice = () => {
         }
     }
 
-    const buildSelectedPeripheral = (info) => {
+    function buildSelectedPeripheral(info){
+        console.log(info)
         const data = {
             ...info,
             actionTypeName: searchDevicePeripheralsModel(devicePeripheralsModel, info.actionType).actionTypeName,
@@ -103,8 +104,6 @@ const IndividualDevice = () => {
 
         }
         setSelectedPeripheral(data)
-        // console.log(data)
-        // console.log(devicePeripheralsModel)
     }
 
     getCurrentDevice(currentDevice)
