@@ -193,3 +193,12 @@ export async function getUsersAccesses(userId){
         return err
     }
 }
+
+export async function postSubServerPermissions(data){
+    try{
+        let res = await axios.post(`${url}/api/app/permissions/access/access`, data,{headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    } catch(err){
+        return err
+    }
+}
