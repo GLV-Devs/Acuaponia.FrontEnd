@@ -1,5 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { ConfigProvider } from 'antd'
+import { theme } from 'antd'
 import AppContextProvider from './context/contextProvider'
 import Root from './pages/root'
 import ErrorPage from './pages/errorPage'
@@ -98,6 +100,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <AppContextProvider>
-    <RouterProvider  router={router}/>
+    <ConfigProvider theme={{algorithm: theme.darkAlgorithm}}>
+      <RouterProvider  router={router}/>
+    </ConfigProvider>
   </AppContextProvider>
 )

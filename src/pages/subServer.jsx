@@ -52,15 +52,20 @@ const SubServer = () => {
         ]
         try{
             let [resInfo, resDevices, resPeripherals] = await Promise.all(querys)
-            setInfo(resInfo.data.data[0])
-            setSubServerDevices(resDevices.data.data)
-            setAllPeripherals(resPeripherals.data.data)
-            buildReportList()
-
+                setAllPeripherals(resPeripherals.data.data)
+                setInfo(resInfo.data.data[0])
+                setSubServerDevices(resDevices.data.data)
         }catch(err){
             console.log(err)
         }
-    }      
+    }
+    
+    useEffect(() => {
+        if (info && subServerDevices.length > 0 && allPeripherals.length > 0) {
+            buildReportList();
+        }
+    }, [allPeripherals]);
+    
 
     function buildReportList(){
         let list = []
@@ -68,9 +73,7 @@ const SubServer = () => {
         subServerReports.forEach(item => {
             currentDeviceIndex = item.deviceIndex
             let res = searchPeripheral(allPeripherals, currentDeviceIndex)
-            // console.log(res)
-            // console.log(searchDevice(subServerDevices, item.deviceId))
-            // console.log(searchReportValueKind(reportValueKind, res.reportValueKind))
+            console.log(res)
             list.push({
                 ...item,
                 reportValueKindName: searchReportValueKind(reportValueKind, res.reportValueKind),

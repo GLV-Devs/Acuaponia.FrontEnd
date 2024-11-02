@@ -2,12 +2,15 @@ import { Button, Modal } from "antd"
 
 export const IndividualPeripheral = ({info, onCancel, open}) => {
 
-    console.log(info)
+    let values = []
+    if(info.values != undefined){
+        values = info.values
+    }
 
     let configValues = []
     let i = 0
 
-    info.values.forEach(item => {
+    values.forEach(item => {
         configValues.push({
             value: item,
             name: info.fields[i].name
