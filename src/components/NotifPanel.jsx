@@ -13,16 +13,23 @@ const NotifPanel = ({close}) => {
     const {notifications} = useContext(appContext)
     const [showList, setShowList] = useState(notifications)
     const [selectedPriority, setSelectedPriority] = useState(4)
-    console.log(notifications)
+    const [notifMessage, setNotifMessage] = useState(false)
+    // console.log(notifications)
 
     const filterLowPriotity = () => {
         if(selectedPriority == 0){
             setSelectedPriority(4)
             setShowList(notifications)
+            setNotifMessage(false)
         }else{
             setSelectedPriority(0)
             let list = notifications.filter(item => item.importance == 0)
             setShowList(list)
+            if(list.length == 0){
+                setNotifMessage('No hay notificaciones con prioridad baja')
+            }else{
+                setNotifMessage(false)
+            }
         }
     }
 
@@ -30,10 +37,16 @@ const NotifPanel = ({close}) => {
         if(selectedPriority == 1){
             setSelectedPriority(4)
             setShowList(notifications)
+            setNotifMessage(false)
         }else{
             setSelectedPriority(1)
             let list = notifications.filter(item => item.importance == 1)
             setShowList(list)
+            if(list.length == 0){
+                setNotifMessage('No hay notificaciones con prioridad media')
+            }else{
+                setNotifMessage(false)
+            }
         }
     }
 
@@ -41,10 +54,16 @@ const NotifPanel = ({close}) => {
         if(selectedPriority == 2){
             setSelectedPriority(4)
             setShowList(notifications)
+            setNotifMessage(false)
         }else{
             setSelectedPriority(2)
             let list = notifications.filter(item => item.importance == 2)
             setShowList(list)
+            if(list.length == 0){
+                setNotifMessage('No hay notificaciones con prioridad alta')
+            }else{
+                setNotifMessage(false)
+            }
         }
     }
 
@@ -52,10 +71,16 @@ const NotifPanel = ({close}) => {
         if(selectedPriority == 3){
             setSelectedPriority(4)
             setShowList(notifications)
+            setNotifMessage(false)
         }else{
             setSelectedPriority(3)
             let list = notifications.filter(item => item.importance == 3)
             setShowList(list)
+            if(list.length == 0){
+                setNotifMessage('No hay notificaciones con prioridad critica')
+            }else{
+                setNotifMessage(false)
+            }
         }
     }
 
@@ -100,6 +125,7 @@ const NotifPanel = ({close}) => {
                             </div>
                         </div>)
                     )}
+                    {notifMessage && <h3 style={{color: '#6f8fc2', textAlign: 'center'}}>{notifMessage}</h3>}
                 </div>)}
             </div>
         </div>    
