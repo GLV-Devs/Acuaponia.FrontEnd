@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { appContext } from "../context/appContext"
-import { getSubserverDevicePeripheral, getSubServerReports } from "../client/ClientePrueba"
+import { getAllPeripherals, getSubserverDevicePeripheral, getSubServerReports } from "../client/ClientePrueba"
 import { useNavigate } from "react-router-dom"
 import { LeftOutlined,DoubleRightOutlined, AppstoreAddOutlined } from '@ant-design/icons'
 import { backButtonStyle } from '../AntDIconStyles'
@@ -120,30 +120,32 @@ const IndividualDevice = () => {
         setSelectedPeripheral(data)
     }
 
-    var peripheralsByIndex = {};
-    getDevicePeripheral(currentDevice).forEach((v, i) => {
-        peripheralsByIndex[v.index] = v.name;
-    });
-
     getCurrentDevice(currentDevice)
     getReports(currentDevice)
-    let preProcessedData = currentDeviceReports.reduce((g, p) => {
-        g.labels.set(p.dateRecorded) = 0;
 
-        var peripheralName = peripheralsByIndex[p.deviceIndex];
-        if (g.datasets.get(peripheralName) == undefined)
-            g.datasets.set(peripheralName) = [];
+    /*
+    let peripheralsByIndex = new Map();
+    devicePeripherals.forEach((v, i) => {
+        peripheralsByIndex.set(v.index, v.name);
+    });
+
+    let preProcessedData = currentDeviceReports.reduce((g, p) => {
+        g.labels.set(p.dateRecorded, 0);
+
+        var peripheralName = peripheralsByIndex.get(p.deviceIndex);
+        if (typeof g.datasets.get(peripheralName) !== 'undefined')
+            g.datasets.set(peripheralName, []);
 
         g.datasets.get(peripheralName).push(p.value);
     }, {labels: new Map(), datasets: new Map()});
     
     let lineChartConfig = {datasets:[]};
-    lineChartConfig.labels = preProcessedData.labels;
+    lineChartConfig.labels = preProcessedData.labels.keys;
     preProcessedData.datasets.forEach((v, k) => {
         lineChartConfig.datasets.push(createDataset(k, v));
     });
-
-    const [chartData, setChartData] = useState(lineChartConfig);
+*/
+    const [chartData, setChartData] = useState({labels:[],data:[]});
 
     //console.log(subServerReports)
     //console.log(devicePeripherals)
