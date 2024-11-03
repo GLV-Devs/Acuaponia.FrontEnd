@@ -7,9 +7,12 @@ import { backButtonStyle } from '../AntDIconStyles'
 import { Skeleton, Button, Modal } from "antd"
 import { searchReportValueKind, searchDevicePeripheralsModel } from '../functions/lists'
 import { IndividualPeripheral } from '../components/Modals'
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
+import { Line } from "react-chartjs-2";
+Chart.register(CategoryScale);
 
 const IndividualDevice = () => {
-
     const {
         subServerDevices,
         currentDevice,
@@ -28,7 +31,9 @@ const IndividualDevice = () => {
     const [viewPeripheralModal, setViewPeripheralModal] = useState(false)
     let currentDeviceInfo = []
     let currentDeviceReports = []
+    let colorIndex = 0;
 
+    let data = {datasets:[]};
 
     const toggleExpand = () => {
         setIsExpanded(!isExpanded);
@@ -38,6 +43,15 @@ const IndividualDevice = () => {
         getDevicePeripheral(currentDevice)
     }, [])
 
+    function createDataset(label, datapoints) {
+        return new {
+            label: label,
+            data: datapoints,
+            borderColor: Utils.COLORS.at((colorIndex++) % Utils.COLORS.length),
+            fill: false,
+            tension: 0.4
+        };
+    }
 
     async function getDevicePeripheral(currentDevice){
         let resDevicePeripherals = await getSubserverDevicePeripheral(currentDevice)
@@ -61,10 +75,8 @@ const IndividualDevice = () => {
             }
             i = i+1 
         });
-        setDevicePeripherals(secondList)
+        setDevicePeripherals(secondList);
     }
-    
-    
     
     function getCurrentDevice(currentDevice){
         if (currentDevice === null) {
@@ -108,11 +120,34 @@ const IndividualDevice = () => {
         setSelectedPeripheral(data)
     }
 
+    var peripheralsByIndex = {};
+    getDevicePeripheral(currentDevice).forEach((v, i) => {
+        peripheralsByIndex[v.index] = v.name;
+    });
+
     getCurrentDevice(currentDevice)
     getReports(currentDevice)
+    let preProcessedData = currentDeviceReports.reduce((g, p) => {
+        g.labels.set(p.dateRecorded) = 0;
+
+        var peripheralName = peripheralsByIndex[p.deviceIndex];
+        if (g.datasets.get(peripheralName) == undefined)
+            g.datasets.set(peripheralName) = [];
+
+        g.datasets.get(peripheralName).push(p.value);
+    }, {labels: new Map(), datasets: new Map()});
+    
+    let lineChartConfig = {datasets:[]};
+    lineChartConfig.labels = preProcessedData.labels;
+    preProcessedData.datasets.forEach((v, k) => {
+        lineChartConfig.datasets.push(createDataset(k, v));
+    });
+
+    const [chartData, setChartData] = useState(lineChartConfig);
+
     //console.log(subServerReports)
-    // console.log(devicePeripherals)
-    // console.log(currentDeviceReports)
+    //console.log(devicePeripherals)
+    //console.log(currentDeviceReports)
 
     return(
         <div className="individualDevice">
@@ -183,7 +218,38 @@ const IndividualDevice = () => {
                     </div>
                 </div>
                 <div className="Section2">
-
+                    <Line 
+                        data={chartData}
+                        options={{
+                            responsive: true,
+                            plugins: {
+                              title: {
+                                display: true,
+                                text: 'Gráfico de muestras'
+                              },
+                            },
+                            interaction: {
+                              intersect: false,
+                            },
+                            scales: {
+                              x: {
+                                display: true,
+                                title: {
+                                  display: true
+                                }
+                              },
+                              y: {
+                                display: true,
+                                title: {
+                                  display: true,
+                                  text: 'Value'
+                                },
+                                suggestedMin: -10,
+                                suggestedMax: 200
+                              }
+                            }
+                        }}
+                    />
                 </div>
             </div>
 
