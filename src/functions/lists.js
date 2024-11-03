@@ -18,6 +18,11 @@ export function searchDevice(list, id){
 }
 
 export function searchFields(list, id){
-        let response = list[id]
-        return response
+    let response = list[id]
+    return response
+}
+
+export function filterNotifications(list, priority){
+    let response = list.filter((item) => item.importance == priority)
+    return response
 }
