@@ -9,7 +9,7 @@ const DispPanel = ({close}) => {
     const {subServerDevices, setCurrentDevice} = useContext(appContext)
     const navigate = useNavigate()
 
-    console.log(subServerDevices)
+    // console.log(subServerDevices)
     
 	return(
 		<div className='DispPanel'>

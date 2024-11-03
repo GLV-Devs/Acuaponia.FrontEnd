@@ -20,6 +20,8 @@ const IndividualDevice = () => {
         reportValueKind
     } = useContext(appContext)
 
+    console.log(currentDevice)
+
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
     const [selectedPeripheral, setSelectedPeripheral] = useState({})
@@ -39,7 +41,7 @@ const IndividualDevice = () => {
 
     async function getDevicePeripheral(currentDevice){
         let resDevicePeripherals = await getSubserverDevicePeripheral(currentDevice)
-        console.log(resDevicePeripherals)
+        // console.log(resDevicePeripherals)
         let originalList = resDevicePeripherals.data.data
         let secondList
         originalList.forEach(item => {
@@ -109,8 +111,8 @@ const IndividualDevice = () => {
     getCurrentDevice(currentDevice)
     getReports(currentDevice)
     //console.log(subServerReports)
-    console.log(devicePeripherals)
-    console.log(currentDeviceReports)
+    // console.log(devicePeripherals)
+    // console.log(currentDeviceReports)
 
     return(
         <div className="individualDevice">

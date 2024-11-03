@@ -73,7 +73,7 @@ const SubServer = () => {
         subServerReports.forEach(item => {
             currentDeviceIndex = item.deviceIndex
             let res = searchPeripheral(allPeripherals, currentDeviceIndex)
-            console.log(res)
+            // console.log(res)
             list.push({
                 ...item,
                 reportValueKindName: searchReportValueKind(reportValueKind, res.reportValueKind),
