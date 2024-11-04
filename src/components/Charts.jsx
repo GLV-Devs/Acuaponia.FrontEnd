@@ -5,23 +5,55 @@ import { appContext } from "../context/appContext"
 
 export const LastMeasurementsChart = ({reports}) => {
 
-    console.log(reports)
-    let labels = []
+    // console.log(reports)
+    let dataSetLabels = []
+    let dataSets = []
+    let colors = [
+        '#e4421c',
+        '#ffb700',
+        '#e95cff',
+        '#01bc85',
+    ]
+
     reports.forEach(item => {
-        
+        if(!dataSetLabels.includes(item.reportValueKindName)){
+            dataSetLabels.push(item.reportValueKindName)
+        }
     });
+
+    dataSetLabels.forEach(item => {
+        let j = 0
+        let currentColor = colors[j]
+        if(j == 3){
+            j = 0
+        }else{
+            j++
+        }
+
+        let filtered = reports.filter(report => report.reportValueKindName == item)
+        let values = []
+        for(let i=0 ; i < 20 ; i++){
+            if(filtered[i] != undefined){
+                values.push(filtered[i].value)
+            }else{
+                values.push(NaN)
+            }
+        }
+        const currentDataSet = {
+            label: item,
+            data: values,
+            fill: true,
+            tension: 0.4,
+            borderColor: currentColor
+        }
+        dataSets.push(currentDataSet)
+    })
 
     return(
         <Line
             data={{
-                labels: ['1', '2', '3', '4', '5', '6','7', '8', '9', '10', '11', '12', '13', '14', '15', '16','17', '18', '19', '20', ],
-                datasets: [{
-                    label: 'waterPh',
-                    data: [40, 20, 30, 55, 28, 35, 48, 25, 60, 42, 40],
-                    fill: true,
-                    tension: 0.4,
-                    borderColor: 'rgb(75, 192, 192)'
-                }]
+                labels: ['', '', '', '', '', '','', '', '', '', '', '', '', '', '', '','', '', '', '', ],
+                datasets: dataSets
             }}
         />
     )

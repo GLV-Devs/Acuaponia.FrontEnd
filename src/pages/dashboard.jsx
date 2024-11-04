@@ -42,7 +42,7 @@ const Dashboard = () => {
                     <>
                         <Input placeholder='Buscar'/>
                         <h1>Ay, ya se cargo</h1>
-                        <LastMeasurementsChart/>
+                        {/* <LastMeasurementsChart/> */}
                     </>
                 )}
             </div>

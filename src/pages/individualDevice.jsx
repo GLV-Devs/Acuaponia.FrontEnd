@@ -25,7 +25,7 @@ const IndividualDevice = () => {
         reportValueKind
     } = useContext(appContext)
 
-    console.log(currentDevice)
+    // console.log(currentDevice)
 
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
