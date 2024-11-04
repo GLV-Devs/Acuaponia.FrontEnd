@@ -182,10 +182,8 @@ const IndividualDevice = () => {
                 </div>
                 <div className="Section2">
                     <LastMeasurementsChart
+                        reports={currentDeviceReports}
                     />
-                    </>) : (
-                        <><p>ñao</p></>
-                    )}
                 </div>
             </div>
 
