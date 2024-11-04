@@ -7,44 +7,12 @@ import { useContext } from 'react'
 import { appContext } from '../context/appContext'
 import { postSubServerPermissions, getUsersAccesses } from '../client/ClientePrueba'
 
-const AssignSubServerPermission = () => {
+const UserPermissionCreation = () => {
 
     const navigate = useNavigate()
     const { subServers, selectedUser } = useContext(appContext)
     const [selectedSubServer, setSelectedSubServer] = useState('')
     let subServersSelect
-    let usersPermissions
-    let currentSubServerAccess
-    let currentBasePermissions
-    let binaryPermissions
-    let permissionsArray
-    let currentPermissions
-    let currentViewUsersWithAccessSwitch
-    let currentManageSubServerSwitch
-    
-    
-    const [viewUsersWithAccessSwitch, setViewUsersWithAccessSwitch] = useState(false)
-    const [manageSubServerSwitch, setManageSubserverSwitch] = useState(false)
-
-    function userAccesses(selectedUser){
-        getUsersAccesses(selectedUser)
-        .then (res => {
-            usersPermissions = res.data.data[0]
-            currentBasePermissions = usersPermissions.basePermissions
-            currentSubServerAccess = usersPermissions.subServerId
-            binaryPermissions = currentBasePermissions.toString(2).padStart(2, '0')
-            permissionsArray = binaryPermissions.split('')
-            currentPermissions = permissionsArray.map(item => item == 1 ? true : false)
-            currentViewUsersWithAccessSwitch = currentPermissions[1]
-            currentManageSubServerSwitch = currentPermissions[0]
-            console.log(currentViewUsersWithAccessSwitch)
-        })
-    } 
-
-    userAccesses(selectedUser)
-
-    
-    
 
     subServers.forEach(item => {
         if(subServersSelect == undefined){
@@ -52,10 +20,8 @@ const AssignSubServerPermission = () => {
         }else{
             subServersSelect = [...subServersSelect, {value: item.id, label: item.name }]
         }
-    });    
+    });
 
-    
-    
     const onSubmit = async () => {
 
         let permissionData  = [
@@ -79,7 +45,7 @@ const AssignSubServerPermission = () => {
         console.log(res)
     }
 
-    return (
+    return(
         <div>
             <Form className='creationForm'
                 variant='filled'
@@ -108,7 +74,6 @@ const AssignSubServerPermission = () => {
                             placeholder='Selecciona un sub servidor'
                             onChange={(e) => setSelectedSubServer(e)}
                             options={subServersSelect}
-                            defaultValue={currentSubServerAccess}
                         />
                     </Form.Item>
                     <Form.Item
@@ -116,7 +81,7 @@ const AssignSubServerPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Ver todos los usuarios con acceso al Sub Servidor</p>
-                            <Switch onChange={(e) => setViewUsersWithAccessSwitch(e)} defaultValue={currentViewUsersWithAccessSwitch}/>
+                            <Switch onChange={(e) => setViewUsersWithAccessSwitch(e)}/>
                         </div>
                     </Form.Item>
                     <Form.Item
@@ -124,7 +89,7 @@ const AssignSubServerPermission = () => {
                     >
                         <div className='item'>
                             <p className='switchLabel'>Administrar Sub Servidor</p>
-                            <Switch onChange={(e) => setManageSubserverSwitch(e)} defaultValue={currentManageSubServerSwitch}/>
+                            <Switch onChange={(e) => setManageSubserverSwitch(e)}/>
                         </div>
                     </Form.Item>
                 </div>
@@ -133,4 +98,4 @@ const AssignSubServerPermission = () => {
     )
 }
 
-export default AssignSubServerPermission
+export default UserPermissionCreation
