@@ -43,7 +43,7 @@ const AppContextProvider = ({children}) => {
         'High',
         'Low'
     ])
-
+    
     return(
         <appContext.Provider value={{
             // mainServerClient
@@ -79,7 +79,8 @@ const AppContextProvider = ({children}) => {
             allPeripherals,
             setAllPeripherals,
             fieldTypeList,
-            interruptTypeList
+            interruptTypeList,
+            
         }}>
             {children}
         </appContext.Provider>

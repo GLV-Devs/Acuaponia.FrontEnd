@@ -5,7 +5,7 @@ import { Button, Modal, Popconfirm } from 'antd'
 import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { appContext } from '../context/appContext'
-import { getAccountsAll, deleteRequestDelete, deleteUserAccount, getUsersAccesses } from '../client/ClientePrueba'
+import { getAccountsAll, deleteRequestDelete, deleteUserAccount } from '../client/ClientePrueba'
 
 const AdminPanel = () => {
     const navigate = useNavigate()
@@ -46,11 +46,6 @@ const AdminPanel = () => {
 
     async function deleteUser(deleteToken){
         let res = await deleteUserAccount(deleteToken)
-        console.log(res)
-    }
-
-    async function getUserAccess(userId){
-        let res = await getUsersAccesses(userId)
         console.log(res)
     }
 
