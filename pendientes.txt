@@ -7,3 +7,5 @@
     -Pantalla de configuracion de permisos a usuarios
 
 -Filtrado de notificaciones, poder marcar como vistas 
+
+-Acomodar modificar subServerPermissions, añadir el Patch en vez de el grant y pasar el grant a creacion de un usuario(Maria)

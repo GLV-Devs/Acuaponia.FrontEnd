@@ -6,7 +6,6 @@ import AssignSubServerPermission from '../components/SubServerPermissions';
 const AssignPermissions = () => {
 
     const onChange = (key) => {
-        console.log(key);
     }
 
     const items = [
