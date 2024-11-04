@@ -663,6 +663,7 @@ body{
 .moduleCreation{
     height: calc(100vh - 80px);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     
@@ -687,6 +688,26 @@ body{
             gap: 5vw;
             align-items: center;
             justify-content: space-between;
+            padding:15px 0px;
+
+            h1{
+                margin: 0px;
+            }
+
+            Button{
+                background-color: rgb(17, 17, 28);
+                border: none;
+            }
+            
+        }
+
+        .upperBar2{
+            height:4vh;
+            width: 80%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: center;
+            justify-content: center;
             padding:15px 0px;
 
             h1{
