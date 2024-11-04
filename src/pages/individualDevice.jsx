@@ -10,6 +10,8 @@ import { IndividualPeripheral } from '../components/Modals'
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { LastMeasurementsChart } from '../components/Charts'
+
 Chart.register(CategoryScale);
 
 const IndividualDevice = () => {
@@ -31,9 +33,6 @@ const IndividualDevice = () => {
     const [viewPeripheralModal, setViewPeripheralModal] = useState(false)
     let currentDeviceInfo = []
     let currentDeviceReports = []
-    let colorIndex = 0;
-
-    let data = {datasets:[]};
 
     const toggleExpand = () => {
         setIsExpanded(!isExpanded);
@@ -42,16 +41,6 @@ const IndividualDevice = () => {
     useEffect(() => {
         getDevicePeripheral(currentDevice)
     }, [])
-
-    function createDataset(label, datapoints) {
-        return new {
-            label: label,
-            data: datapoints,
-            borderColor: Utils.COLORS.at((colorIndex++) % Utils.COLORS.length),
-            fill: false,
-            tension: 0.4
-        };
-    }
 
     async function getDevicePeripheral(currentDevice){
         let resDevicePeripherals = await getSubserverDevicePeripheral(currentDevice)
@@ -123,34 +112,6 @@ const IndividualDevice = () => {
     getCurrentDevice(currentDevice)
     getReports(currentDevice)
 
-    /*
-    let peripheralsByIndex = new Map();
-    devicePeripherals.forEach((v, i) => {
-        peripheralsByIndex.set(v.index, v.name);
-    });
-
-    let preProcessedData = currentDeviceReports.reduce((g, p) => {
-        g.labels.set(p.dateRecorded, 0);
-
-        var peripheralName = peripheralsByIndex.get(p.deviceIndex);
-        if (typeof g.datasets.get(peripheralName) !== 'undefined')
-            g.datasets.set(peripheralName, []);
-
-        g.datasets.get(peripheralName).push(p.value);
-    }, {labels: new Map(), datasets: new Map()});
-    
-    let lineChartConfig = {datasets:[]};
-    lineChartConfig.labels = preProcessedData.labels.keys;
-    preProcessedData.datasets.forEach((v, k) => {
-        lineChartConfig.datasets.push(createDataset(k, v));
-    });
-*/
-    const [chartData, setChartData] = useState({labels:[],data:[]});
-
-    //console.log(subServerReports)
-    //console.log(devicePeripherals)
-    //console.log(currentDeviceReports)
-
     return(
         <div className="individualDevice">
             <div className="upperBar">
@@ -220,37 +181,8 @@ const IndividualDevice = () => {
                     </div>
                 </div>
                 <div className="Section2">
-                    <Line 
-                        data={chartData}
-                        options={{
-                            responsive: true,
-                            plugins: {
-                              title: {
-                                display: true,
-                                text: 'Gráfico de muestras'
-                              },
-                            },
-                            interaction: {
-                              intersect: false,
-                            },
-                            scales: {
-                              x: {
-                                display: true,
-                                title: {
-                                  display: true
-                                }
-                              },
-                              y: {
-                                display: true,
-                                title: {
-                                  display: true,
-                                  text: 'Value'
-                                },
-                                suggestedMin: -10,
-                                suggestedMax: 200
-                              }
-                            }
-                        }}
+                    <LastMeasurementsChart
+                        reports={currentDeviceReports}
                     />
                 </div>
             </div>

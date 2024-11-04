@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { getSubServerReports, getSubServers, getAccount, getAllNotifications, getSubserverDevicePeripheralModel } from '../client/ClientePrueba'
 import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
+import { LastMeasurementsChart } from '../components/Charts'
 
 const Dashboard = () => {
 
@@ -41,6 +42,7 @@ const Dashboard = () => {
                     <>
                         <Input placeholder='Buscar'/>
                         <h1>Ay, ya se cargo</h1>
+                        <LastMeasurementsChart/>
                     </>
                 )}
             </div>
