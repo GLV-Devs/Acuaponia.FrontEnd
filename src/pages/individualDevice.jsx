@@ -125,9 +125,9 @@ const IndividualDevice = () => {
 
     /*
     let peripheralsByIndex = new Map();
-    devicePeripherals.forEach((v, i) => {
-        peripheralsByIndex.set(v.index, v.name);
-    });
+    //devicePeripherals.forEach((v, i) => {
+    //    peripheralsByIndex.set(v.index, v.name);
+    //});
 
     let preProcessedData = currentDeviceReports.reduce((g, p) => {
         g.labels.set(p.dateRecorded, 0);
@@ -144,7 +144,7 @@ const IndividualDevice = () => {
     preProcessedData.datasets.forEach((v, k) => {
         lineChartConfig.datasets.push(createDataset(k, v));
     });
-*/
+    
     const [chartData, setChartData] = useState({labels:[],data:[]});
 
     //console.log(subServerReports)
@@ -220,6 +220,8 @@ const IndividualDevice = () => {
                     </div>
                 </div>
                 <div className="Section2">
+                {chartData.labels.length > 0 ? (
+                    <>
                     <Line 
                         data={chartData}
                         options={{
@@ -252,6 +254,9 @@ const IndividualDevice = () => {
                             }
                         }}
                     />
+                    </>) : (
+                        <><p>ñao</p></>
+                    )}
                 </div>
             </div>
 
