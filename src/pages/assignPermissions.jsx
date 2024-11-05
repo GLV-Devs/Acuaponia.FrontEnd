@@ -1,9 +1,10 @@
 import { Tabs } from 'antd';
 import AssignGlobalPermission from '../components/GlobalPermissions';
 import AssignSubServerPermission from '../components/SubServerPermissions';
-
+import { getUsersAccesses } from '../client/ClientePrueba';
 
 const AssignPermissions = () => {
+
 
     const onChange = (key) => {
     }
@@ -17,7 +18,7 @@ const AssignPermissions = () => {
         {
             key: '2',
             label: 'Permisos de Subservidor',
-            children: <AssignSubServerPermission/>,
+            children: <AssignSubServerPermission />,
         },
     ];
     

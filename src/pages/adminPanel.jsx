@@ -5,7 +5,7 @@ import { Button, Modal, Popconfirm } from 'antd'
 import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { appContext } from '../context/appContext'
-import { getAccountsAll, deleteRequestDelete, deleteUserAccount } from '../client/ClientePrueba'
+import { getAccountsAll, deleteRequestDelete, deleteUserAccount, getUsersAccesses } from '../client/ClientePrueba'
 
 const AdminPanel = () => {
     const navigate = useNavigate()
@@ -13,6 +13,7 @@ const AdminPanel = () => {
     const { allUsers, setAllUsers, setSelectedUser, selectedUser } = useContext(appContext)
     const [open, setOpen] = useState(false)
     const [secondOpen, setSecondOpen] = useState(false)
+    let userAcceses=[]
     let deleteToken 
 
     const showModal = () => {
@@ -34,7 +35,6 @@ const AdminPanel = () => {
 
     async function getUsers(){
         let res = await getAccountsAll()
-        console.log(res)
         setAllUsers(res.data.data)        
     }
 
@@ -47,6 +47,12 @@ const AdminPanel = () => {
     async function deleteUser(deleteToken){
         let res = await deleteUserAccount(deleteToken)
         console.log(res)
+    }
+
+    async function userAccesses(selectedUser){
+        let res = await getUsersAccesses(selectedUser)
+        userAcceses = res.data.data
+        console.log(userAcceses)
     }
 
     useEffect(() => {
@@ -74,7 +80,7 @@ const AdminPanel = () => {
                             ):(
                                 <div className="List">
                                     { allUsers.map((item) => (
-                                        <div key={item.id} className="ListItem" onClick={() => {setSelectedUser(item.id); showModal()}}>
+                                        <div key={item.id} className="ListItem" onClick={() => {setSelectedUser(item.id); showModal();}}>
                                             <div className="banner">
                                             <div className="userIcon"><UserOutlined style={{color:'#e95cff', fontSize:'45px'}}/></div>
                                             <div><DoubleRightOutlined rotate={315}/></div>
@@ -93,7 +99,7 @@ const AdminPanel = () => {
                                     className="custom-modal"
                                     footer={
                                         [
-                                            <Button key="subServers" onClick={() => getUserAccess(selectedUser)}>
+                                            <Button key="subServers" onClick={() => userAccesses(selectedUser)}>
                                                 Sub servidores
                                             </Button>,
                                             <Button key="info" onClick={() => navigate ('/editUser') }>
