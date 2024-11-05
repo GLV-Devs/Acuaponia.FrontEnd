@@ -1,7 +1,7 @@
 import { backButtonStyle, saveStyle } from '../AntDIconStyles'
 import { LeftOutlined, SaveOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
-import { Button, Form, Switch, Select } from 'antd'
+import { Button, Form, Switch, Select, message } from 'antd'
 import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { appContext } from '../context/appContext'
@@ -12,6 +12,9 @@ const UserPermissionCreation = () => {
     const navigate = useNavigate()
     const { subServers, selectedUser } = useContext(appContext)
     const [selectedSubServer, setSelectedSubServer] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [viewUsersWithAccessSwitch, setViewUsersWithAccessSwitch] = useState(false)
+    const [manageSubServerSwitch, setManageSubserverSwitch] = useState(false)
     let subServersSelect
 
     subServers.forEach(item => {
@@ -23,6 +26,7 @@ const UserPermissionCreation = () => {
     });
 
     const onSubmit = async () => {
+        setLoading(true)
 
         let permissionData  = [
             viewUsersWithAccessSwitch,
@@ -39,6 +43,17 @@ const UserPermissionCreation = () => {
         }
 
         let res = await postSubServerPermissions(data)
+        if(res.status == 200){
+            message.success('Permisos de Sub Servidor creados exitosamente')
+            navigate('/Dashboard')
+        }else if(res.status == 403){
+            setLoading(false)
+            message.error('El usuario ya tiene permisos en este sub servidor')
+        }else{
+            setLoading(false)
+            message.error('Error del servidor')
+        }    
+
         
         console.log(selectedSubServer)
         console.log(decimalPermissions)
@@ -51,11 +66,11 @@ const UserPermissionCreation = () => {
                 variant='filled'
                 size='small'
                 layout='Horizontal'
+                disabled={loading}
             >
                 <div className='upperBar'>
                     <LeftOutlined style={backButtonStyle} onClick={() => {navigate (-1)}}/>
                     <h1>Permisos de Sub Servidor</h1>
-                    <Button onClick={onSubmit} shape='circle' size='large'><SaveOutlined style={saveStyle}/></Button>
                 </div>
                 <div className='permissions'>
                     <Form.Item
@@ -91,6 +106,9 @@ const UserPermissionCreation = () => {
                             <p className='switchLabel'>Administrar Sub Servidor</p>
                             <Switch onChange={(e) => setManageSubserverSwitch(e)}/>
                         </div>
+                    </Form.Item>
+                    <Form.Item>
+                    <Button onClick={onSubmit}>{loading ? 'Cargando...' : 'Crear'}</Button>
                     </Form.Item>
                 </div>
             </Form>

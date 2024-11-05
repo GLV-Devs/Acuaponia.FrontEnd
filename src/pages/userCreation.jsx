@@ -4,18 +4,9 @@ import UserInfoCreation from '../components/UserInfoCreation'
 import UserPermissionCreation from '../components/UserPermissionCreation'
 import React, { useState } from 'react';
 
-const steps = [
-    {
-        title: 'Informacion de Usuario',
-        content: <UserInfoCreation/>,
-    },
-    {
-        title: 'Permisos',
-        content: <UserPermissionCreation/>,
-    },
-];
 
-const UserCreation = () => {
+const UserCreation = () => {  
+
     const navigate = useNavigate()    
 
     const [current, setCurrent] = useState(0);
@@ -27,10 +18,24 @@ const UserCreation = () => {
     const prev = () => {
         setCurrent(current - 1);
     };
+
+    const steps = [
+        {
+            title: 'Informacion de Usuario',
+            content: <UserInfoCreation submit={next}/>,
+        },
+        {
+            title: 'Permisos',
+            content: <UserPermissionCreation/>,
+        },
+    ] 
+
     const items = steps.map((item) => ({
         key: item.title,
         title: item.title,
     }));
+
+    
 
         return(
         <div className='moduleCreation'>
@@ -43,12 +48,12 @@ const UserCreation = () => {
                     justifySelf: 'center',
                     }}
                 >
-                    {current < steps.length - 1 && (
+                    {/* {current < steps.length - 1 && (
                     <Button type="primary" onClick={() => next()}>
                         Siguiente
                     </Button>
-                    )}
-                    {current > 0 && (
+                    )} */}
+                    {/* {current > 0 && (
                     <Button
                         style={{
                         margin: '0 8px',
@@ -62,7 +67,7 @@ const UserCreation = () => {
                     <Button type="primary" onClick={() => message.success('Processing complete!')}>
                         Crear
                     </Button>
-                    )}
+                    )} */}
                 </div>
             </div>        
         </div>
