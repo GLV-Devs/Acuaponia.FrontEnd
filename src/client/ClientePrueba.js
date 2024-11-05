@@ -196,9 +196,18 @@ export async function getUsersAccesses(userId){
 
 export async function postSubServerPermissions(data){
     try{
-        let res = await axios.post(`${url}/api/app/permissions/access/access`, data,{headers: {'Authorization': `Session ${sessionToken}`}})
+        let res = await axios.post(`${url}/api/app/permissions/access/access`, data, {headers: {'Authorization': `Session ${sessionToken}`}})
         return res
     } catch(err){
+        return err
+    }
+}
+
+export async function createNewPeripheral(data){
+    try{
+        let res = axios.post(`${url}/api/app/devices/Peripherals`, data, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
         return err
     }
 }

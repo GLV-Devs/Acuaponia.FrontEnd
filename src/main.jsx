@@ -14,7 +14,7 @@ import SubServerSession from './pages/subServerSession'
 import IndividualReactor from './pages/individualReactor'
 import Profile from './pages/profile'
 import UserCreation from './pages/userCreation'
-import DeviceCreation from './pages/deviceCreation'
+import PeriphericCreation from './pages/periphericCreation'
 import ReportCreation from './pages/reportCreation'
 import NotificationCreation from './pages/notificationCreation'
 import AdminPanel from './pages/adminPanel'
@@ -66,8 +66,8 @@ const router = createBrowserRouter([
         element: <UserCreation/>
       },
       {
-        path: '/DeviceCreation',
-        element: <DeviceCreation/>
+        path: '/periphericCreation',
+        element: <PeriphericCreation/>
       },
       {
         path: '/ReportCreation',

@@ -32,11 +32,11 @@ const ConfigPanel = ({close}) => {
                             <p>Creacion de Usuario</p>
                         </div>
                     </div>
-                    <div className="Button" onClick={() => {navigate ('/deviceCreation'); close()}}>
+                    <div className="Button" onClick={() => {navigate ('/periphericCreation'); close()}}>
                         <MobileOutlined style={buttonPanelIconStyle}/>
                         <div>
-                            <h4>Dispositivo</h4>
-                            <p>Creacion de Dispositivo</p>
+                            <h4>Perifericos</h4>
+                            <p>Creacion de Perifericos</p>
                         </div>
                     </div>
                     <div className="Button" onClick={() => {navigate ('/reportCreation'); close()}}>
