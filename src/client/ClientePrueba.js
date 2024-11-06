@@ -212,6 +212,15 @@ export async function createNewPeripheral(data){
     }
 }
 
+export async function patchEditSubServerAccess(subServerId, userId, data){
+    try{
+        let res = axios.patch(`${url}/api/app/permissions/access/${subServerId}/${userId}`, data, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}
+
 export async function getPinActionTypesList() {
     try{
         let res = await axios.get(`${url}/api/app/devices/peripherals/actiontypes`, {headers: {'Authorization': `Session ${sessionToken}`}})

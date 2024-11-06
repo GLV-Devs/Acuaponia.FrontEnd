@@ -5,7 +5,7 @@ import { Button, Form, Switch, Select } from 'antd'
 import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { appContext } from '../context/appContext'
-import { postSubServerPermissions, getUsersAccesses } from '../client/ClientePrueba'
+import { patchEditSubServerAccess, getUsersAccesses } from '../client/ClientePrueba'
 
 const AssignSubServerPermission = () => {
 
@@ -30,19 +30,20 @@ const AssignSubServerPermission = () => {
         getUsersAccesses(selectedUser)
         .then (res => {
             usersPermissions = res.data.data[0]
+            console.log(usersPermissions)
             currentBasePermissions = usersPermissions.basePermissions
             currentSubServerAccess = usersPermissions.subServerId
             binaryPermissions = currentBasePermissions.toString(2).padStart(2, '0')
             permissionsArray = binaryPermissions.split('')
             currentPermissions = permissionsArray.map(item => item == 1 ? true : false)
-            currentViewUsersWithAccessSwitch = currentPermissions[1]
-            currentManageSubServerSwitch = currentPermissions[0]
-            console.log(currentViewUsersWithAccessSwitch)
+            currentViewUsersWithAccessSwitch = currentPermissions[0]
+            currentManageSubServerSwitch = currentPermissions[1]
+            
         })
     } 
 
     userAccesses(selectedUser)
-
+    
     
     
 
@@ -54,28 +55,27 @@ const AssignSubServerPermission = () => {
         }
     });    
 
+
+
     
     
     const onSubmit = async () => {
 
         let permissionData  = [
-            viewUsersWithAccessSwitch,
             manageSubServerSwitch,
+            viewUsersWithAccessSwitch,
         ]
         
         let Permissions = permissionData.map(item => item ? 1 : 0).join("")
         let decimalPermissions = parseInt(Permissions, 2)
 
-        let data = {
-            userId: selectedUser,
-            subServerId: selectedSubServer,
-            basePermissions: decimalPermissions
-        }
-
-        let res = await postSubServerPermissions(data)
-        
         console.log(selectedSubServer)
+        console.log(selectedUser)
         console.log(decimalPermissions)
+
+        let res = await patchEditSubServerAccess(selectedSubServer, selectedUser, decimalPermissions)
+        
+        
         console.log(res)
     }
 
