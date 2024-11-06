@@ -211,3 +211,13 @@ export async function createNewPeripheral(data){
         return err
     }
 }
+
+export async function getPinActionTypesList() {
+    try{
+        let res = await axios.get(`${url}/api/app/devices/peripherals/actiontypes`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        console.log(res)
+        return res
+    }catch(err){
+        return err
+    }
+}
