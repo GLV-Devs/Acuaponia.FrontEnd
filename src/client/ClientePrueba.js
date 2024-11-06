@@ -214,7 +214,7 @@ export async function createNewPeripheral(data){
 
 export async function patchEditSubServerAccess(subServerId, userId, data){
     try{
-        let res = axios.patch(`${url}/api/app/permissions/access/${subServerId}/${userId}`, data, {headers: {'Authorization': `Session ${sessionToken}`}})
+        let res = axios.patch(`${url}/api/app/permissions/access/${subServerId}/${userId}`, data, {headers: {'Authorization': `Session ${sessionToken}`, 'Content-Type': 'application/json'}})
         return res
     }catch(err){
         return err
