@@ -221,3 +221,12 @@ export async function getPinActionTypesList() {
         return err
     }
 }
+
+export async function getPinActionFormData(){
+    try{
+        let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Session ${sessionToken}`}})
+        return res
+    }catch(err){
+        return err
+    }
+}

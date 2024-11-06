@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { createNewPeripheral, getPinActionTypesList, getSubServerDevices } from '../client/ClientePrueba'
+import { createNewPeripheral, getPinActionTypesList, getSubServerDevices, getPinActionFormData } from '../client/ClientePrueba'
 import { Select, Input, Form, Button } from 'antd'
 import { appContext } from '../context/appContext'
 import axios from 'axios'
@@ -47,6 +47,8 @@ const PeriphericCreation = () => {
             value: item.value,
             label: item.key
         })))
+        let resFields = await getPinActionFormData()
+        console.log(resFields)
     }
 
     useEffect(() => {
