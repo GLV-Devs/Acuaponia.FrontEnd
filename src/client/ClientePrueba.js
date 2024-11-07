@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const url = 'https://acuaponia-servidorprincipal.azurewebsites.net'
+const url = 'https://acuaponiaservidorprincipal.azurewebsites.net'
 let bearerToken
 let refreshToken
 
