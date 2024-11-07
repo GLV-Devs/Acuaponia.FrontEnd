@@ -14,8 +14,8 @@ async function refresh () {
 export async function login(data){
     try{
         let res = await axios.patch(`${url}/api/app/identity`, data)
-        bearerToken = res.data.data.accessToken
-        refreshToken = res.data.data.refreshToken
+        bearerToken = res.data.data[0].accessToken
+        refreshToken = res.data.data[0].refreshToken
         return res
     }catch(err){
         return err
@@ -27,6 +27,7 @@ export async function getSubServers(){
         let res = await axios.get(`${url}/api/app/subservers`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
         return res
     }catch(err){
+        console.log(err)
         if (err.response.status == 401){
             refresh()
             res = await axios.get(`${url}/api/app/subservers`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
