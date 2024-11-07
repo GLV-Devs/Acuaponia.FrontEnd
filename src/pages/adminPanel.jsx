@@ -44,8 +44,8 @@ const AdminPanel = () => {
         console.log(deleteToken)
     }
 
-    async function deleteUser(deleteToken){
-        let res = await deleteUserAccount(deleteToken)
+    async function deleteUser(token){
+        let res = await deleteUserAccount(token)
         console.log(res)
     }
 
