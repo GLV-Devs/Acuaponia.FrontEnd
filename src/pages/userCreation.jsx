@@ -40,7 +40,7 @@ const UserCreation = () => {
         return(
         <div className='moduleCreation'>
             <div className='steps'>
-            <Steps current={current} items={items} />
+            <Steps current={current} items={items} style={{marginBottom:10}} />
                 <div>{steps[current].content}</div>
                 <div
                     style={{
@@ -48,26 +48,7 @@ const UserCreation = () => {
                     justifySelf: 'center',
                     }}
                 >
-                    {/* {current < steps.length - 1 && (
-                    <Button type="primary" onClick={() => next()}>
-                        Siguiente
-                    </Button>
-                    )} */}
-                    {/* {current > 0 && (
-                    <Button
-                        style={{
-                        margin: '0 8px',
-                        }}
-                        onClick={() => prev()}
-                    >
-                        Anterior
-                    </Button>
-                    )}
-                    {current === steps.length - 1 && (
-                    <Button type="primary" onClick={() => message.success('Processing complete!')}>
-                        Crear
-                    </Button>
-                    )} */}
+                    
                 </div>
             </div>        
         </div>

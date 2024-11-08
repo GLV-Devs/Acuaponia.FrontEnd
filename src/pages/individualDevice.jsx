@@ -194,7 +194,6 @@ const IndividualDevice = () => {
                     {devicePeripherals == null ? (
                         <>
                             <Skeleton active/>
-                            <Skeleton active/>
                         </>
                         ):(
                             <div className="List">

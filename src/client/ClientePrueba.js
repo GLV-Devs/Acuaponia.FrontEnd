@@ -5,10 +5,16 @@ let bearerToken
 let refreshToken
 
 async function refresh () {
-    const data = {refreshToken: refreshToken}
-    res = await axios.patch(`${url}/api/app/identity/refresh`, data)
-    bearerToken = res.data.data.accessToken
-    refreshToken = res.data.data.refreshToken
+    try{
+        const data = {refreshToken: refreshToken}
+        res = await axios.patch(`${url}/api/app/identity/refresh`, data)
+        bearerToken = res.data.data.accessToken
+        refreshToken = res.data.data.refreshToken
+        console.log(res)
+    }catch(err){
+        return err
+    }
+    
 }
 
 export async function login(data){
@@ -135,6 +141,7 @@ export async function getAccountsAll(){
     }catch(err){
         if (err.response.status == 401){
             refresh()
+            console.log(refresh())
             res = await axios.get(`${url}/api/app/accounts/all`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
             return res
         }else{

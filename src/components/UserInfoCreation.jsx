@@ -14,11 +14,6 @@ const UserInfoCreation = ({submit}) => {
 
     const onSubmit = async (values) => {
         setLoading(true)
-        // let realName = document.getElementById('realName').value
-        // let userName = document.getElementById('userName').value
-        // let email = document.getElementById('email').value
-        // let phoneNumber = document.getElementById('phoneNumber').value
-        // let password = document.getElementById('password').value
 
         const data = {
             realName: values.realName,

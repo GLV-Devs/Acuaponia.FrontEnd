@@ -12,7 +12,8 @@ const AdminPanel = () => {
     const [isExpanded, setIsExpanded] = useState(false)
     const { allUsers, setAllUsers, setSelectedUser, selectedUser } = useContext(appContext)
     const [open, setOpen] = useState(false)
-    const [secondOpen, setSecondOpen] = useState(false)
+    const [ready, setReady] = useState(false)
+    const [countdown, setCountdown] = useState(20)
     let userAcceses=[]
     let deleteToken 
 
@@ -20,9 +21,6 @@ const AdminPanel = () => {
         setOpen(true)
     }
 
-    const showSecondModal = () => {
-        setSecondOpen(true)
-    }
 
     const handleCancel = () => {
         setOpen(false)
@@ -41,6 +39,7 @@ const AdminPanel = () => {
     async function deleteUserRequest(selectedUser){
         let res = await deleteRequestDelete(selectedUser)
         deleteToken = res.data.data[0]
+        setCountdown(20)
         console.log(deleteToken)
     }
 
@@ -60,7 +59,25 @@ const AdminPanel = () => {
         
     }, [])
 
-    console.log(allUsers)
+    useEffect(() => {
+        let timer;
+        if (open && countdown > 0) {
+            timer = setInterval(() => {
+                setCountdown((prevCountdown) => {
+                    if (prevCountdown > 1) {
+                        return prevCountdown - 1;
+                    } else {
+                        setReady(true);
+                        clearInterval(timer);
+                        return 0;
+                    }
+                });
+            }, 1000);
+        }
+        return () => clearInterval(timer);
+    }, [open, countdown]);
+
+    
     //console.log(secondOpen)    
 
     return (
@@ -110,12 +127,13 @@ const AdminPanel = () => {
                                                 Editar permisos
                                             </Button>,
                                             <Popconfirm
-                                                title="¿Está seguro de que desea eliminar este usuario?"
+                                                title={`¿Está seguro de que desea eliminar este usuario? ${countdown > 0 ? `(${countdown}s)` : ''}`}
                                                 onConfirm={() => deleteUser(deleteToken)}
                                                 okText="Sí"
                                                 cancelText="No"
+                                                okButtonProps={{ disabled: !ready }}
                                             >
-                                                <Button key="delete" onClick={() => {deleteUserRequest(selectedUser); showSecondModal()}} >
+                                                <Button key="delete"  onClick={() => {deleteUserRequest(selectedUser); }} >
                                                 Eliminar usuario
                                                 </Button>
                                             </Popconfirm>
