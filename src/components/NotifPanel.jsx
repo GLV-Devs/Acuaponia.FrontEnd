@@ -1,6 +1,6 @@
 import { BellOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons'
 import { Button, notification, Skeleton } from 'antd'
-import { getAllNotifications } from '../client/ClientePrueba'
+import { aproveSubServerSession } from '../client/ClientePrueba'
 import { useContext, useEffect, useState } from 'react'
 import { appContext } from '../context/appContext'
 

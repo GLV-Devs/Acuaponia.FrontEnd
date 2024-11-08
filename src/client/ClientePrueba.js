@@ -398,3 +398,34 @@ export async function getPinActionFormData(){
         }
     }
 }
+
+export async function getApprovePendingSubServers() {
+    try{
+        let res = await axios.get(`${url}/api/app/subservers/sessions`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+        return res
+    }catch(err){
+        if(err.status == 401){
+            refresh()
+            res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+            return res
+        }else{
+            return err
+        }
+    }
+}
+
+export async function aproveSubServerSession(data, subServerId) {
+    try{
+        let res = await axios.patch(`${url}/api/app/subservers/sessions/${subServerId}/approve`, data)
+        return res
+
+    }catch(err){
+        if(err.status == 401){
+            refresh()
+            res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+            return res
+        }else{
+            return err
+        }
+    }
+}

@@ -21,6 +21,7 @@ import AdminPanel from './pages/adminPanel'
 import AssignPermissions from './pages/assignPermissions'
 import  EditUser  from './pages/editUser'
 import EditPassword from './pages/editPassword'
+import SubServerSessions from './pages/SubServerSessionS'
 import './style.scss'
 
 const router = createBrowserRouter([
@@ -92,8 +93,10 @@ const router = createBrowserRouter([
       {
         path: '/EditPassword',
         element: <EditPassword/>
+      },{
+        path: '/SubServerSessions',
+        element: <SubServerSessions/>
       }
-      
     ]
   }
 ])
