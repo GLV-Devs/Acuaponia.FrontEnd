@@ -43,7 +43,25 @@ const AppContextProvider = ({children}) => {
         'High',
         'Low'
     ])
-    
+    const [notificationCategoryList] = useState([
+        'None',
+        'SubServer',
+        'SubServerReactors',
+        'SubServerSessions',
+        'Devices',
+        'DeviceSession'
+    ])
+    const [notificationTypeList] = useState([
+    'newEntity',
+    'conflict',
+    'Approved',
+    'Rejected',
+    'ConfigurationError'
+    ])
+    const [notificationContentFormatlist] = useState([
+        'NoContent',
+        'json'
+    ])
     return(
         <appContext.Provider value={{
             // mainServerClient
@@ -80,6 +98,7 @@ const AppContextProvider = ({children}) => {
             setAllPeripherals,
             fieldTypeList,
             interruptTypeList,
+            notificationCategoryList,
             
         }}>
             {children}
