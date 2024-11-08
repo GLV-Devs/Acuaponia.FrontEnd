@@ -27,6 +27,7 @@ const PeriphericCreation = () => {
         value: item.id,
         label: item.name
     })))
+    const [fieldList, setFieldList] = useState([])
 
     // Funciones
     const submitPeripheral = () => {
@@ -63,6 +64,12 @@ const PeriphericCreation = () => {
         })))
     }
 
+    async function getFields(e) {
+        setSelectedActiontype(e)
+        let res = await getPinActionFormData()
+        setFieldList(res.data.data.find(item => item.actionTypeId == e).fields)
+    }
+
     return(
         <div className="periphericCreation">
             <Form>
@@ -83,10 +90,45 @@ const PeriphericCreation = () => {
                 </Form.Item>
                 <Form.Item label='Action type'>
                     <Select
-                        onChange={(e) => setSelectedActiontype(e)}
+                        onChange={(e) => getFields(e)}
                         options={actionTypeList}
                     />
                 </Form.Item>
+
+                {/* Aqui van los  */}
+
+                { fieldList.map(item => {
+                    if(item.fieldType == 0){
+                        return(
+                            <Form.Item >
+                                <Input placeholder='Pin'/>
+                            </Form.Item>
+                        )
+                    }else if(item.fieldType == 1){
+                        return(
+                            <Form.Item label='Tipo de interruptor'>
+                                <Select 
+                                    options={[{value: 0, label: 'Rising'}, {value: 1, label: 'Falling'}, {value: 2, label: 'High'}, {value: 3, label: 'Low'}]}
+                                />
+                            </Form.Item>
+                        )
+                    }else if(item.fieldType == 2){
+                        return(
+                            <Form.Item >
+                                <Input placeholder='Seconds Delay'/>
+                            </Form.Item>
+                        )
+                    }else if(item.fieldType == 3){
+                        return(
+                            <Form.Item label='Analogo'>
+                                <Select 
+                                    options={[{value: true, label: 'Si'}, {value: false, label: 'No'}]}
+                                />
+                            </Form.Item>
+                        )
+                    }
+                }) }
+
                 <Form.Item label='Report value kind'>
                     <Select
                         onChange={(e) => setSelectedReportValueKind(e)}

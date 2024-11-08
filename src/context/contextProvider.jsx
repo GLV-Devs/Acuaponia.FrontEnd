@@ -52,11 +52,11 @@ const AppContextProvider = ({children}) => {
         'DeviceSession'
     ])
     const [notificationTypeList] = useState([
-    'newEntity',
-    'conflict',
-    'Approved',
-    'Rejected',
-    'ConfigurationError'
+        'newEntity',
+        'conflict',
+        'Approved',
+        'Rejected',
+        'ConfigurationError'
     ])
     const [notificationContentFormatlist] = useState([
         'NoContent',

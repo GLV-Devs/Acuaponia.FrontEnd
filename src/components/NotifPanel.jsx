@@ -113,7 +113,7 @@ const NotifPanel = ({close}) => {
                         <div className='listElement' key={item.id}>
                             <UserOutlined style={{color: '#6f8fc2', fontSize: '40px'}}/>
                             <div className='info'>
-                                <h3 className='normalInfo'>Titulo de la notif (Category+Type)</h3> 
+                                <h3 className='normalInfo'>{item.categoryName} {item.typeName}</h3> 
                                 <p className='normalInfo'>Subservidor: {item.subServerId}</p>
                                 <h5 className='normalInfo'>contenido de la notif lorem ipsum dolor lorem ipsum dolor lorem ipsum </h5>
                                 <div className='dateTime'>

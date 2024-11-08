@@ -406,7 +406,7 @@ export async function getPinActionFormData(){
     }
 }
 
-export async function getApprovePendingSubServers() {
+export async function getSubServerSessions() {
     try{
         let res = await axios.get(`${url}/api/app/subservers/sessions`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
         return res

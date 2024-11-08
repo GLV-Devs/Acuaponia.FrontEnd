@@ -4,10 +4,21 @@ import { getSubServerReports, getSubServers, getAccount, getAllNotifications, ge
 import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
 import { LastMeasurementsChart } from '../components/Charts'
+import { searchFields } from '../functions/lists'
 
 const Dashboard = () => {
 
-    const {subServers, setSubServers, setUserData, setNotifications, setSubServerReports, setDevicePeripheralsModel, setUserInfo} = useContext(appContext)
+    const {
+        subServers, 
+        setSubServers,
+        setUserData,
+        setNotifications,
+        setSubServerReports,
+        setDevicePeripheralsModel,
+        setUserInfo,
+        notificationCategoryList,
+        notificationTypeList
+    } = useContext(appContext)
 
     async function getAllInfo(){
         let subserverRes = await getSubServers()
@@ -18,7 +29,11 @@ const Dashboard = () => {
 
         setSubServers(subserverRes.data.data)
         setUserData(userDataRes.data.data[0])
-        setNotifications(notificationsRes.data.data)
+        setNotifications(notificationsRes.data.data.map(item => ({
+            ...item,
+            categoryName: searchFields(notificationCategoryList, item.category),
+            // typeName: searchFields(notificationTypeList, item.type)
+        })))
         setSubServerReports(reportsRes.data.data)
         setDevicePeripheralsModel(resDevicePeripheralsModel.data.data)
     }

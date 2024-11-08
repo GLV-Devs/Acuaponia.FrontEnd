@@ -46,6 +46,13 @@ const ConfigPanel = ({close}) => {
                             <p>Creacion de reportes</p>
                         </div>
                     </div>
+                    <div className="Button" onClick={() => {navigate ('/SubServerSessions'); close()}}>
+                        <AppstoreAddOutlined style={buttonPanelIconStyle}/>
+                        <div>
+                            <h4>SubServidores</h4>
+                            <p>Sesiones de sub servidores</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
