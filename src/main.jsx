@@ -10,7 +10,6 @@ import Dashboard from './pages/dashboard'
 import SubServerSearch from './pages/subSeverSearch'
 import SubServer from './pages/subServer'
 import IndividualDevice from './pages/individualDevice'
-import SubServerSession from './pages/subServerSession'
 import IndividualReactor from './pages/individualReactor'
 import Profile from './pages/profile'
 import UserCreation from './pages/userCreation'
@@ -21,7 +20,7 @@ import AdminPanel from './pages/adminPanel'
 import AssignPermissions from './pages/assignPermissions'
 import  EditUser  from './pages/editUser'
 import EditPassword from './pages/editPassword'
-import SubServerSessions from './pages/SubServerSessionS'
+import SubServerSessions from './pages/SubServersSessions'
 import './style.scss'
 
 const router = createBrowserRouter([
@@ -49,10 +48,6 @@ const router = createBrowserRouter([
       {
         path: '/IndividualDevice',
         element: <IndividualDevice/>
-      },
-      {
-        path: '/SubServerSession',
-        element: <SubServerSession/>
       },
       {
         path: '/IndividualReactor',
