@@ -6,13 +6,14 @@ import { appContext } from "../context/appContext"
 export const LastMeasurementsChart = ({reports}) => {
 
     // console.log(reports)
+    let j = 0
     let dataSetLabels = []
     let dataSets = []
     let colors = [
+        '#01bc85',
         '#e4421c',
         '#ffb700',
         '#e95cff',
-        '#01bc85',
     ]
 
     reports.forEach(item => {
@@ -22,8 +23,6 @@ export const LastMeasurementsChart = ({reports}) => {
     });
 
     dataSetLabels.forEach(item => {
-        let j = 0
-        let currentColor = colors[j]
         if(j == 3){
             j = 0
         }else{
@@ -44,7 +43,7 @@ export const LastMeasurementsChart = ({reports}) => {
             data: values,
             fill: true,
             tension: 0.4,
-            borderColor: currentColor
+            borderColor: colors[j]
         }
         dataSets.push(currentDataSet)
     })

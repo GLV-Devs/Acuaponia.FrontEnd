@@ -424,9 +424,23 @@ export async function getSubServerSessions() {
 
 export async function aproveSubServerSession(data, subServerId) {
     try{
-        let res = await axios.patch(`${url}/api/app/subservers/sessions/${subServerId}/approve`, data)
+        let res = await axios.patch(`${url}/api/app/subservers/sessions/${subServerId}/approve`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
         return res
+    }catch(err){
+        if(err.status == 401){
+            refresh()
+            res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+            return res
+        }else{
+            return err
+        }
+    }
+}
 
+export async function rejectSubServerSession(data, subServerId) {
+    try{
+        let res = await axios.patch(`${url}/api/app/subservers/sessions/${subServerId}/reject`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+        return res
     }catch(err){
         if(err.status == 401){
             refresh()
