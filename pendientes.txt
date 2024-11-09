@@ -6,5 +6,3 @@
     -Pantalla de configuracion de permisos a usuarios
 
 -poder marcar como vistas las notif (opcional)
-
--Acomodar modificar subServerPermissions

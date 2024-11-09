@@ -5,6 +5,8 @@ import { appContext } from '../context/appContext'
 import DynamicFields from '../components/DynamicFields'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { LeftOutlined } from '@ant-design/icons'
+import { backButtonStyle } from '../AntDIconStyles'
 
 const PeriphericCreation = () => {
 
@@ -122,53 +124,63 @@ const PeriphericCreation = () => {
 
     return(
         <div className="periphericCreation">
-            <Form>
-                <Form.Item name='name'>
-                    <Input placeholder='Nombre'/>
-                </Form.Item>
-                <Form.Item label='Sub servidor'>
-                    <Select
-                        onChange={(e) => getDevices(e)}
-                        options={aviableSubServers}
-                    />
-                </Form.Item>
-                <Form.Item label='Dispositivo'>
-                    <Select
-                        onChange={(e) => setSelectedDevice(e)}
-                        options={aviableDevices}
-                    />
-                </Form.Item>
-                <Form.Item label='Action type'>
-                    <Select
-                        onChange={(e) => getFields(e)}
-                        options={actionTypeList}
-                    />
-                </Form.Item>
+            <Form
+                variant='filled'
+            >
+                <div className='formContainer'>
+                    <div className='upperBar2'>
+                        <LeftOutlined style={backButtonStyle} onClick={() => {navigate ('/Dashboard')}}/>
+                        <h1>Creacion de Periférico</h1>
+                    </div>
+                    <form className='form'>
+                    <Form.Item name='name'>
+                        <Input placeholder='Nombre'/>
+                    </Form.Item>
+                    <Form.Item label='Sub servidor'>
+                        <Select
+                            onChange={(e) => getDevices(e)}
+                            options={aviableSubServers}
+                        />
+                    </Form.Item>
+                    <Form.Item label='Dispositivo'>
+                        <Select
+                            onChange={(e) => setSelectedDevice(e)}
+                            options={aviableDevices}
+                        />
+                    </Form.Item>
+                    <Form.Item label='Action type'>
+                        <Select
+                            onChange={(e) => getFields(e)}
+                            options={actionTypeList}
+                        />
+                    </Form.Item>
 
-                <DynamicFields
-                    selectedActionType={selectedActionType}
-                    setSelectedInput={setSelectedInput}
-                    setSelectedSecondsDelay={setSelectedSecondsDelay}
-                    setSelectedIsAnalog={setSelectedIsAnalog}
-                    setSelectedSignal={setSelectedSignal}
-                    setSelectedInterruptType={setSelectedInterruptType}
-                    setSelectedReadType={setSelectedReadType}
-                    setSelectedReadTypeParameter={setSelectedReadTypeParameter}
-                    setSelectedDelayToActivate={setSelectedDelayToActivate}
-                    setSelectedDelayToDeactivate={setSelectedDelayToDectivate}
-                    setSelectedOutput={setSelectedOutput}
-                    setSelectedInterval={setSelectedInterval}
-                    setSelectedEcho={setSelectedEcho}
-                    setSelectedTrigger={setSelectedTrigger}
-                />
-
-                <Form.Item label='Report value kind'>
-                    <Select
-                        onChange={(e) => setSelectedReportValueKind(e)}
-                        options={reportValueKindList}
+                    <DynamicFields
+                        selectedActionType={selectedActionType}
+                        setSelectedInput={setSelectedInput}
+                        setSelectedSecondsDelay={setSelectedSecondsDelay}
+                        setSelectedIsAnalog={setSelectedIsAnalog}
+                        setSelectedSignal={setSelectedSignal}
+                        setSelectedInterruptType={setSelectedInterruptType}
+                        setSelectedReadType={setSelectedReadType}
+                        setSelectedReadTypeParameter={setSelectedReadTypeParameter}
+                        setSelectedDelayToActivate={setSelectedDelayToActivate}
+                        setSelectedDelayToDeactivate={setSelectedDelayToDectivate}
+                        setSelectedOutput={setSelectedOutput}
+                        setSelectedInterval={setSelectedInterval}
+                        setSelectedEcho={setSelectedEcho}
+                        setSelectedTrigger={setSelectedTrigger}
                     />
-                </Form.Item>
-                <Button onClick={submitPeripheral}>Crear</Button>
+
+                    <Form.Item label='Report value kind'>
+                        <Select
+                            onChange={(e) => setSelectedReportValueKind(e)}
+                            options={reportValueKindList}
+                        />
+                    </Form.Item>
+                    <Button onClick={submitPeripheral}>Crear</Button>
+                    </form>
+                </div>
             </Form>
         </div>
     )
