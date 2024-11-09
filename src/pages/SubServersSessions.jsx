@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react'
-import { getSubServerSessions, aproveSubServerSession, rejectSubServerSession } from '../client/ClientePrueba'
+import { getSubServerSessions, aproveSubServerSession, rejectSubServerSession, deleteSubServerSession } from '../client/ClientePrueba'
 import { Button } from 'antd'
 import { appContext } from '../context/appContext'
 import { AppstoreAddOutlined } from '@ant-design/icons'
@@ -61,6 +61,22 @@ const SubServerSessions = () => {
         }
     }
 
+    const deleteSubServer = async (id) => {
+        let res = await deleteSubServerSession(id)
+        if(res.status == 200){
+            getInfo()
+            messageApi.open({
+                type: 'success',
+                content: 'Sesion terminada con exito'
+            })
+        }else{
+            messageApi.open({
+                type: 'error',
+                content: 'Ah ocurrido un error'
+            })
+        }
+    }
+
     return(
         <div className="SubServerSessions">
             <h1>Sesiones de subServidores</h1>
@@ -80,7 +96,12 @@ const SubServerSessions = () => {
                                 <Button onClick={() => rejectSubServer(item.id, item.requestingClientIP)}>rechazar</Button>
                             </>
                         ) }
-                        { item.isApproved == true && <h3 className='approve'>Sub servidor aprovado</h3> }
+                        { item.isApproved == true && (
+                            <>
+                                <h3 className='approve'>Sub servidor aprovado</h3>
+                                <Button onClick={() => deleteSubServer(item.id)}>Eliminar</Button>
+                            </>
+                        ) }
                         { item.isApproved == false && <h3 className='rejected'>Sub servidor rechazado</h3> }
                     </div>
                 </div>

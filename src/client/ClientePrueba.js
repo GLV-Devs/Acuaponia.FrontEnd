@@ -467,3 +467,18 @@ export async function getSubServerSessionInfo(subServerId){
         }
     }
 }
+
+export async function deleteSubServerSession(subServerId){
+    try{
+        let res = await axios.delete(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+        return res
+    }catch(err){
+        if(err.status == 401){
+            refresh()
+            let res = await axios.delete(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+            return res
+        }else{
+            return err
+        }
+    }
+}

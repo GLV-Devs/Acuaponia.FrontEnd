@@ -9,6 +9,7 @@ const SubServerSearch = () => {
 
     const {subServers, setCurrentSubServer} = useContext(appContext)
     const navigate = useNavigate()
+    console.log(subServers)
 
     // console.log(subServers)
     const slideStyle = {
@@ -20,7 +21,6 @@ const SubServerSearch = () => {
         fontSize: '25px',
         
     }
-
 
     return(
         <div className='SubServerSearch'>
@@ -44,7 +44,7 @@ const SubServerSearch = () => {
                                 <div key={item.id} className="ListItem" onClick={() => {setCurrentSubServer(item.id); navigate('/SubServer')}}>
                                     <div className="left">
                                         <SwapRightOutlined/>
-                                        <p>{item.name}</p>
+                                        <p>{ item.givenName ? (item.givenName):(item.reportedName) }</p>
                                     </div>
                                     <div className='badge'></div>
                                 </div>
@@ -58,9 +58,8 @@ const SubServerSearch = () => {
                                         <div><DoubleRightOutlined rotate={315}/></div>
                                     </div>
                                     <div className='Info'>
-                                        <h3>{item.name}</h3>
-                                        <h5>{item.id}</h5>
-                                        <p>{item.lastHeartBeat}</p>
+                                        <h3>{ item.givenName ? (item.givenName):(item.reportedName) }</h3>
+                                        <h5>Last heart beat: {Date(item.lastHeartbeat)}</h5>
                                     </div>
                                 </div>
                             ))}
