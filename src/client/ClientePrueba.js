@@ -451,3 +451,19 @@ export async function rejectSubServerSession(data, subServerId) {
         }
     }
 }
+
+
+export async function getSubServerSessionInfo(subServerId){
+    try{
+        let res = axios.get(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+        return res
+    }catch(err){
+        if(err.status == 401){
+            refresh()
+            let res = axios.get(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+            return res
+        }else{
+            return err
+        }
+    }
+}

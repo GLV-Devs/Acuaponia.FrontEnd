@@ -8,6 +8,7 @@ import ReactPanel from '../components/ReactPanel'
 import { useNavigate } from "react-router-dom"
 import { backButtonStyle } from '../AntDIconStyles'
 import { searchReportValueKind, searchPeripheral, searchDevice } from "../functions/lists"
+import { SubServerSessionModal } from '../components/Modals'
 
 const SubServer = () => {
 
@@ -27,6 +28,8 @@ const SubServer = () => {
     const [info, setInfo] = useState(null)
     const [dispPanelOpen, setDispPanelOpen] = useState(false)
     const [reactPanelOpen, setReactPanelOpen] = useState(false)
+    const [subServerSessionModal, setSubServerSessionModal] = useState(false)
+    const [subServerSessionModalOpen, setSubServerSessionModalOpen] = useState(false)
     const [showList, setShowList] = useState([])
     const navigate = useNavigate()
 
@@ -106,7 +109,7 @@ const SubServer = () => {
                                 <h1>Dispositivos</h1>
                                 <MobileOutlined style={{color: '#e95cff', fontSize: '65px'}}/>
                             </div>
-                            <div className="Button2">
+                            <div className="Button2" onClick={() => setSubServerSessionModalOpen(true)}>
                                 <h2>Sesion del sub servidor</h2>
                             </div>
                             <div className="Button3" onClick={openReactPanel}>
@@ -157,7 +160,12 @@ const SubServer = () => {
                     </div>
 
                     { dispPanelOpen && <DispPanel close={() => setDispPanelOpen(false)}/> }
-                    { reactPanelOpen && <ReactPanel close={() => setReactPanelOpen(false)}/> }      
+                    { reactPanelOpen && <ReactPanel close={() => setReactPanelOpen(false)}/> } 
+                    <SubServerSessionModal 
+                        open={subServerSessionModalOpen}
+                        onCancel={() => setSubServerSessionModalOpen(false)}
+                        subServerId={info.id}
+                    />     
                 </>
             )}
         </div>
