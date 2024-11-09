@@ -1,6 +1,3 @@
-
--Hacer pantalla/modal de la sesion del subservidor (PREGUNTAR A DIEGO COMO MANEJAR ESTO) la notificacion te lleva a un apartado donde se puede aceptar o rechazar la solicitud de sesion
-
 -Apartado de administracion
     -mostrar usuarios a los que tiene acceso
     -Pantalla de configuracion de permisos a usuarios
