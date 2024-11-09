@@ -1,18 +1,35 @@
 import { useContext, useEffect, useState } from 'react'
 import { createNewPeripheral, getPinActionTypesList, getSubServerDevices, getPinActionFormData } from '../client/ClientePrueba'
-import { Select, Input, Form, Button } from 'antd'
+import { Select, Input, Form, Button, InputNumber } from 'antd'
 import { appContext } from '../context/appContext'
+import DynamicFields from '../components/DynamicFields'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const PeriphericCreation = () => {
 
-    const { reportValueKind, subServers } = useContext(appContext)
+    const { reportValueKind, subServers, messageApi } = useContext(appContext)
+    const navigate = useNavigate()
 
     // Manejadores de los datos recolectados
-    const [selectedActiontype, setSelectedActiontype] = useState(0)
+    const [selectedActionType, setSelectedActionType] = useState(0)
     const [selectedReportValueKind, setSelectedReportValueKind] = useState(0)
     const [selectedSubServer, setSelectedSubServer] = useState(0)
     const [selectedDevice, setSelectedDevice] = useState(0)
+    const [selectedInterruptType, setSelectedInterruptType] = useState(0)
+    const [selectedIsAnalog, setSelectedIsAnalog] = useState(0)
+    const [selectedPin, setSelectedPin] = useState(0)
+    const [selectedSecondsDelay, setSelectedSecondsDelay] = useState(0)
+    const [selectedReadType, setSelectedReadType] = useState(0)
+    const [selectedReadTypeParameter, setSelectedReadTypeParameter] = useState(0)
+    const [selectedInput, setSelectedInput] = useState(0)
+    const [selectedSignal, setSelectedSignal] = useState(0)
+    const [selectedDelayToActivate, setSelectedDelayToActivate] = useState(0)
+    const [selectedDelayTodeActivate, setSelectedDelayToDectivate] = useState(0)
+    const [selectedOutput, setSelectedOutput] = useState(0)
+    const [selectedInterval, setSelectedInterval] = useState(0)
+    const [selectedEcho, setSelectedEcho] = useState(0)
+    const [selectedTrigger, setSelectedTrigger] = useState(0)
 
     // Declaracion y asignacion de las listas de los select
     let i = 0
@@ -27,19 +44,51 @@ const PeriphericCreation = () => {
         value: item.id,
         label: item.name
     })))
+    const [fullFieldsList, setFullFieldsList] = useState([])
     const [fieldList, setFieldList] = useState([])
 
     // Funciones
-    const submitPeripheral = () => {
+    const submitPeripheral = async () => {
         const name = document.getElementById('name').value
+        let pins = []
+
+        if(selectedActionType == 0){
+            pins = [0]
+        }else if(selectedActionType == 1){
+            pins = [Number(selectedInput), Number(selectedSecondsDelay), selectedIsAnalog]
+        }else if(selectedActionType == 2){
+            pins = [Number(selectedPin), selectedInterruptType, Number(selectedReadType), Number(selectedReadTypeParameter)]
+        }else if(selectedActionType == 3 || selectedActionType == 4){
+            pins = [Number(selectedOutput), selectedDelayToActivate, selectedDelayTodeActivate]
+        }else if(selectedActionType == 5 || selectedActionType == 6){
+            pins = [Number(selectedOutput), selectedSignal, selectedInterruptType]
+        }else if(selectedActionType == 3){
+            pins = [Number(selectedEcho), Number(selectedTrigger), Number(selectedInterval)]
+        }
 
         const data = {
             subServerDeviceId: selectedDevice,
             name: name,
-            actionType: selectedActiontype,
-            reportValuekind: selectedReportValueKind
+            actionType: selectedActionType,
+            reportValuekind: selectedReportValueKind,
+            pins: pins
         }
+
         console.log(data)
+
+        let res = await createNewPeripheral(data)
+        if (res.status == 200){
+            messageApi.open({
+                type: 'success',
+                content: 'Periferico creado con exito'
+            })
+            navigate(-1)
+        }else{
+            messageApi.open({
+                type: 'error',
+                content: 'Ah ocurrido un error'
+            })
+        }
     }
 
     async function getData() {
@@ -48,8 +97,9 @@ const PeriphericCreation = () => {
             value: item.value,
             label: item.key
         })))
+
         let resFields = await getPinActionFormData()
-        console.log(resFields)
+        setFullFieldsList(resFields.data.data)
     }
 
     useEffect(() => {
@@ -65,9 +115,9 @@ const PeriphericCreation = () => {
     }
 
     async function getFields(e) {
-        setSelectedActiontype(e)
-        let res = await getPinActionFormData()
-        setFieldList(res.data.data.find(item => item.actionTypeId == e).fields)
+        setSelectedActionType(e)
+        setFieldList(fullFieldsList.find(item => item.actionTypeId == e).fields)
+        console.log(fullFieldsList.find(item => item.actionTypeId == e).fields)
     }
 
     return(
@@ -95,39 +145,22 @@ const PeriphericCreation = () => {
                     />
                 </Form.Item>
 
-                {/* Aqui van los  */}
-
-                { fieldList.map(item => {
-                    if(item.fieldType == 0){
-                        return(
-                            <Form.Item >
-                                <Input placeholder='Pin'/>
-                            </Form.Item>
-                        )
-                    }else if(item.fieldType == 1){
-                        return(
-                            <Form.Item label='Tipo de interruptor'>
-                                <Select 
-                                    options={[{value: 0, label: 'Rising'}, {value: 1, label: 'Falling'}, {value: 2, label: 'High'}, {value: 3, label: 'Low'}]}
-                                />
-                            </Form.Item>
-                        )
-                    }else if(item.fieldType == 2){
-                        return(
-                            <Form.Item >
-                                <Input placeholder='Seconds Delay'/>
-                            </Form.Item>
-                        )
-                    }else if(item.fieldType == 3){
-                        return(
-                            <Form.Item label='Analogo'>
-                                <Select 
-                                    options={[{value: true, label: 'Si'}, {value: false, label: 'No'}]}
-                                />
-                            </Form.Item>
-                        )
-                    }
-                }) }
+                <DynamicFields
+                    selectedActionType={selectedActionType}
+                    setSelectedInput={setSelectedInput}
+                    setSelectedSecondsDelay={setSelectedSecondsDelay}
+                    setSelectedIsAnalog={setSelectedIsAnalog}
+                    setSelectedSignal={setSelectedSignal}
+                    setSelectedInterruptType={setSelectedInterruptType}
+                    setSelectedReadType={setSelectedReadType}
+                    setSelectedReadTypeParameter={setSelectedReadTypeParameter}
+                    setSelectedDelayToActivate={setSelectedDelayToActivate}
+                    setSelectedDelayToDeactivate={setSelectedDelayToDectivate}
+                    setSelectedOutput={setSelectedOutput}
+                    setSelectedInterval={setSelectedInterval}
+                    setSelectedEcho={setSelectedEcho}
+                    setSelectedTrigger={setSelectedTrigger}
+                />
 
                 <Form.Item label='Report value kind'>
                     <Select

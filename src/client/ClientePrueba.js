@@ -350,6 +350,7 @@ export async function createNewPeripheral(data){
         let res = axios.post(`${url}/api/app/devices/Peripherals`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
         return res
     }catch(err){
+        console.log(errq)
         if (err.response.status == 401){
             refresh()
             res = axios.post(`${url}/api/app/devices/Peripherals`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})

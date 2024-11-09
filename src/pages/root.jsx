@@ -6,7 +6,7 @@ import { appContext } from "../context/appContext"
 
 const Root = () => {
 
-    const {logged} = useContext(appContext)
+    const {logged, contextHolder} = useContext(appContext)
 
     const navigate = useNavigate()
     useEffect(() => {
@@ -15,6 +15,7 @@ const Root = () => {
 
     return(
         <div className="root">
+            {contextHolder}
             {logged && <NavBar/>}
             <Outlet/>
         </div>

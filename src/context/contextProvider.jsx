@@ -1,9 +1,11 @@
 import { appContext } from './appContext'
 import { useState } from 'react'
 import { mainServerClient } from '../client/client'
+import { message } from 'antd'
 
 const AppContextProvider = ({children}) => {
 
+    const [messageApi, contextHolder] = message.useMessage()
     // const client = new mainServerClient(loginData, serverUrl, httpErrorHandler)
     const [logged, setLogged] = useState(false)
     const [userData, setUserData] = useState(null)
@@ -99,7 +101,8 @@ const AppContextProvider = ({children}) => {
             fieldTypeList,
             interruptTypeList,
             notificationCategoryList,
-            
+            messageApi,
+            contextHolder
         }}>
             {children}
         </appContext.Provider>
