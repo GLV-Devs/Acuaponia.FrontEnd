@@ -3,18 +3,19 @@ import axios from "axios"
 const url = 'https://acuaponiaservidorprincipal.azurewebsites.net'
 let bearerToken
 let refreshToken
+let lastRefresh
 
 async function refresh () {
-    try{
-        const data = {refreshToken: refreshToken}
-        res = await axios.patch(`${url}/api/app/identity/refresh`, data)
-        bearerToken = res.data.data.accessToken
-        refreshToken = res.data.data.refreshToken
-        console.log(res)
-    }catch(err){
-        return err
+    const data = {refreshToken: refreshToken}
+    if(Date.now() > (lastRefresh + (30 * 1000))){
+        try{
+            res = await axios.patch(`${url}/api/app/identity/refresh`, data)
+            bearerToken = res.data.data.accessToken
+            refreshToken = res.data.data.refreshToken
+        }catch(err){
+            return err
+        } 
     }
-    
 }
 
 export async function login(data){
@@ -22,6 +23,7 @@ export async function login(data){
         let res = await axios.patch(`${url}/api/app/identity`, data)
         bearerToken = res.data.data[0].accessToken
         refreshToken = res.data.data[0].refreshToken
+        lastRefresh = new Date()
         return res
     }catch(err){
         return err
@@ -50,7 +52,9 @@ export async function getSubServerInfo(subServerId){
         return res
     }catch(err){
         if (err.response.status == 401){
+            console.log(refreshToken)
             refresh()
+            console.log(refreshToken)
             res = await axios.get(`${url}/api/app/subservers/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
             return res
         }else{
