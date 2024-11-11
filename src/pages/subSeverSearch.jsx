@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom"
 const SubServerSearch = () => {
 
     const {subServers, setCurrentSubServer} = useContext(appContext)
+    const [showList, setShowList] = useState(subServers)
     const navigate = useNavigate()
-    console.log(subServers)
 
     // console.log(subServers)
     const slideStyle = {
@@ -20,6 +20,11 @@ const SubServerSearch = () => {
         color: '#ffb700',
         fontSize: '25px',
         
+    }
+
+    const handleSearch = (e) => {
+        setShowList(subServers.filter(item => (item.givenName && item.givenName.toLowerCase().includes(e.toLowerCase())) || (item.reportedName && item.reportedName.toLowerCase().includes(e.toLowerCase()))))
+        console.log(subServers.filter(item => (item.givenName && item.givenName.toLowerCase().includes(e.toLowerCase())) || (item.reportedName && item.reportedName.toLowerCase().includes(e.toLowerCase()))))
     }
 
     return(
@@ -33,7 +38,7 @@ const SubServerSearch = () => {
             ):(
                 <>
                     <div className="searchBar">
-                        <Input className='inputSearchBar' variant='filled' placeholder="Buscar..."/>
+                        <Input className='inputSearchBar' variant='filled' placeholder="Buscar..." onChange={(e) => handleSearch(e.target.value)}/>
                         <SlidersOutlined style={slideStyle}/>
                         <Button className='buttonExport' type="text"> <ExportOutlined style={exportStyle}/> </Button>
                     </div>
@@ -51,7 +56,7 @@ const SubServerSearch = () => {
                             ))}
                         </div>
                         <div className="BlockList">
-                            { subServers.map((item) => (
+                            { showList.map((item) => (
                                 <div key={item.id} className="ListItem" onClick={() => {setCurrentSubServer(item.id); navigate('/SubServer')}}>
                                     <div className="banner">
                                         <div className="subServerIcon"><AppstoreAddOutlined style={{color:'#e95cff', fontSize:'45px'}}/></div>
