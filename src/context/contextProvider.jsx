@@ -13,9 +13,9 @@ const AppContextProvider = ({children}) => {
     const [notifications, setNotifications] = useState(null)
     const [subServerReports, setSubServerReports] = useState(null)
     const [currentSubServer, setCurrentSubServer] = useState(null)
-    const [subServerDevices, setSubServerDevices] = useState(null)
+    const [subServerDevices, setSubServerDevices] = useState([])
     const [currentDevice, setCurrentDevice] = useState(null)
-    const [devicePeripherals, setDevicePeripherals] = useState(null)
+    const [devicePeripherals, setDevicePeripherals] = useState([])
     const [currentPeripheral, setCurrentPeripheral] = useState(null)
     const [devicePeripheralsModel, setDevicePeripheralsModel] = useState(null)
     const [reportValueKind, setReportValueKind] = useState([

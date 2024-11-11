@@ -18,7 +18,7 @@ const ConfigPanel = ({close}) => {
                 </div>
 
                 <div className="Buttons">
-                <div className="Button" onClick={ () => {navigate ('/adminPanel')}}>
+                <div className="Button" onClick={ () => {navigate ('/adminPanel'); close()}}>
                     <SettingOutlined style={buttonPanelIconStyle}/>
                         <div>
                             <h4>Administracion</h4>

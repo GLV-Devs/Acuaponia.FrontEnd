@@ -52,15 +52,21 @@ export const SubServerSessionModal = ({subServerId, open, onCancel}) => {
     const { messageApi } = useContext(appContext)
 
     const getInfo = async () => {
-        let res = await getSubServerSessionInfo(subServerId)
-        if(res.status == 200){
-            setInfo(res.data.data[0])
-        }else{
-            onCancel()
-            messageApi.open({
-                type: 'error',
-                content: 'Ah ocurrido un error'
-            })
+        try{
+            let res = await getSubServerSessionInfo(subServerId)
+            if(res.status == 200){
+                setInfo(res.data.data[0])
+            }
+        }catch(err){
+            if(err.status == 404){
+                setInfo({error: true, message: 'No hay informacion de sesion para este subServidor'})
+            }else{
+                onCancel()
+                messageApi.open({
+                    type: 'error',
+                    content: 'Ah ocurrido un error'
+                })
+            }
         }
     }
 
@@ -72,11 +78,17 @@ export const SubServerSessionModal = ({subServerId, open, onCancel}) => {
         <Modal destroyOnClose title="Sesion del Sub servidor" open={open} onCancel={onCancel} footer={[<Button onClick={onCancel}>Cerrar</Button>]}>
             { info ? (
                 <>
-                    <h3>{ info.givenName ? (info.givenName):(info.reportedName) }</h3>
-                    <h4>Primera conexion: {Date(info.firstRequestedDate).toString()}</h4>
-                    <h4>Ultima conexion: {Date(info.lastLoginDate).toString()}</h4>
-                    <h4>MAC: {info.requestingClientReportedMACAddress}</h4>
-                    <h4>Direccion IP: {info.requestingClientIP}</h4>
+                    { info.error == true ? (
+                        <h3>{info.message}</h3>
+                    ):(
+                        <>
+                            <h3>{ info.givenName ? (info.givenName):(info.reportedName) }</h3>
+                            <h4>Primera conexion: {Date(info.firstRequestedDate).toString()}</h4>
+                            <h4>Ultima conexion: {Date(info.lastLoginDate).toString()}</h4>
+                            <h4>MAC: {info.requestingClientReportedMACAddress}</h4>
+                            <h4>Direccion IP: {info.requestingClientIP}</h4>
+                        </>
+                    ) }
                 </>
             ):(
                 <>

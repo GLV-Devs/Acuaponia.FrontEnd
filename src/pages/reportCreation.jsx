@@ -1,42 +1,23 @@
 import { Form, Select, Input, DatePicker, Button, message } from 'antd'
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { postSubServerReport } from '../client/ClientePrueba'
+import { postSubServerReport, getSubServerDevices, getSubserverDevicePeripheral } from '../client/ClientePrueba'
 import { appContext } from '../context/appContext'
 
 const ReportCreation = () => {
     const navigate = useNavigate()
-    const { subServers, subServerDevices, devicePeripherals } = useContext(appContext)
-    let subServersSelect
-    let subServerDevicesSelect
-    let devicePeripheralsSelect
+    const { subServers, subServerDevices, setSubServerDevices, devicePeripherals, setDevicePeripherals } = useContext(appContext)
+    
+    // Declaracion y asignacion de las listas para los select
+    const [aviablePeripherals, setAviablePeripherals] = useState([])
+    const [aviableDevices, setAviableDevices] = useState([])
+    const [aviableSubServers, setAviableSubServers] = useState(subServers.map(item => ({value: item.id, label: item.name })))
+
+    // Declaracion de los valores seleccionados
+    const [selectedSubServer, setSelectedSubServer] = useState('')
     const [selectedDevice, setSelectedDevice] = useState('')
     const [selectedPeripheral, setSelectedPeripheral] = useState('')
     const [selectedDate, setSelectedDate] = useState(null)
-
-    subServers.forEach(item => {
-        if(subServersSelect == undefined){
-            subServersSelect = [{value: item.id, label: item.name }]
-        }else{
-            subServersSelect = [...subServersSelect, {value: item.id, label: item.name }]
-        }
-    });
-
-    subServerDevices.forEach(item => {
-        if(subServerDevicesSelect == undefined){
-            subServerDevicesSelect = [{value: item.id, label: item.name }]
-        }else{
-            subServerDevicesSelect = [...subServerDevicesSelect, {value: item.id, label: item.name }]
-        }
-    });
-
-    devicePeripherals.forEach(item => {
-        if(devicePeripheralsSelect == undefined){
-            devicePeripheralsSelect = [{value: item.index, label: item.name }]
-        }else{
-            devicePeripheralsSelect = [...devicePeripheralsSelect, {value: item.index, label: item.name }]
-        }
-    });
 
     const onChange = (date, dateString) => {
         console.log(date, dateString);
@@ -62,6 +43,28 @@ const ReportCreation = () => {
         console.log(res)
     }
 
+    async function getAviableDevices(e){
+        console.log(e)
+        setSelectedSubServer(e)
+        let res = await getSubServerDevices(e)
+        console.log(res)
+        setAviableDevices(res.data.data.map(item => ({
+            value: item.id,
+            label: item.name
+        })))
+    }
+
+    async function getAviablePeripherals(e){
+        console.log(e)
+        setSelectedDevice(e)
+        let res = await getSubserverDevicePeripheral(e)
+        console.log(res)
+        setAviablePeripherals(res.data.data.map(item => ({
+            value: item.index,
+            label: item.name
+        })))
+    }
+
     return(
         <div className='moduleCreation'>
             <Form className='creationForm'
@@ -84,7 +87,8 @@ const ReportCreation = () => {
                     <Select
                         className='Select'
                         placeholder='Selecciona un sub servidor'
-                        options={subServersSelect}
+                        options={aviableSubServers}
+                        onChange={(e) => getAviableDevices(e)}
                     />
                 </Form.Item>
                 <Form.Item
@@ -101,8 +105,8 @@ const ReportCreation = () => {
                     <Select
                         className='Select'
                         placeholder='Selecciona un dispositivo'
-                        onChange={(e) => setSelectedDevice(e)}
-                        options={subServerDevicesSelect}
+                        onChange={(e) => getAviablePeripherals(e)}
+                        options={aviableDevices}
                     />
                 </Form.Item>
                 <Form.Item
@@ -120,7 +124,7 @@ const ReportCreation = () => {
                         className='Select'
                         placeholder='Selecciona un periferico'
                         onChange={(e) => setSelectedPeripheral(e)}
-                        options={devicePeripheralsSelect}
+                        options={aviablePeripherals}
                     />
                 </Form.Item>
                 <Form.Item
