@@ -3,24 +3,43 @@ import axios from "axios"
 const url = 'https://acuaponiaservidorprincipal.azurewebsites.net'
 var bearerToken
 var refreshToken
-var lock = false
+var lock = 0
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const refresh = async () => {
+    while(true) { // Espera indefinitivamente
+        let m;
+        while (mutex > 0) { sleep(50) } // Si alguien ya esta usando esta funcion
+        m = mutex++ // Lee e incrementa atomicamente
+        if (m > 0) mutex--; // No es el unico que lo agarro, continua esperando
+        else {
+            if (Date.now() > (lastRefreshed + (30 * 1000))) {
+                // Aqui volvemos a chequear cuz arriba es solo para ahorrarnos tener que hacer
+                // todo este chequeo para saber que somos los unicos
+                break;
+            }
+
+            mutex--;
+            return; // Alguien mas ya refresco
+        }
+    }
+    
     const data = {
         refreshToken: refreshToken
     }
-    if(!lock){
-        lock = true
-        try{
-            let res = await axios.patch(`${url}/api/app/identity/refresh`, data)
-            bearerToken = res.data.data[0].accessToken
-            refreshToken = res.data.data[0].refreshToken
-            console.log(res)
-        }catch(err){
-            console.log(err)
-        }finally{
-            lock = false
-        }
+    
+    try{
+        let res = await axios.patch(`${url}/api/app/identity/refresh`, data)
+        bearerToken = res.data.data[0].accessToken
+        refreshToken = res.data.data[0].refreshToken
+        console.log(res)
+    }catch(err){
+        console.log(err)
+    }finally {
+        mutex--;
     }
 }
 
