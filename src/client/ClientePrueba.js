@@ -3,7 +3,8 @@ import axios from "axios"
 const url = 'https://acuaponiaservidorprincipal.azurewebsites.net'
 var bearerToken
 var refreshToken
-var lock = 0
+var mutex = 0
+var lastRefreshed = 0;
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -12,7 +13,7 @@ function sleep(ms) {
 const refresh = async () => {
     while(true) { // Espera indefinitivamente
         let m;
-        while (mutex > 0) { sleep(50) } // Si alguien ya esta usando esta funcion
+        while (mutex > 0) { await sleep(50) } // Si alguien ya esta usando esta funcion
         m = mutex++ // Lee e incrementa atomicamente
         if (m > 0) mutex--; // No es el unico que lo agarro, continua esperando
         else {
