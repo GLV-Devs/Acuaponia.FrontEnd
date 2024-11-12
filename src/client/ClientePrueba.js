@@ -5,16 +5,16 @@ var bearerToken
 var refreshToken
 var lock = false
 
-async function refresh () {
-    const data = {refreshToken: refreshToken}
+const refresh = async () => {
+    const data = {
+        refreshToken: refreshToken
+    }
     if(!lock){
         lock = true
         try{
-            console.log('ejecute la funcion')
             let res = await axios.patch(`${url}/api/app/identity/refresh`, data)
-            console.log(res)
-            bearerToken = res.data.data.accessToken
-            refreshToken = res.data.data.refreshToken
+            bearerToken = res.data.data[0].accessToken
+            refreshToken = res.data.data[0].refreshToken
         }catch(err){
             console.log(err)
         }finally{
@@ -42,8 +42,10 @@ export async function getSubServers(){
         console.log(err)
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/subservers`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/subservers`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -56,11 +58,16 @@ export async function getSubServerInfo(subServerId){
         return res
     }catch(err){
         if (err.response.status == 401){
-            console.log(refreshToken)
+            console.log(`Viejo Bearer: ${bearerToken}`)   //este es el bearer antes de actualizarse
+            console.log(`Viejo Refresh: ${refreshToken}`)   //este es el refresh antes de actualizarse
+
             refresh()
-            console.log(refreshToken)
-            let res = await axios.get(`${url}/api/app/subservers/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                console.log(`Nuevo Bearer: ${bearerToken}`)   //este es el bearer despues de actualizarse
+                console.log(`Nuevo Refresh: ${refreshToken}`)   //este es el refresh despues de actualizarse
+                let res = await axios.get(`${url}/api/app/subservers/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -74,8 +81,10 @@ export async function getSubServerReports(){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/reports`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/reports`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -89,8 +98,10 @@ export async function getSubServerDevices(subServerId){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            let res = await axios.get(`${url}/api/app/devices/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/devices/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -104,8 +115,10 @@ export async function getSubserverDevicePeripheral(deviceId){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/devices/peripherals/${deviceId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/devices/peripherals/${deviceId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -119,8 +132,10 @@ export async function getAllNotifications(){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/notifications`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/notifications`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -134,8 +149,10 @@ export async function getAccount(){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/accounts`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/accounts`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -149,9 +166,10 @@ export async function getAccountsAll(){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            console.log(refresh())
-            res = await axios.get(`${url}/api/app/accounts/all`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/accounts/all`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -165,8 +183,10 @@ export async function getSubServerReactors(subServerId){
     } catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/subservers/${subServerId}/reactors/config`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/subservers/${subServerId}/reactors/config`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -180,8 +200,10 @@ export async function postSubServerReport(data){
     } catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.post(`${url}/api/app/reports`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.post(`${url}/api/app/reports`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -195,8 +217,10 @@ export async function postCreateAccount(data){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.post(`${url}/api/app/identity`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.post(`${url}/api/app/identity`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -210,8 +234,10 @@ export async function getSubserverDevicePeripheralModel(){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -225,8 +251,10 @@ export async function getAllPeripherals(subServerId){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            let res = await axios.get(`${url}/api/app/devices/peripherals/subserver/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/devices/peripherals/subserver/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -240,8 +268,10 @@ export async function patchAdjustUserPermissions(otherUserId, data){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.patch(`${url}/api/app/permissions/${otherUserId}`, data, {headers: {'Authorization': `Bearer ${bearerToken}`,'Content-Type': 'application/json'}})
-            return res
+            .then(async() => {
+                let res = await axios.patch(`${url}/api/app/permissions/${otherUserId}`, data, {headers: {'Authorization': `Bearer ${bearerToken}`,'Content-Type': 'application/json'}})
+                return res
+            })
         }else{
             return err
         }
@@ -255,8 +285,10 @@ export async function patchUpdateAccount(userKey, data){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.patch(`${url}/api/app/accounts/${userKey}`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.patch(`${url}/api/app/accounts/${userKey}`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -270,8 +302,10 @@ export async function patchChangePassword(data){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.patch(`${url}/api/app/accounts/password`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.patch(`${url}/api/app/accounts/password`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -285,8 +319,10 @@ export async function logOut() {
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.delete(`${url}/api/app/identity`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.delete(`${url}/api/app/identity`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -300,8 +336,10 @@ export async function deleteRequestDelete(userToDelete){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.delete(`${url}/api/app/accounts/${userToDelete}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.delete(`${url}/api/app/accounts/${userToDelete}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -315,8 +353,10 @@ export async function deleteUserAccount(givenToken){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.delete(`${url}/api/app/accounts?token=${givenToken}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.delete(`${url}/api/app/accounts?token=${givenToken}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -330,8 +370,10 @@ export async function getUsersAccesses(userId){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/permissions/access/user/${userId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/permissions/access/user/${userId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -345,8 +387,10 @@ export async function postSubServerPermissions(data){
     } catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.post(`${url}/api/app/permissions/access/access`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.post(`${url}/api/app/permissions/access/access`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -361,8 +405,10 @@ export async function createNewPeripheral(data){
         console.log(errq)
         if (err.response.status == 401){
             refresh()
-            res = axios.post(`${url}/api/app/devices/Peripherals`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = axios.post(`${url}/api/app/devices/Peripherals`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -376,8 +422,10 @@ export async function patchEditSubServerAccess(subServerId, userId, data){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = axios.patch(`${url}/api/app/permissions/access/${subServerId}/${userId}`, data, {headers: {'Authorization': `Bearer ${bearerToken}`, 'Content-Type': 'application/json'}})
-            return res
+            .then(async() => {
+                let res = axios.patch(`${url}/api/app/permissions/access/${subServerId}/${userId}`, data, {headers: {'Authorization': `Bearer ${bearerToken}`, 'Content-Type': 'application/json'}})
+                return res
+            })
         }else{
             return err
         }
@@ -392,8 +440,10 @@ export async function getPinActionTypesList() {
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/devices/peripherals/actiontypes`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/devices/peripherals/actiontypes`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -407,8 +457,10 @@ export async function getPinActionFormData(){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -422,8 +474,10 @@ export async function getSubServerSessions() {
     }catch(err){
         if(err.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -437,8 +491,10 @@ export async function aproveSubServerSession(data, subServerId) {
     }catch(err){
         if(err.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -452,8 +508,10 @@ export async function rejectSubServerSession(data, subServerId) {
     }catch(err){
         if(err.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -468,8 +526,10 @@ export async function getSubServerSessionInfo(subServerId){
     }catch(err){
         if(err.status == 401){
             refresh()
-            let res = axios.get(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = axios.get(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res
+            })
         }else{
             return err
         }
@@ -483,8 +543,10 @@ export async function deleteSubServerSession(subServerId){
     }catch(err){
         if(err.status == 401){
             refresh()
-            let res = await axios.delete(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-            return res
+            .then(async() => {
+                let res = await axios.delete(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                return res    
+            })
         }else{
             return err
         }
