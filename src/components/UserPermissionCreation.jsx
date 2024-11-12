@@ -46,6 +46,10 @@ const UserPermissionCreation = () => {
         if(res.status == 200){
             message.success('Permisos de Sub Servidor creados exitosamente')
             navigate('/Dashboard')
+        }else if(res.status == 401){
+            setLoading(false)
+            message.error('vuelva a intentar')
+
         }else if(res.status == 403){
             setLoading(false)
             message.error('El usuario ya tiene permisos en este sub servidor')

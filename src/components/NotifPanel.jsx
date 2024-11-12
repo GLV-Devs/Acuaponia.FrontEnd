@@ -14,7 +14,7 @@ const NotifPanel = ({close}) => {
     const [showList, setShowList] = useState(notifications)
     const [selectedPriority, setSelectedPriority] = useState(4)
     const [notifMessage, setNotifMessage] = useState(false)
-    // console.log(notifications)
+    console.log(notifications)
 
     const filterLowPriotity = () => {
         if(selectedPriority == 0){
@@ -115,7 +115,7 @@ const NotifPanel = ({close}) => {
                             <div className='info'>
                                 <h3 className='normalInfo'>{item.categoryName} {item.typeName}</h3> 
                                 <p className='normalInfo'>Subservidor: {item.subServerId}</p>
-                                <h5 className='normalInfo'>contenido de la notif lorem ipsum dolor lorem ipsum dolor lorem ipsum </h5>
+                                {item.content == null ? null : <h5 className='normalInfo'>{item.content}</h5>}
                                 <div className='dateTime'>
                                     <p className='date'>
                                         {new Date(item.notificationDate).getDate()}/{new Date(item.notificationDate).getMonth()}/{new Date(item.notificationDate).getFullYear()}

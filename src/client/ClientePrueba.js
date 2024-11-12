@@ -15,6 +15,7 @@ const refresh = async () => {
             let res = await axios.patch(`${url}/api/app/identity/refresh`, data)
             bearerToken = res.data.data[0].accessToken
             refreshToken = res.data.data[0].refreshToken
+            console.log(res)
         }catch(err){
             console.log(err)
         }finally{
@@ -66,6 +67,7 @@ export async function getSubServerInfo(subServerId){
                 console.log(`Nuevo Bearer: ${bearerToken}`)   //este es el bearer despues de actualizarse
                 console.log(`Nuevo Refresh: ${refreshToken}`)   //este es el refresh despues de actualizarse
                 let res = await axios.get(`${url}/api/app/subservers/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                console.log(res)
                 return res
             })
         }else{
@@ -100,6 +102,7 @@ export async function getSubServerDevices(subServerId){
             refresh()
             .then(async() => {
                 let res = await axios.get(`${url}/api/app/devices/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+                console.log(res)
                 return res
             })
         }else{
