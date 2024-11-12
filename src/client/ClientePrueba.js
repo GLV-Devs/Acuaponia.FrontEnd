@@ -1,20 +1,25 @@
 import axios from "axios"
 
 const url = 'https://acuaponiaservidorprincipal.azurewebsites.net'
-let bearerToken
-let refreshToken
-let lastRefresh
+var bearerToken
+var refreshToken
+var lock = false
 
 async function refresh () {
     const data = {refreshToken: refreshToken}
-    if(Date.now() > (lastRefresh + (30 * 1000))){
+    if(!lock){
+        lock = true
         try{
-            res = await axios.patch(`${url}/api/app/identity/refresh`, data)
+            console.log('ejecute la funcion')
+            let res = await axios.patch(`${url}/api/app/identity/refresh`, data)
+            console.log(res)
             bearerToken = res.data.data.accessToken
             refreshToken = res.data.data.refreshToken
         }catch(err){
-            return err
-        } 
+            console.log(err)
+        }finally{
+            lock = false
+        }
     }
 }
 
@@ -23,7 +28,6 @@ export async function login(data){
         let res = await axios.patch(`${url}/api/app/identity`, data)
         bearerToken = res.data.data[0].accessToken
         refreshToken = res.data.data[0].refreshToken
-        lastRefresh = new Date()
         return res
     }catch(err){
         return err
@@ -55,7 +59,7 @@ export async function getSubServerInfo(subServerId){
             console.log(refreshToken)
             refresh()
             console.log(refreshToken)
-            res = await axios.get(`${url}/api/app/subservers/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+            let res = await axios.get(`${url}/api/app/subservers/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
             return res
         }else{
             return err
@@ -85,7 +89,7 @@ export async function getSubServerDevices(subServerId){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/devices/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+            let res = await axios.get(`${url}/api/app/devices/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
             return res
         }else{
             return err
@@ -221,7 +225,7 @@ export async function getAllPeripherals(subServerId){
     }catch(err){
         if (err.response.status == 401){
             refresh()
-            res = await axios.get(`${url}/api/app/devices/peripherals/subserver/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
+            let res = await axios.get(`${url}/api/app/devices/peripherals/subserver/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
             return res
         }else{
             return err
