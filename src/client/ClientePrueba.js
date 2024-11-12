@@ -20,6 +20,7 @@ const refresh = async () => {
             if (Date.now() > (lastRefreshed + (30 * 1000))) {
                 // Aqui volvemos a chequear cuz arriba es solo para ahorrarnos tener que hacer
                 // todo este chequeo para saber que somos los unicos
+                lastRefreshed = Date.now();
                 break;
             }
 
