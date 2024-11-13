@@ -63,11 +63,13 @@ export async function getSubServers(){
     }catch(err){
         console.log(err)
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/subservers`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -157,11 +159,13 @@ export async function getAllNotifications(){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/notifications`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -174,11 +178,13 @@ export async function getAccount(){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try {
                 let res = await axios.get(`${url}/api/app/accounts`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -191,11 +197,13 @@ export async function getAccountsAll(){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/accounts/all`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -208,11 +216,13 @@ export async function getSubServerReactors(subServerId){
         return res
     } catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/subservers/${subServerId}/reactors/config`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -225,11 +235,13 @@ export async function postSubServerReport(data){
         return res
     } catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try {
                 let res = await axios.post(`${url}/api/app/reports`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -242,11 +254,13 @@ export async function postCreateAccount(data){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.post(`${url}/api/app/identity`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -259,11 +273,13 @@ export async function getSubserverDevicePeripheralModel(){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -295,11 +311,13 @@ export async function patchAdjustUserPermissions(otherUserId, data){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try {
                 let res = await axios.patch(`${url}/api/app/permissions/${otherUserId}`, data, {headers: {'Authorization': `Bearer ${bearerToken}`,'Content-Type': 'application/json'}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -312,11 +330,13 @@ export async function patchUpdateAccount(userKey, data){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.patch(`${url}/api/app/accounts/${userKey}`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -329,11 +349,13 @@ export async function patchChangePassword(data){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.patch(`${url}/api/app/accounts/password`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -346,11 +368,13 @@ export async function logOut() {
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await  refresh()
+            try{
                 let res = await axios.delete(`${url}/api/app/identity`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -363,11 +387,13 @@ export async function deleteRequestDelete(userToDelete){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.delete(`${url}/api/app/accounts/${userToDelete}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -380,11 +406,13 @@ export async function deleteUserAccount(givenToken){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.delete(`${url}/api/app/accounts?token=${givenToken}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -397,11 +425,13 @@ export async function getUsersAccesses(userId){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/permissions/access/user/${userId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -414,11 +444,13 @@ export async function postSubServerPermissions(data){
         return res
     } catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.post(`${url}/api/app/permissions/access/access`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -432,11 +464,13 @@ export async function createNewPeripheral(data){
     }catch(err){
         console.log(errq)
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = axios.post(`${url}/api/app/devices/Peripherals`, data, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -449,11 +483,13 @@ export async function patchEditSubServerAccess(subServerId, userId, data){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = axios.patch(`${url}/api/app/permissions/access/${subServerId}/${userId}`, data, {headers: {'Authorization': `Bearer ${bearerToken}`, 'Content-Type': 'application/json'}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -467,11 +503,13 @@ export async function getPinActionTypesList() {
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/devices/peripherals/actiontypes`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -484,11 +522,13 @@ export async function getPinActionFormData(){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -501,11 +541,13 @@ export async function getSubServerSessions() {
         return res
     }catch(err){
         if(err.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -518,11 +560,13 @@ export async function aproveSubServerSession(data, subServerId) {
         return res
     }catch(err){
         if(err.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try {
                 let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -535,11 +579,13 @@ export async function rejectSubServerSession(data, subServerId) {
         return res
     }catch(err){
         if(err.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/devices/peripherals/formdata`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -553,11 +599,13 @@ export async function getSubServerSessionInfo(subServerId){
         return res
     }catch(err){
         if(err.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = axios.get(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -570,11 +618,13 @@ export async function deleteSubServerSession(subServerId){
         return res
     }catch(err){
         if(err.status == 401){
-            refresh()
-            .then(async() => {
+            await  refresh()
+            try {
                 let res = await axios.delete(`${url}/api/app/subservers/sessions/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res    
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
