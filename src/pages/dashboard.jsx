@@ -5,6 +5,7 @@ import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
 import { SubServerResumeChart } from '../components/Charts'
 import { searchFields, searchPeripheral, searchReportValueKind, searchDevice } from '../functions/lists'
+import { AppstoreAddOutlined, BarsOutlined } from '@ant-design/icons'
 
 const Dashboard = () => {
 
@@ -71,7 +72,7 @@ const Dashboard = () => {
 
     return(
         <div className='Dashboard'>
-            <h1 className='title'>Bienvenido</h1>
+            <h1 className='title'>Bienvenido al Panel de control del bucle Acuaponico</h1>
             <div className='Container'>
                 {subServers == null ? (
                     <>
@@ -82,13 +83,26 @@ const Dashboard = () => {
                     <>
                         <h2>Usted posee {cantidadBucles} bucles disponibles.</h2>
                         <h3>Sus bucles disponibles son:</h3>
-                        {subServers.map(item => (
-                            <div className='bucleItem'>
-                                <h3>{item.givenName ? (item.givenName):(item.reportedName)}</h3>
-                                <h4>con {item.devices.length} dispositivos registrados</h4>
-                                {item.sessionInfo.isActivated && <h4>y cuenta con una sesion activa</h4>}
-                            </div>
-                        ))}
+                        <div className='info'>
+                            {subServers.map(item => (
+                                <div className='bucleItem'>
+                                    <div className='left'>
+                                        <AppstoreAddOutlined style={{color:'#e95cff', fontSize:'45px'}}/>
+                                    </div>
+                                    <div className='info'>
+                                        <h3>{item.givenName ? (item.givenName):(item.reportedName)}</h3>
+                                        <h4>con {item.devices.length} dispositivos registrados</h4>
+                                        {item.sessionInfo.isActivated && <h5>Sesion Activa</h5>}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className='texto'>
+                            <h3>Para mas informacionde los bucles dirirse a Busqueda </h3> 
+                            <BarsOutlined style={{ fontSize:'20px', color:'#e95cff'}}/>
+                        </div>
+                        
+
                     </>
                 )}
             </div>
