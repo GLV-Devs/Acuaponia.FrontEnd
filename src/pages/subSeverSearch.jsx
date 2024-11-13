@@ -40,7 +40,7 @@ const SubServerSearch = () => {
                     <div className="searchBar">
                         <Input className='inputSearchBar' variant='filled' placeholder="Buscar..." onChange={(e) => handleSearch(e.target.value)}/>
                         <SlidersOutlined style={slideStyle}/>
-                        <Button className='buttonExport' type="text"> <ExportOutlined style={exportStyle}/> </Button>
+                        {/* <Button className='buttonExport' type="text"> <ExportOutlined style={exportStyle}/> </Button> */}
                     </div>
 
                     <div className="content">

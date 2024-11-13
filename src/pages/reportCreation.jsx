@@ -11,7 +11,7 @@ const ReportCreation = () => {
     // Declaracion y asignacion de las listas para los select
     const [aviablePeripherals, setAviablePeripherals] = useState([])
     const [aviableDevices, setAviableDevices] = useState([])
-    const [aviableSubServers, setAviableSubServers] = useState(subServers.map(item => ({value: item.id, label: item.name })))
+    const [aviableSubServers, setAviableSubServers] = useState(subServers.map(item => ({value: item.id, label: item.reportedName })))
 
     // Declaracion de los valores seleccionados
     const [selectedSubServer, setSelectedSubServer] = useState('')
