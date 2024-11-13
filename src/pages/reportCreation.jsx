@@ -6,7 +6,7 @@ import { appContext } from '../context/appContext'
 
 const ReportCreation = () => {
     const navigate = useNavigate()
-    const { subServers, subServerDevices, setSubServerDevices, devicePeripherals, setDevicePeripherals } = useContext(appContext)
+    const { subServers, subServerDevices, setSubServerDevices, devicePeripherals, setDevicePeripherals, messageApi } = useContext(appContext)
     
     // Declaracion y asignacion de las listas para los select
     const [aviablePeripherals, setAviablePeripherals] = useState([])
@@ -40,6 +40,13 @@ const ReportCreation = () => {
             value: valueField,
         }
         let res = await postSubServerReport(data)
+        if (res.status === 200){
+            messageApi.open({
+                type: 'success',
+                content: 'Reporte creado con exito'
+            })
+            navigate(-1)
+        }
         console.log(res)
     }
 
