@@ -80,17 +80,13 @@ export async function getSubServerInfo(subServerId){
         return res
     }catch(err){
         if (err.response.status == 401){
-            console.log(`Viejo Bearer: ${bearerToken}`)   //este es el bearer antes de actualizarse
-            console.log(`Viejo Refresh: ${refreshToken}`)   //este es el refresh antes de actualizarse
-
-            refresh()
-            .then(async() => {
-                console.log(`Nuevo Bearer: ${bearerToken}`)   //este es el bearer despues de actualizarse
-                console.log(`Nuevo Refresh: ${refreshToken}`)   //este es el refresh despues de actualizarse
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/subservers/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-                console.log(res)
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -103,11 +99,13 @@ export async function getSubServerReports(){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/reports`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-                return res
-            })
+                return res                
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -120,12 +118,13 @@ export async function getSubServerDevices(subServerId){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/devices/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
-                console.log(res)
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
@@ -138,11 +137,14 @@ export async function getSubserverDevicePeripheral(deviceId){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/devices/peripherals/${deviceId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
+        
         }else{
             return err
         }
@@ -274,11 +276,13 @@ export async function getAllPeripherals(subServerId){
         return res
     }catch(err){
         if (err.response.status == 401){
-            refresh()
-            .then(async() => {
+            await refresh()
+            try{
                 let res = await axios.get(`${url}/api/app/devices/peripherals/subserver/${subServerId}`, {headers: {'Authorization': `Bearer ${bearerToken}`}})
                 return res
-            })
+            }catch(err){
+                return err
+            }
         }else{
             return err
         }
