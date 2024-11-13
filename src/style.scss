@@ -816,7 +816,7 @@ body{
 
         .Buttons{
             display: flex;
-            align-items: center;
+            align-items: space-between;
             gap: 40px;
 
             .Button1, .Button2, .Button3{

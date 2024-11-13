@@ -115,11 +115,12 @@ const SubServer = () => {
                             </div>
                             <div className="Button2" onClick={() => setSubServerSessionModalOpen(true)}>
                                 <h2>Sesion del sub servidor</h2>
+                                <LaptopOutlined style={{color: '#ffb700', fontSize: '65px'}}/>
                             </div>
-                            <div className="Button3" onClick={openReactPanel}>
+                            {/* <div className="Button3" onClick={openReactPanel}>
                                 <LaptopOutlined style={{color: '#ffb700', fontSize: '65px'}}/>
                                 <h1>Reactores</h1>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 
