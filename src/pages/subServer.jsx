@@ -73,6 +73,10 @@ const SubServer = () => {
     function buildReportList(){
         let list = []
         let currentDeviceIndex
+        if (subServerReports.length > 0) {
+            subServerReports.sort((a, b) => new Date(b.dateRecorded) - new Date(a.dateRecorded))
+        }
+        console.log(subServerReports)
         subServerReports.forEach(item => {
             currentDeviceIndex = item.deviceIndex
             let res = searchPeripheral(allPeripherals, currentDeviceIndex)
@@ -102,7 +106,7 @@ const SubServer = () => {
                     <div className="section1">
                         <div className='bar'>
                         <LeftOutlined style={backButtonStyle} onClick={() => {navigate ('/subServerSearch')}}/>
-                            <h1>{info.name}</h1>
+                            {info.givenName == null ? (<h1>{info.reportedName}</h1>):(<h1>{info.givenName}</h1>)}
                         </div>
                         <div className="Buttons">
                             <div className="Button1" onClick={openDispPanel}>

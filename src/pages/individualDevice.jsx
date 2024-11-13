@@ -25,13 +25,13 @@ const IndividualDevice = () => {
         reportValueKind
     } = useContext(appContext)
 
-    // console.log(currentDevice)
+    console.log(devicePeripherals)
 
     const navigate = useNavigate()
     const [isExpanded, setIsExpanded] = useState(false)
     const [selectedPeripheral, setSelectedPeripheral] = useState({})
     const [viewPeripheralModal, setViewPeripheralModal] = useState(false)
-    const [existingPeriferals, setExistingPeriferals] = useState(false)
+    const [existingPeriferals, setExistingPeriferals] = useState(true)
     let currentDeviceInfo = []
     let currentDeviceReports = []
 
@@ -46,6 +46,12 @@ const IndividualDevice = () => {
     async function getDevicePeripheral(currentDevice){
         let resDevicePeripherals = await getSubserverDevicePeripheral(currentDevice)
         // console.log(resDevicePeripherals)
+        if (resDevicePeripherals.data.data.length == 0) {
+            setExistingPeriferals(false)
+        } else {
+            setExistingPeriferals(true)
+        }
+        
         let originalList = resDevicePeripherals.data.data
         let secondList
         originalList.forEach(item => {
@@ -71,7 +77,6 @@ const IndividualDevice = () => {
     function getCurrentDevice(currentDevice){
         if (currentDevice === null) {
             console.log('No device selected')
-            setDevicePeripherals(true)
         }else{
             const deviceIndex = subServerDevices.findIndex(device => device.id === currentDevice)
             if (deviceIndex !== -1) {
@@ -95,7 +100,6 @@ const IndividualDevice = () => {
             return currentDeviceReports; 
             
         } else {
-            console.log('Device not found');
             return null;
         }
     }
@@ -195,7 +199,14 @@ const IndividualDevice = () => {
                     <h2>Perifericos</h2>
                     {devicePeripherals == null ? (
                         <>
-                            <Skeleton active/>
+                            {existingPeriferals === false ? (
+                                <>
+                                    <h3>No hay perifericos registrados en este dispositivo</h3>
+                                </>
+                            ):(
+                                <Skeleton active/>
+                            )}
+                            
                         </>
                         ):(
                             <div className="List">
