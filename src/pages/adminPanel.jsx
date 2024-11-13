@@ -126,17 +126,17 @@ const AdminPanel = () => {
                                             <Button key="permissions" onClick={() =>navigate ('/assignPermissions')}>
                                                 Editar permisos
                                             </Button>,
-                                            <Popconfirm
-                                                title={`¿Está seguro de que desea eliminar este usuario? ${countdown > 0 ? `(${countdown}s)` : ''}`}
-                                                onConfirm={() => deleteUser(deleteToken)}
-                                                okText="Sí"
-                                                cancelText="No"
-                                                okButtonProps={{ disabled: !ready }}
-                                            >
-                                                <Button key="delete"  onClick={() => {deleteUserRequest(selectedUser); }} >
-                                                Eliminar usuario
-                                                </Button>
-                                            </Popconfirm>
+                                            // <Popconfirm
+                                            //     title={`¿Está seguro de que desea eliminar este usuario? ${countdown > 0 ? `(${countdown}s)` : ''}`}
+                                            //     onConfirm={() => deleteUser(deleteToken)}
+                                            //     okText="Sí"
+                                            //     cancelText="No"
+                                            //     okButtonProps={{ disabled: !ready }}
+                                            // >
+                                            //     <Button key="delete"  onClick={() => {deleteUserRequest(selectedUser); }} >
+                                            //     Eliminar usuario
+                                            //     </Button>
+                                            // </Popconfirm>
                                             
                                         ]
                                     }
