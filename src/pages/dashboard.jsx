@@ -3,8 +3,8 @@ import { useEffect } from 'react'
 import { getSubServerReports, getSubServers, getAccount, getAllNotifications, getSubserverDevicePeripheralModel } from '../client/ClientePrueba'
 import { appContext } from '../context/appContext'
 import { Skeleton, Input } from 'antd'
-import { LastMeasurementsChart } from '../components/Charts'
-import { searchFields } from '../functions/lists'
+import { SubServerResumeChart } from '../components/Charts'
+import { searchFields, searchPeripheral, searchReportValueKind, searchDevice } from '../functions/lists'
 
 const Dashboard = () => {
 
@@ -17,8 +17,15 @@ const Dashboard = () => {
         setDevicePeripheralsModel,
         setUserInfo,
         notificationCategoryList,
-        notificationTypeList
+        notificationTypeList,
+        subServerReports,
+        allPeripherals,
+        reportValueKind,
+        subServerDevices,
     } = useContext(appContext)
+
+    const [chartLabels, setChartLabels] = useState([])
+    const [cantidadBucles, setCantidadBucles] = useState(0)
 
     async function getAllInfo(){
         let subserverRes = await getSubServers()
@@ -26,6 +33,7 @@ const Dashboard = () => {
         let notificationsRes = await getAllNotifications()
         let reportsRes = await getSubServerReports()
         let resDevicePeripheralsModel = await getSubserverDevicePeripheralModel()
+        
 
         setSubServers(subserverRes.data.data)
         setUserData(userDataRes.data.data[0])
@@ -38,7 +46,24 @@ const Dashboard = () => {
         setDevicePeripheralsModel(resDevicePeripheralsModel.data.data)
     }
 
-    
+    function buildCharts(){
+        setCantidadBucles(subServers.length)
+        subServers.forEach(item => {
+            if(item.givenName){
+                if(!chartLabels.includes(item.givenName)){
+                    setChartLabels([...chartLabels, {name: item.givenName, id: item.id}])
+                }
+            }else{
+                if(!chartLabels.includes(item.reportedName)){
+                    setChartLabels([...chartLabels, {name: item.reportedName, id: item.id}])
+                }
+            }
+        })
+    }
+
+    useEffect(() => {
+        buildCharts()
+    }, [subServers])
 
     useEffect(() => {
         getAllInfo()
@@ -46,7 +71,7 @@ const Dashboard = () => {
 
     return(
         <div className='Dashboard'>
-            <h1 className='title'>DashBoard</h1>
+            <h1 className='title'>Bienvenido</h1>
             <div className='Container'>
                 {subServers == null ? (
                     <>
@@ -55,9 +80,15 @@ const Dashboard = () => {
                     </>    
                 ):(
                     <>
-                        <Input placeholder='Buscar'/>
-                        <h1>Ay, ya se cargo</h1>
-                        {/* <LastMeasurementsChart/> */}
+                        <h2>Usted posee {cantidadBucles} bucles disponibles.</h2>
+                        <h3>Sus bucles disponibles son:</h3>
+                        {subServers.map(item => (
+                            <div className='bucleItem'>
+                                <h3>{item.givenName ? (item.givenName):(item.reportedName)}</h3>
+                                <h4>con {item.devices.length} dispositivos registrados</h4>
+                                {item.sessionInfo.isActivated && <h4>y cuenta con una sesion activa</h4>}
+                            </div>
+                        ))}
                     </>
                 )}
             </div>
