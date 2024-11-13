@@ -101,7 +101,7 @@ const SubServer = () => {
                 <>
                     <div className="section1">
                         <div className='bar'>
-                        <LeftOutlined style={backButtonStyle} onClick={() => {navigate (-1)}}/>
+                        <LeftOutlined style={backButtonStyle} onClick={() => {navigate ('/subServerSearch')}}/>
                             <h1>{info.name}</h1>
                         </div>
                         <div className="Buttons">

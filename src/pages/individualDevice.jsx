@@ -31,6 +31,7 @@ const IndividualDevice = () => {
     const [isExpanded, setIsExpanded] = useState(false)
     const [selectedPeripheral, setSelectedPeripheral] = useState({})
     const [viewPeripheralModal, setViewPeripheralModal] = useState(false)
+    const [existingPeriferals, setExistingPeriferals] = useState(false)
     let currentDeviceInfo = []
     let currentDeviceReports = []
 
@@ -70,6 +71,7 @@ const IndividualDevice = () => {
     function getCurrentDevice(currentDevice){
         if (currentDevice === null) {
             console.log('No device selected')
+            setDevicePeripherals(true)
         }else{
             const deviceIndex = subServerDevices.findIndex(device => device.id === currentDevice)
             if (deviceIndex !== -1) {
