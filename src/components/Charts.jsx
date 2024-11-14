@@ -9,6 +9,7 @@ export const LastMeasurementsChart = ({reports}) => {
     let j = 0
     let dataSetLabels = []
     let dataSets = []
+    let dates = []
     let colors = [
         '#01bc85',
         '#e4421c',
@@ -31,11 +32,14 @@ export const LastMeasurementsChart = ({reports}) => {
 
         let filtered = reports.filter(report => report.reportValueKindName == item)
         let values = []
-        for(let i=0 ; i < 20 ; i++){
+        console.log(filtered)
+        for(let i=20 ; i >= 0 ; i--){
             if(filtered[i] != undefined){
                 values.push(filtered[i].value)
+                dates.push(`${filtered[i].dateRecorded.slice(0, 10)} ${filtered[i].dateRecorded.slice(11, 19)}`)
             }else{
                 values.push(NaN)
+                dates.push(NaN)
             }
         }
         const currentDataSet = {
@@ -51,7 +55,7 @@ export const LastMeasurementsChart = ({reports}) => {
     return(
         <Line
             data={{
-                labels: ['', '', '', '', '', '','', '', '', '', '', '', '', '', '', '','', '', '', '', ],
+                labels: dates.slice(0, 20),
                 datasets: dataSets
             }}
         />
